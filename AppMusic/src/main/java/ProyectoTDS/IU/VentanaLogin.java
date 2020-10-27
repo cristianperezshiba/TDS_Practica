@@ -1,4 +1,4 @@
-package IU;
+package ProyectoTDS.IU;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -93,7 +93,7 @@ public class VentanaLogin extends JFrame {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (Controlador.Controlador.ComprobarLoginUsuario(textFieldUsuario.getText(), textFieldContrasena.getText())) {
+				if (ProyectoTDS.Controlador.Controlador.ComprobarLoginUsuario(textFieldUsuario.getText(), textFieldContrasena.getText())) {
 					abrirVentanaPrincipal();
 					dispose();
 				}

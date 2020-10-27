@@ -1,4 +1,4 @@
-package IU;
+package ProyectoTDS.IU;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -83,7 +83,7 @@ public class VentanaPrincipal extends JFrame {
 		textEstilo.setBounds(606, 121, 86, 20);
 		contentPane.add(textEstilo);
 		
-		JLabel lblUsuario = new JLabel("Hola " + Controlador.Controlador.getUsuarioActivo() + "!");
+		JLabel lblUsuario = new JLabel("Hola " + ProyectoTDS.Controlador.Controlador.getUsuarioActivo() + "!");
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblUsuario.setBounds(288, 29, 111, 19);
 		contentPane.add(lblUsuario);

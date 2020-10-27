@@ -1,4 +1,4 @@
-package IU;
+package ProyectoTDS.IU;
 
 import java.awt.EventQueue;
 
@@ -21,7 +21,7 @@ public class Main {
 
 		//Creamos el objeto appMusic y el objeto Controlador y luego abrimos la ventana del Login 
 		ProyectoTDS.LogicaNegocio.AppMusic appMusic = new ProyectoTDS.LogicaNegocio.AppMusic();
-		Controlador.Controlador controlador = new Controlador.Controlador(appMusic);
+		ProyectoTDS.Controlador.Controlador controlador = new ProyectoTDS.Controlador.Controlador(appMusic);
 		abrirVentanaLogin();
 		
 	}

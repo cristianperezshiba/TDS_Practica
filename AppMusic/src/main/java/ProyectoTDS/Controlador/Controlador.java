@@ -1,4 +1,4 @@
-package Controlador;
+package ProyectoTDS.Controlador;
 
 public class Controlador {
 	//TODO: Usar patron singleton o simplemente usamos metodos estaticos?�?�

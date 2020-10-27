@@ -1,4 +1,4 @@
-package IU;
+package ProyectoTDS.IU;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -121,7 +121,7 @@ public class VentanaRegistro extends JFrame {
 		btnRegistrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (Controlador.Controlador.RegistroUsuario(textFieldUsuario.getText(), textFieldClave.getText(), textFieldNombre.getText(), textFieldApellidos.getText(), textFieldFecha.getText(), textFieldEmail.getText())) {
+				if (ProyectoTDS.Controlador.Controlador.RegistroUsuario(textFieldUsuario.getText(), textFieldClave.getText(), textFieldNombre.getText(), textFieldApellidos.getText(), textFieldFecha.getText(), textFieldEmail.getText())) {
 					abrirVentanaLogin();
 					dispose();
 				}
