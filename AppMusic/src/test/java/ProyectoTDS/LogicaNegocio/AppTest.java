@@ -1,4 +1,4 @@
-package ProyectoTDS.AppMusic;
+package ProyectoTDS.LogicaNegocio;
 
 import static org.junit.Assert.assertTrue;
 
