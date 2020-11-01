@@ -1,6 +1,6 @@
 package ProyectoTDS.LogicaNegocio;
 
-import java.util.LinkedList;
+import java.util.*;
 
 public class Usuario {
 	
@@ -13,9 +13,9 @@ public class Usuario {
 	private String fechaNacimiento;
 	private String email;
 	private boolean premium;
-	private LinkedList<ListaCanciones> playlists;
+	private Set<ListaCanciones> playlists;
 	
-	private LinkedList<Cancion> cancionesRecientes;
+	private List<Cancion> cancionesRecientes;
 	
 	
 
@@ -28,9 +28,11 @@ public class Usuario {
 		this.fechaNacimiento = fechaNacimiento;
 		this.email = email;
 		this.premium = false;
-		this.playlists = new LinkedList<ListaCanciones>();
+		this.playlists = new LinkedHashSet<ListaCanciones>();
 		this.cancionesRecientes = new LinkedList<Cancion>();
 	}
+	
+	
 	
 	public String getUsuario() {
 		return usuario;
@@ -86,6 +88,18 @@ public class Usuario {
 
 	public void setPremium(boolean premium) {
 		this.premium = premium;
+	}
+	
+	
+	public void crearNuevaPlaylist(String nombre) {
+		this.playlists.add(new ListaCanciones(nombre));
+	}
+	
+	public void añadirCancionAPlaylist(ListaCanciones lista, Cancion cancion) {
+		//TODO: Esto es provisional aun, no se si hara así
+		this.playlists.stream()
+			.filter(l -> l.equals(lista))
+			.forEach(l -> l.añadirCancion(cancion));
 	}
 	
 	

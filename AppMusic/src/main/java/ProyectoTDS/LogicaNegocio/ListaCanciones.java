@@ -1,15 +1,15 @@
 package ProyectoTDS.LogicaNegocio;
-import java.util.LinkedList;
+import java.util.*;
 
 public class ListaCanciones {
 	private String nombre;
-	private LinkedList<Cancion> canciones;
+	private Set<Cancion> canciones;
 	
 	
 	public ListaCanciones(String nombre) {
 		super();
 		this.nombre = nombre;
-		this.canciones = new LinkedList<Cancion>();
+		this.canciones = new LinkedHashSet<Cancion>();
 	}
 
 
@@ -25,7 +25,7 @@ public class ListaCanciones {
 	
 
 
-	public LinkedList<Cancion> getCanciones() {
+	public Set<Cancion> getCanciones() {
 		//TODO: �Devolvemos la lista o una copia de ella?
 		return canciones;
 	}
@@ -33,9 +33,14 @@ public class ListaCanciones {
 
 	
 	
-	public void addCancion(Cancion cancion) {
+	public void añadirCancion(Cancion cancion) {
 		this.canciones.add(cancion);
 	}
+	
+	public void eliminarCancion(Cancion cancion) {
+		this.canciones.remove(cancion);
+	}
+	
 
 	
 
