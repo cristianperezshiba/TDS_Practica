@@ -18,8 +18,11 @@ public class VentanaPrincipal extends JFrame {
 	private JTextField txtInterprete;
 	private JTextField textTitulo;
 	private JTextField textEstilo;
+	private ProyectoTDS.Controlador.Controlador Controlador;
 
 	public VentanaPrincipal() {
+		Controlador = Controlador.getUnicaInstancia();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 749, 570);
 		contentPane = new JPanel();
@@ -83,7 +86,7 @@ public class VentanaPrincipal extends JFrame {
 		textEstilo.setBounds(606, 121, 86, 20);
 		contentPane.add(textEstilo);
 		
-		JLabel lblUsuario = new JLabel("Hola " + ProyectoTDS.Controlador.Controlador.getUsuarioActivo() + "!");
+		JLabel lblUsuario = new JLabel("Hola " + Controlador.getUsuarioActivo() + "!");
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblUsuario.setBounds(288, 29, 111, 19);
 		contentPane.add(lblUsuario);

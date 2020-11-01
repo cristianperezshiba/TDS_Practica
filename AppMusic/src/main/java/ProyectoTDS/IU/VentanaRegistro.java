@@ -26,8 +26,10 @@ public class VentanaRegistro extends JFrame {
 	private JTextField textFieldUsuario;
 	private JTextField textFieldClave;
 	private JTextField textFieldRepite;
+	private ProyectoTDS.Controlador.Controlador Controlador;
 
 	public VentanaRegistro() {
+		Controlador = Controlador.getUnicaInstancia();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		this.setTitle("Registro");
@@ -121,7 +123,7 @@ public class VentanaRegistro extends JFrame {
 		btnRegistrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (ProyectoTDS.Controlador.Controlador.RegistroUsuario(textFieldUsuario.getText(), textFieldClave.getText(), textFieldNombre.getText(), textFieldApellidos.getText(), textFieldFecha.getText(), textFieldEmail.getText())) {
+				if (Controlador.RegistroUsuario(textFieldUsuario.getText(), textFieldClave.getText(), textFieldNombre.getText(), textFieldApellidos.getText(), textFieldFecha.getText(), textFieldEmail.getText())) {
 					abrirVentanaLogin();
 					dispose();
 				}

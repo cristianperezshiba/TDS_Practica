@@ -3,23 +3,32 @@ package ProyectoTDS.LogicaNegocio;
 import java.util.LinkedList;
 
 public class AppMusic {
-	//Usar patron singleton �?
+	//Usamos patron singleton
+	private static AppMusic AppMusic = null;
 	
-	// TODO: private controlador �?�?��?� Tiene referencia a controlador o no ?��?�
+	// TODO: private controlador?? Tiene referencia a controlador o no ??
+	
 	
 	private CatalogoCanciones catalogoCanciones;
 	private CatalogoUsuarios catalogoUsuarios;
 	private LinkedList<Cancion> CancionesMasReproducidas; 
-	private String UsuarioActivo;  //Variable que contendr� el usuario activo
+	private String UsuarioActivo;  //Variable que contendra  el usuario activo
 	
 
 
-	public AppMusic() {
+	private AppMusic() {
 		super();
 		this.catalogoCanciones = new CatalogoCanciones();
 		this.catalogoUsuarios = new CatalogoUsuarios();
 		this.CancionesMasReproducidas = new LinkedList<Cancion>();
 		this.UsuarioActivo = "";
+	}
+	
+	public static AppMusic getUnicaInstancia() {
+		if (AppMusic == null) {
+			AppMusic = new AppMusic();
+		}
+		return AppMusic;
 	}
 
 	public CatalogoCanciones getCatalogoCanciones() {

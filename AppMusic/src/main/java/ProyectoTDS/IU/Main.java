@@ -19,9 +19,10 @@ public class Main {
 	
 	public static void main(String[] args) {
 
-		//Creamos el objeto appMusic y el objeto Controlador y luego abrimos la ventana del Login 
-		ProyectoTDS.LogicaNegocio.AppMusic appMusic = new ProyectoTDS.LogicaNegocio.AppMusic();
-		ProyectoTDS.Controlador.Controlador controlador = new ProyectoTDS.Controlador.Controlador(appMusic);
+		//Creamos el objeto Controlador, que creara automaticamente el objeto AppMusic
+		//y luego abrimos la ventana del Login 
+		//ProyectoTDS.LogicaNegocio.AppMusic appMusic = ProyectoTDS.LogicaNegocio.AppMusic.getUnicaInstancia();
+		ProyectoTDS.Controlador.Controlador controlador = ProyectoTDS.Controlador.Controlador.getUnicaInstancia();
 		abrirVentanaLogin();
 		
 	}

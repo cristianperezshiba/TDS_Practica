@@ -29,12 +29,13 @@ public class VentanaLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField textFieldUsuario;
 	private JTextField textFieldContrasena;
-
+	private ProyectoTDS.Controlador.Controlador Controlador;
 
 	/**
 	 * Create the frame.
 	 */
 	public VentanaLogin() {
+		this.Controlador = Controlador.getUnicaInstancia();
 		/////////////////////////////////////////////////////////
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -93,7 +94,7 @@ public class VentanaLogin extends JFrame {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (ProyectoTDS.Controlador.Controlador.ComprobarLoginUsuario(textFieldUsuario.getText(), textFieldContrasena.getText())) {
+				if (Controlador.ComprobarLoginUsuario(textFieldUsuario.getText(), textFieldContrasena.getText())) {
 					abrirVentanaPrincipal();
 					dispose();
 				}

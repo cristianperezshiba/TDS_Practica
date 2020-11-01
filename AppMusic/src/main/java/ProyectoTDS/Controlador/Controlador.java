@@ -1,24 +1,32 @@
 package ProyectoTDS.Controlador;
 
 public class Controlador {
-	//TODO: Usar patron singleton o simplemente usamos metodos estaticos?�?�
+	//Patron singleton
+	private static Controlador Controlador = null; 
 	
-	private static ProyectoTDS.LogicaNegocio.AppMusic AppMusic;
+	
+	private ProyectoTDS.LogicaNegocio.AppMusic AppMusic;
 
-	public Controlador(ProyectoTDS.LogicaNegocio.AppMusic appMusic) {
+	private Controlador() {
 		super();
-		AppMusic = appMusic;
 	}
 	
-	public static boolean ComprobarLoginUsuario(String usuario, String password) {
+	public static Controlador getUnicaInstancia() {
+		if (Controlador == null) {
+			Controlador = new Controlador();
+			Controlador.AppMusic = ProyectoTDS.LogicaNegocio.AppMusic.getUnicaInstancia();
+		}
+		return Controlador;
+	}
+	public boolean ComprobarLoginUsuario(String usuario, String password) {
 		return AppMusic.comprobarLoginUsuario(usuario, password);
 	}
-	
-	public static boolean RegistroUsuario(String usuario, String contrasena, String nombre, String apellidos, String fechaNacimiento, String email) {
+
+	public boolean RegistroUsuario(String usuario, String contrasena, String nombre, String apellidos, String fechaNacimiento, String email) {
 		return AppMusic.RegistroUsuario(usuario, contrasena, nombre, apellidos, fechaNacimiento, email);
 	}
 	
-	public static String getUsuarioActivo() {
+	public String getUsuarioActivo() {
 		return AppMusic.getUsuarioActivo();
 	}
 	
