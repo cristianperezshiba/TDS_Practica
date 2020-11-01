@@ -46,31 +46,33 @@ public class VentanaLogin extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel LabelContrasena = new JLabel("Contrase\u00F1a:");
-		LabelContrasena.setBounds(37, 137, 89, 14);
+		LabelContrasena.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		LabelContrasena.setBounds(76, 126, 89, 14);
 		contentPane.add(LabelContrasena);
 		
 		JLabel LabelTitulo = new JLabel("AppMusic");
 		LabelTitulo.setFont(new Font("Tahoma", Font.BOLD, 23));
-		LabelTitulo.setBounds(151, 11, 125, 38);
+		LabelTitulo.setBounds(176, 11, 125, 38);
 		LabelTitulo.setVerticalAlignment(SwingConstants.TOP);
 		contentPane.add(LabelTitulo);
 		
 		JLabel LabelUsuario = new JLabel("Usuario:");
-		LabelUsuario.setBounds(37, 87, 68, 14);
+		LabelUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		LabelUsuario.setBounds(94, 82, 68, 14);
 		contentPane.add(LabelUsuario);
 		
 		JLabel LabelTexto = new JLabel("Si no estas registrado ->");
 		LabelTexto.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		LabelTexto.setBounds(64, 225, 149, 25);
+		LabelTexto.setBounds(76, 225, 149, 25);
 		contentPane.add(LabelTexto);
 		
 		textFieldUsuario = new JTextField();
-		textFieldUsuario.setBounds(136, 84, 140, 20);
+		textFieldUsuario.setBounds(161, 81, 140, 20);
 		contentPane.add(textFieldUsuario);
 		textFieldUsuario.setColumns(10);
 		
 		textFieldContrasena = new JPasswordField();
-		textFieldContrasena.setBounds(136, 134, 140, 20);
+		textFieldContrasena.setBounds(161, 125, 140, 20);
 		contentPane.add(textFieldContrasena);
 		textFieldContrasena.setColumns(10);
 		////////////////////////////////////////////////////////
@@ -86,7 +88,7 @@ public class VentanaLogin extends JFrame {
 		});
 		
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnNewButton.setBounds(235, 227, 99, 23);
+		btnNewButton.setBounds(229, 227, 99, 23);
 		contentPane.add(btnNewButton);
 		
 		/////////////////////////////////////////////////////////////
@@ -104,7 +106,7 @@ public class VentanaLogin extends JFrame {
 			
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton_1.setBounds(146, 165, 114, 44);
+		btnNewButton_1.setBounds(176, 156, 114, 44);
 		contentPane.add(btnNewButton_1);
 	}
 	
