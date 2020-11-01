@@ -98,7 +98,7 @@ public class VentanaLogin extends JFrame {
 					abrirVentanaPrincipal();
 					dispose();
 				}
-				else JOptionPane.showMessageDialog (null, "Usuario y/o contrase�a incorrecta", "Error!", JOptionPane.ERROR_MESSAGE);
+				else JOptionPane.showMessageDialog (null, "Usuario y/o contraseña incorrecta", "Error!", JOptionPane.ERROR_MESSAGE);
 				
 			}
 			

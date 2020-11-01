@@ -123,7 +123,13 @@ public class VentanaRegistro extends JFrame {
 		btnRegistrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (Controlador.RegistroUsuario(textFieldUsuario.getText(), textFieldClave.getText(), textFieldNombre.getText(), textFieldApellidos.getText(), textFieldFecha.getText(), textFieldEmail.getText())) {
+				//TODO: Hace falta hacer mas comprovaciones de este tipo o no ?¿?¿?¿
+				//Condiciones para que el usuario pueda registrarse 
+				if (textFieldClave.getText() != textFieldRepite.getText()) {
+					JOptionPane.showMessageDialog (null, "Las contraseñas no coinciden", "Error!", JOptionPane.ERROR_MESSAGE);
+				}
+				//Intentamos registrar al usuario
+				else if (Controlador.RegistroUsuario(textFieldUsuario.getText(), textFieldClave.getText(), textFieldNombre.getText(), textFieldApellidos.getText(), textFieldFecha.getText(), textFieldEmail.getText())) {
 					abrirVentanaLogin();
 					dispose();
 				}

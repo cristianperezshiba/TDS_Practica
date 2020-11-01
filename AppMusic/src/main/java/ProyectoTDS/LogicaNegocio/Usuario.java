@@ -14,6 +14,7 @@ public class Usuario {
 	private String email;
 	private boolean premium;
 	private LinkedList<ListaCanciones> playlists;
+	
 	private LinkedList<Cancion> cancionesRecientes;
 	
 	
