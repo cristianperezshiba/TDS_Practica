@@ -55,8 +55,8 @@ public class AppMusic {
 		else return false;
 	};
 	
-	public boolean RegistroUsuario(String usuario, String contrasena, String nombre, String apellidos, String fechaNacimiento, String email) {
-		return this.catalogoUsuarios.registrarUsuario(usuario, contrasena, nombre, apellidos, fechaNacimiento, email);
+	public int RegistroUsuario(String usuario, String contrasena, String repite, String nombre, String apellidos, String fechaNacimiento, String email) {
+		return this.catalogoUsuarios.registrarUsuario(usuario, contrasena, repite, nombre, apellidos, fechaNacimiento, email);
 	};
 	
 	

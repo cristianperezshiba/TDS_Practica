@@ -19,7 +19,14 @@ public class CatalogoUsuarios {
 		return listaUsuarios.stream().anyMatch(u -> (usuario.equals(u.getUsuario()) && password.equals(u.getContrasena())));
 	}
 	
-	public boolean registrarUsuario(String usuario, String contrasena, String nombre, String apellidos, String fechaNacimiento, String email) {
+	public int registrarUsuario(String usuario, String contrasena, String repite, String nombre, String apellidos, String fechaNacimiento, String email) {
+		
+		//Comprobar si las contraseñas son diferentes
+		
+		if (!contrasena.equals(repite)) return 1;
+		
+		if (usuario.length()==0 || contrasena.length()==0 || nombre.length()==0 || apellidos.length()==0 || fechaNacimiento.length()==0 || email.length()==0) return 2;
+		
 		
 		Usuario usuarioNuevo = new Usuario(usuario, contrasena, nombre, apellidos, fechaNacimiento, email);
 		
@@ -27,9 +34,10 @@ public class CatalogoUsuarios {
 		
 		if (listaUsuarios.stream().anyMatch(
 				u -> (usuarioNuevo.getUsuario().equals(u.getUsuario()) || usuarioNuevo.getEmail().equals(u.getEmail()))
-				)) return false;
+				)) return 3;
 		
-		return listaUsuarios.add(usuarioNuevo);
+		if (listaUsuarios.add(usuarioNuevo)) return 0;
+		else return 4;
 		
 	}
 	

@@ -15,13 +15,13 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import com.toedter.calendar.JDateChooser;
 
 public class VentanaRegistro extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldNombre;
 	private JTextField textFieldApellidos;
-	private JTextField textFieldFecha;
 	private JTextField textFieldEmail;
 	private JTextField textFieldUsuario;
 	private JTextField textFieldClave;
@@ -83,11 +83,6 @@ public class VentanaRegistro extends JFrame {
 		textFieldApellidos.setBounds(283, 20, 212, 20);
 		contentPane.add(textFieldApellidos);
 		
-		textFieldFecha = new JTextField();
-		textFieldFecha.setColumns(10);
-		textFieldFecha.setBounds(387, 67, 108, 20);
-		contentPane.add(textFieldFecha);
-		
 		textFieldEmail = new JTextField();
 		textFieldEmail.setColumns(10);
 		textFieldEmail.setBounds(72, 67, 141, 20);
@@ -120,28 +115,52 @@ public class VentanaRegistro extends JFrame {
 		btnIrALogin.setBounds(382, 243, 136, 30);
 		contentPane.add(btnIrALogin);
 		
+		JDateChooser textFieldFecha = new JDateChooser();
+		textFieldFecha.setBounds(395, 64, 79, 19);
+		contentPane.add(textFieldFecha);
+		
 		JButton btnRegistrar = new JButton("Registrarme");
 		btnRegistrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//TODO: Hace falta hacer mas comprovaciones de este tipo o no ?¿?¿?¿
-				//Condiciones para que el usuario pueda registrarse 
-				if (textFieldClave.getText() != textFieldRepite.getText()) {
-					JOptionPane.showMessageDialog (null, "Las contraseñas no coinciden", "Error!", JOptionPane.ERROR_MESSAGE);
+
+				int valorRetornoRegistro;
+				
+				try {
+				valorRetornoRegistro=Controlador.RegistroUsuario(textFieldUsuario.getText(), textFieldClave.getText(), textFieldRepite.getText(), textFieldNombre.getText(), textFieldApellidos.getText(), textFieldFecha.getDate().toString(), textFieldEmail.getText());
 				}
-				//Intentamos registrar al usuario
-				else if (Controlador.RegistroUsuario(textFieldUsuario.getText(), textFieldClave.getText(), textFieldNombre.getText(), textFieldApellidos.getText(), textFieldFecha.getText(), textFieldEmail.getText())) {
+				catch (Exception e1) {
+					valorRetornoRegistro=2;
+				}
+				
+				switch (valorRetornoRegistro) {
+				case 0:
 					abrirVentanaLogin();
 					dispose();
-				}
-				else JOptionPane.showMessageDialog (null, "Este usuario/email ya esta registrado", "Error!", JOptionPane.ERROR_MESSAGE);
+					break;
+					
+				case 1:
+					JOptionPane.showMessageDialog (null, "Las contraseñas no coinciden", "Error!", JOptionPane.ERROR_MESSAGE);
+					break;
+					
+				case 2:
+					JOptionPane.showMessageDialog (null, "Todos los campos deben ser rellenados", "Error!", JOptionPane.ERROR_MESSAGE);
+					break;
+					
+				case 3:
+					JOptionPane.showMessageDialog (null, "Este usuario/email ya esta registrado", "Error!", JOptionPane.ERROR_MESSAGE);
 				
+				case 4:
+					JOptionPane.showMessageDialog (null, "No se pudo registrar al usuario, contacto con el servicio tecnico", "Error!", JOptionPane.ERROR_MESSAGE);
+				}
 				
 			}
 		});
 		btnRegistrar.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnRegistrar.setBounds(173, 189, 166, 51);
 		contentPane.add(btnRegistrar);
+		
+
 	}
 	
 	private void abrirVentanaLogin() {
