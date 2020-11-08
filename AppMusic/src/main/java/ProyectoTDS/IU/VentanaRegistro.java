@@ -123,8 +123,28 @@ public class VentanaRegistro extends JFrame {
 		btnRegistrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				int valorRetornoRegistro;
+				String usuario = textFieldUsuario.getText();
+				String contrasena = textFieldClave.getText();
+				String repite = textFieldRepite.getText();
+				String nombre = textFieldNombre.getText();
+				String apellidos = textFieldApellidos.getText();
+				String fechaNacimiento = textFieldFecha.getText();
+				String email = textFieldEmail.getText();
+				//Las comprobaciones las hacemos aquí mismo, ya que como bien dice el patrón experto, tenemos que implementar la funcionalidad allí donde tengamos la información
+				//disponible para hacerlo, por lo que las comprovaciones las hacemos a nivel de vista, además esto en un sistema de host-servidor también mejora el tiempo de respuesta
+				if (!contrasena.equals(repite)) JOptionPane.showMessageDialog (null, "Las contraseñas no coinciden", "Error!", JOptionPane.ERROR_MESSAGE);
+				
+				else if (usuario.length()==0 || contrasena.length()==0 || 
+						nombre.length()==0 || apellidos.length()==0 || 
+						fechaNacimiento.length()==0 || email.length()==0) JOptionPane.showMessageDialog (null, "Todos los campos deben ser rellenados", "Error!", JOptionPane.ERROR_MESSAGE);
+				else if (!Controlador.RegistroUsuario(usuario, contrasena, repite, nombre, apellidos, fechaNacimiento, email)) {
+					JOptionPane.showMessageDialog (null, "Este usuario/email ya esta registrado, el usuario no se ha creado", "Error!", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					abrirVentanaLogin();
+					dispose();
+				}
+				/*int valorRetornoRegistro;
 				
 				try {
 				valorRetornoRegistro=Controlador.RegistroUsuario(textFieldUsuario.getText(), textFieldClave.getText(), textFieldRepite.getText(), textFieldNombre.getText(), textFieldApellidos.getText(), textFieldFecha.getDate().toString(), textFieldEmail.getText());
@@ -139,20 +159,13 @@ public class VentanaRegistro extends JFrame {
 					dispose();
 					break;
 					
-				case 1:
-					JOptionPane.showMessageDialog (null, "Las contraseñas no coinciden", "Error!", JOptionPane.ERROR_MESSAGE);
-					break;
-					
-				case 2:
-					JOptionPane.showMessageDialog (null, "Todos los campos deben ser rellenados", "Error!", JOptionPane.ERROR_MESSAGE);
-					break;
 					
 				case 3:
 					JOptionPane.showMessageDialog (null, "Este usuario/email ya esta registrado", "Error!", JOptionPane.ERROR_MESSAGE);
 				
 				case 4:
 					JOptionPane.showMessageDialog (null, "No se pudo registrar al usuario, contacto con el servicio tecnico", "Error!", JOptionPane.ERROR_MESSAGE);
-				}
+				}*/
 				
 			}
 		});
@@ -175,4 +188,6 @@ public class VentanaRegistro extends JFrame {
 			}
 		});
 	}
+	
+	
 }

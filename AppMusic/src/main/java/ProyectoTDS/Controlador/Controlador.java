@@ -22,7 +22,7 @@ public class Controlador {
 		return AppMusic.comprobarLoginUsuario(usuario, password);
 	}
 
-	public int RegistroUsuario(String usuario, String contrasena, String repite, String nombre, String apellidos, String fechaNacimiento, String email) {
+	public boolean RegistroUsuario(String usuario, String contrasena, String repite, String nombre, String apellidos, String fechaNacimiento, String email) {
 		return AppMusic.RegistroUsuario(usuario, contrasena, repite, nombre, apellidos, fechaNacimiento, email);
 	}
 	
