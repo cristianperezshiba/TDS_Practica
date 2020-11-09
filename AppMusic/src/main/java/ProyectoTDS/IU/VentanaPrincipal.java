@@ -35,24 +35,28 @@ public class VentanaPrincipal extends JFrame {
 		
 		JPanel panelLeft = new JPanel();
 		panelLeft.setBackground(Color.GRAY);
-		panelLeft.setBounds(0, 99, 217, 362);
+		panelLeft.setBounds(0, 99, 201, 362);
 		contentPane.add(panelLeft);
 		panelLeft.setLayout(null);
 		
 		JButton btnExplorar = new JButton("Explorar");
-		btnExplorar.setBounds(67, 59, 89, 23);
+		btnExplorar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnExplorar.setBounds(39, 47, 117, 44);
 		panelLeft.add(btnExplorar);
 		
 		JButton btnNuevaLista = new JButton("Nueva lista");
-		btnNuevaLista.setBounds(67, 107, 89, 23);
+		btnNuevaLista.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNuevaLista.setBounds(39, 124, 117, 44);
 		panelLeft.add(btnNuevaLista);
 		
 		JButton btnReciente = new JButton("Reciente");
-		btnReciente.setBounds(67, 166, 89, 23);
+		btnReciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnReciente.setBounds(39, 202, 117, 44);
 		panelLeft.add(btnReciente);
 		
 		JButton btnMisListas = new JButton("Mis listas");
-		btnMisListas.setBounds(67, 237, 89, 23);
+		btnMisListas.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnMisListas.setBounds(39, 279, 117, 44);
 		panelLeft.add(btnMisListas);
 		
 		txtInterprete = new JTextField();
@@ -62,10 +66,12 @@ public class VentanaPrincipal extends JFrame {
 		txtInterprete.setColumns(10);
 		
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
-		btnMejoraCuenta.setBounds(433, 25, 149, 23);
+		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnMejoraCuenta.setBounds(433, 11, 167, 37);
 		contentPane.add(btnMejoraCuenta);
 		
 		JButton btnLogout = new JButton("Logout");
+		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnLogout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -75,7 +81,7 @@ public class VentanaPrincipal extends JFrame {
 				
 			}
 		});
-		btnLogout.setBounds(634, 25, 89, 23);
+		btnLogout.setBounds(625, 11, 98, 37);
 		contentPane.add(btnLogout);
 		
 		JButton btnBuscar = new JButton("Buscar");
@@ -99,8 +105,8 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.add(textEstilo);
 		
 		JLabel lblUsuario = new JLabel("Hola " + Controlador.getUsuarioActivo() + "!");
-		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblUsuario.setBounds(288, 29, 111, 19);
+		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 17));
+		lblUsuario.setBounds(106, 19, 293, 19);
 		contentPane.add(lblUsuario);
 	}
 	

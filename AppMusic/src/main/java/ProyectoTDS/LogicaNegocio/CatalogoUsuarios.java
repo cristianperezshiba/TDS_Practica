@@ -27,5 +27,12 @@ public class CatalogoUsuarios {
 		
 	}
 	
+	public Usuario buscarObjetoUsuario(String usuario) {
+		//Buscamos el objeto usuario a partir de su String usuario
+		return listaUsuarios.stream().filter(u -> (usuario.equals(u.getUsuario()))).findFirst().get();
+	}
+	
+	
+	
 	
 }

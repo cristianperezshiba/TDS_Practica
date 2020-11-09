@@ -12,7 +12,7 @@ public class AppMusic {
 	private CatalogoCanciones catalogoCanciones;
 	private CatalogoUsuarios catalogoUsuarios;
 	private LinkedList<Cancion> CancionesMasReproducidas; 
-	private String UsuarioActivo;  //Variable que contendra  el usuario activo
+	private Usuario UsuarioActivo;  //Variable que contendra  el usuario activo
 	
 
 
@@ -21,7 +21,7 @@ public class AppMusic {
 		this.catalogoCanciones = new CatalogoCanciones();
 		this.catalogoUsuarios = new CatalogoUsuarios();
 		this.CancionesMasReproducidas = new LinkedList<Cancion>();
-		this.UsuarioActivo = "";
+		this.UsuarioActivo = null;
 	}
 	
 	public static AppMusic getUnicaInstancia() {
@@ -40,10 +40,10 @@ public class AppMusic {
 	}
 
 	public String getUsuarioActivo() {
-		return UsuarioActivo;
+		return UsuarioActivo.getUsuario();
 	}
 
-	public void setUsuarioActivo(String usuarioActivo) {
+	public void setUsuarioActivo(Usuario usuarioActivo) {
 		UsuarioActivo = usuarioActivo;
 	}
 	
@@ -54,7 +54,7 @@ public class AppMusic {
 	
 	public boolean comprobarLoginUsuario(String usuario, String password) {
 		if (this.catalogoUsuarios.loginUsuario(usuario, password)){
-			this.UsuarioActivo = usuario;
+			UsuarioActivo = this.catalogoUsuarios.buscarObjetoUsuario(usuario);
 			return true;
 		}
 		else return false;
