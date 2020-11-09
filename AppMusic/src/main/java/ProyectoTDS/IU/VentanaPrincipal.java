@@ -5,7 +5,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -13,13 +16,15 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTable;
+import javax.swing.JComboBox;
+import javax.swing.JScrollBar;
 
 public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtInterprete;
 	private JTextField textTitulo;
-	private JTextField textEstilo;
 	private ProyectoTDS.Controlador.Controlador Controlador;
 
 	public VentanaPrincipal() {
@@ -35,33 +40,33 @@ public class VentanaPrincipal extends JFrame {
 		
 		JPanel panelLeft = new JPanel();
 		panelLeft.setBackground(Color.GRAY);
-		panelLeft.setBounds(0, 99, 201, 362);
+		panelLeft.setBounds(0, 99, 201, 421);
 		contentPane.add(panelLeft);
 		panelLeft.setLayout(null);
 		
 		JButton btnExplorar = new JButton("Explorar");
 		btnExplorar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnExplorar.setBounds(39, 47, 117, 44);
+		btnExplorar.setBounds(39, 25, 117, 44);
 		panelLeft.add(btnExplorar);
 		
 		JButton btnNuevaLista = new JButton("Nueva lista");
 		btnNuevaLista.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNuevaLista.setBounds(39, 124, 117, 44);
+		btnNuevaLista.setBounds(39, 93, 117, 44);
 		panelLeft.add(btnNuevaLista);
 		
 		JButton btnReciente = new JButton("Reciente");
 		btnReciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnReciente.setBounds(39, 202, 117, 44);
+		btnReciente.setBounds(39, 158, 117, 44);
 		panelLeft.add(btnReciente);
 		
 		JButton btnMisListas = new JButton("Mis listas");
 		btnMisListas.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnMisListas.setBounds(39, 279, 117, 44);
+		btnMisListas.setBounds(39, 228, 117, 44);
 		panelLeft.add(btnMisListas);
 		
 		txtInterprete = new JTextField();
 		txtInterprete.setText("Interprete");
-		txtInterprete.setBounds(250, 121, 149, 20);
+		txtInterprete.setBounds(250, 118, 149, 23);
 		contentPane.add(txtInterprete);
 		txtInterprete.setColumns(10);
 		
@@ -95,19 +100,35 @@ public class VentanaPrincipal extends JFrame {
 		textTitulo = new JTextField();
 		textTitulo.setText("Titulo");
 		textTitulo.setColumns(10);
-		textTitulo.setBounds(433, 121, 149, 20);
+		textTitulo.setBounds(420, 118, 149, 23);
 		contentPane.add(textTitulo);
-		
-		textEstilo = new JTextField();
-		textEstilo.setText("Estilo");
-		textEstilo.setColumns(10);
-		textEstilo.setBounds(606, 121, 86, 20);
-		contentPane.add(textEstilo);
 		
 		JLabel lblUsuario = new JLabel("Hola " + Controlador.getUsuarioActivo() + "!");
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblUsuario.setBounds(106, 19, 293, 19);
 		contentPane.add(lblUsuario);
+		
+		JComboBox comboBoxEstilo = new JComboBox();
+		comboBoxEstilo.setBounds(579, 118, 126, 23);
+		comboBoxEstilo.addItem("BOLERO");
+		comboBoxEstilo.addItem("CANTAUTOR");
+		comboBoxEstilo.addItem("CLASICA");
+		comboBoxEstilo.addItem("FLAMENCO");
+		comboBoxEstilo.addItem("JAZZ");
+		comboBoxEstilo.addItem("OPERA");
+		comboBoxEstilo.addItem("POP");
+		comboBoxEstilo.addItem("ROCK");
+		comboBoxEstilo.addItem("ROMANTICA");
+		contentPane.add(comboBoxEstilo);
+		
+	  String[][] tituloEInterpretes = new String[][] {}; 
+	  String[] columnas = new String[] {"Titulo", "Interprete"};
+	  JTable table = new JTable();
+	  table.setSize(473, 219);
+	  table.setLocation(232, 190);
+	  table.setModel(new DefaultTableModel(tituloEInterpretes, columnas));
+	  //table.add(new JScrollPane(table), BorderLayout.CENTER);
+	  contentPane.add(table);
 	}
 	
 	
