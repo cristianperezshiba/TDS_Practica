@@ -128,7 +128,7 @@ public class VentanaRegistro extends JFrame {
 				String repite = textFieldRepite.getText();
 				String nombre = textFieldNombre.getText();
 				String apellidos = textFieldApellidos.getText();
-				String fechaNacimiento = textFieldFecha.getText();
+				String fechaNacimiento = textFieldFecha.getDateFormatString();
 				String email = textFieldEmail.getText();
 				//Las comprobaciones las hacemos aquí mismo, ya que como bien dice el patrón experto, tenemos que implementar la funcionalidad allí donde tengamos la información
 				//disponible para hacerlo, por lo que las comprovaciones las hacemos a nivel de vista, además esto en un sistema de host-servidor también mejora el tiempo de respuesta
