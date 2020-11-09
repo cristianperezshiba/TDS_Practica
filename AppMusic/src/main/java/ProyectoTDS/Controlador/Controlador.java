@@ -30,6 +30,9 @@ public class Controlador {
 		return AppMusic.getUsuarioActivo();
 	}
 	
+	public void logout() {
+		AppMusic.logout();
+	}
 	
 	
 }

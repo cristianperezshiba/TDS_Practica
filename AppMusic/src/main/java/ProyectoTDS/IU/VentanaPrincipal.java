@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -21,6 +23,7 @@ public class VentanaPrincipal extends JFrame {
 	private ProyectoTDS.Controlador.Controlador Controlador;
 
 	public VentanaPrincipal() {
+		setTitle("Ventana principal");
 		Controlador = Controlador.getUnicaInstancia();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,6 +66,15 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.add(btnMejoraCuenta);
 		
 		JButton btnLogout = new JButton("Logout");
+		btnLogout.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Controlador.logout();
+				abrirVentanaLogin();
+				dispose();
+				
+			}
+		});
 		btnLogout.setBounds(634, 25, 89, 23);
 		contentPane.add(btnLogout);
 		
@@ -90,5 +102,19 @@ public class VentanaPrincipal extends JFrame {
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblUsuario.setBounds(288, 29, 111, 19);
 		contentPane.add(lblUsuario);
+	}
+	
+	
+	private void abrirVentanaLogin() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VentanaLogin frame = new VentanaLogin();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }

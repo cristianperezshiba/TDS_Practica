@@ -144,28 +144,7 @@ public class VentanaRegistro extends JFrame {
 					abrirVentanaLogin();
 					dispose();
 				}
-				/*int valorRetornoRegistro;
 				
-				try {
-				valorRetornoRegistro=Controlador.RegistroUsuario(textFieldUsuario.getText(), textFieldClave.getText(), textFieldRepite.getText(), textFieldNombre.getText(), textFieldApellidos.getText(), textFieldFecha.getDate().toString(), textFieldEmail.getText());
-				}
-				catch (Exception e1) {
-					valorRetornoRegistro=2;
-				}
-				
-				switch (valorRetornoRegistro) {
-				case 0:
-					abrirVentanaLogin();
-					dispose();
-					break;
-					
-					
-				case 3:
-					JOptionPane.showMessageDialog (null, "Este usuario/email ya esta registrado", "Error!", JOptionPane.ERROR_MESSAGE);
-				
-				case 4:
-					JOptionPane.showMessageDialog (null, "No se pudo registrar al usuario, contacto con el servicio tecnico", "Error!", JOptionPane.ERROR_MESSAGE);
-				}*/
 				
 			}
 		});

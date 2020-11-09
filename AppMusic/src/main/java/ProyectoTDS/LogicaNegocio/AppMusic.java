@@ -47,6 +47,11 @@ public class AppMusic {
 		UsuarioActivo = usuarioActivo;
 	}
 	
+	public void logout() {
+		UsuarioActivo = null;
+		//Hay que hacer algo mas¿?¿?¿?¿?¿? Supongo que si
+	}
+	
 	public boolean comprobarLoginUsuario(String usuario, String password) {
 		if (this.catalogoUsuarios.loginUsuario(usuario, password)){
 			this.UsuarioActivo = usuario;
