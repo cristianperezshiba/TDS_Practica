@@ -1,6 +1,10 @@
 package ProyectoTDS.LogicaNegocio;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 public class AppMusic {
 	//Usamos patron singleton
@@ -62,6 +66,21 @@ public class AppMusic {
 	
 	public boolean RegistroUsuario(String usuario, String contrasena, String repite, String nombre, String apellidos, String fechaNacimiento, String email) {
 		return this.catalogoUsuarios.registrarUsuario(usuario, contrasena, repite, nombre, apellidos, fechaNacimiento, email);
+	};
+	
+	public ArrayList<List<String>> buscarCanciones(String Titulo ,String Interprete,String  Estilo) {
+		Set<Cancion> canciones = new LinkedHashSet<Cancion>(catalogoCanciones.buscarCanciones(Titulo, Interprete, Estilo));
+		ArrayList<List<String>> ArrayConLasDosListas = new ArrayList<>();
+		List<String> listaTitulos = new ArrayList<String>();
+		List<String> listaInterpretes = new ArrayList<String>();
+	    for (Cancion c : canciones) {
+			listaTitulos.add(c.getTitulo());
+			listaInterpretes.add(c.getInterprete().getNombre());
+		}
+	    ArrayConLasDosListas.add(0, listaTitulos);
+	    ArrayConLasDosListas.add(1, listaInterpretes);
+	    
+		return ArrayConLasDosListas;
 	};
 	
 	

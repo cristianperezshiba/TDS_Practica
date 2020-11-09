@@ -19,6 +19,10 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.swing.JTable;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -34,8 +38,9 @@ public class VentanaPrincipal extends JFrame {
 	private JTextField txtInterprete;
 	private JTextField textTitulo;
 	private ProyectoTDS.Controlador.Controlador Controlador;
-	private JTable table_1;
-
+	private JComboBox comboBoxEstilo = new JComboBox();
+	
+	
 	public VentanaPrincipal() {
 		setTitle("Ventana principal");
 		Controlador = Controlador.getUnicaInstancia();
@@ -97,13 +102,9 @@ public class VentanaPrincipal extends JFrame {
 		btnLogout.setBounds(625, 11, 98, 37);
 		contentPane.add(btnLogout);
 		
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(334, 152, 89, 23);
-		contentPane.add(btnBuscar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(470, 152, 89, 23);
-		contentPane.add(btnCancelar);
+		
+		
 		
 		textTitulo = new JTextField();
 		textTitulo.setText("Titulo");
@@ -116,7 +117,7 @@ public class VentanaPrincipal extends JFrame {
 		lblUsuario.setBounds(106, 19, 293, 19);
 		contentPane.add(lblUsuario);
 		
-		JComboBox comboBoxEstilo = new JComboBox();
+		
 		comboBoxEstilo.setBounds(579, 118, 126, 23);
 		comboBoxEstilo.addItem("BOLERO");
 		comboBoxEstilo.addItem("CANTAUTOR");
@@ -132,16 +133,52 @@ public class VentanaPrincipal extends JFrame {
 
 	  
 	  JScrollPane scrollPane = new JScrollPane();
+	  JTable table = new JTable();
 	  scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	  scrollPane.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 	  scrollPane.setBounds(211, 186, 512, 331);
 	  contentPane.add(scrollPane);
-	  String[][] tituloEInterpretes = new String[][] {{"EjemploTitulo", "EjemploInterprete"},
-			  {"Aqui habra las canciones", "segun se necesiten en busquedas, etc"}}; 
+	  /*String[][] tituloEInterpretes = new String[][] {{"EjemploTitulo", "EjemploInterprete"},
+			  {"Aqui habra las canciones", "segun se necesiten en busquedas, etc"}};*/
 	  String[] columnas = new String[] {"Titulo", "Interprete"};
-	  JTable table = new JTable();
-	  table.setModel(new DefaultTableModel(tituloEInterpretes, columnas));	  
+	  table.setModel(new DefaultTableModel(null, columnas));	  
 	  scrollPane.setViewportView(table);
+	  scrollPane.setVisible(false); //Por defecto ocultamos el panel con la tabla, cuando nos haga falta lo activaremos
+	  
+	  
+	  JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ArrayList<List<String>> cancionesEncontradas = Controlador.buscarCanciones(textTitulo.getText() ,txtInterprete.getText(), comboBoxEstilo.getSelectedItem().toString());
+				List<String> listaTitulos = cancionesEncontradas.get(0);
+				List<String> listaInterpretes = cancionesEncontradas.get(1);
+				
+				DefaultTableModel tableMode = new DefaultTableModel(null, columnas);
+				for(int i=0 ; i<listaTitulos.size(); i++) {
+					Object[] data = new Object[2];
+					data[0] = listaTitulos.get(i);
+					data[1] = listaInterpretes.get(i);
+					tableMode.addRow(data);
+					}
+				table.setModel(tableMode);
+				scrollPane.setVisible(true);	
+			}
+		});
+		btnBuscar.setBounds(334, 152, 89, 23);
+		contentPane.add(btnBuscar);
+		
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				scrollPane.setVisible(false);
+			}
+		});
+		btnCancelar.setBounds(470, 152, 89, 23);
+		
+		contentPane.add(btnCancelar);
 	}
 	
 	

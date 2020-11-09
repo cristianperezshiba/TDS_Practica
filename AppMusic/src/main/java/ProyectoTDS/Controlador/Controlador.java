@@ -1,5 +1,11 @@
 package ProyectoTDS.Controlador;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import ProyectoTDS.LogicaNegocio.Cancion;
+
 public class Controlador {
 	//Patron singleton
 	private static Controlador Controlador = null; 
@@ -33,6 +39,10 @@ public class Controlador {
 	public void logout() {
 		AppMusic.logout();
 	}
+	
+	public ArrayList<List<String>> buscarCanciones(String Titulo ,String Interprete,String  Estilo) {
+		return AppMusic.buscarCanciones(Titulo, Interprete, Estilo);
+	};
 	
 	
 }
