@@ -1,7 +1,6 @@
 package ProyectoTDS.LogicaNegocio;
 import static java.util.stream.Collectors.*;
 import java.util.*;
-import java.util.regex.Pattern;
 
 public class CatalogoCanciones {
 	//Usar patron singleton �?
@@ -11,15 +10,20 @@ public class CatalogoCanciones {
 		super();
 		this.listaCanciones = new LinkedHashSet<Cancion>();
 		
+		//Canciones para testear
+		listaCanciones.add(new Cancion("Zooilogco", new Interprete("Foyone"), EstiloMusical.CANTAUTOR, "/.../.."));
+		listaCanciones.add(new Cancion("TituloBolero", new Interprete("INterpreteBolero"), EstiloMusical.BOLERO, "/.Bolero../.."));
+		listaCanciones.add(new Cancion("TituloOpera", new Interprete("InterpreteOpera"), EstiloMusical.OPERA, "/..Opera./.."));
+		
 	}
 	
 	
 	
 	public Set<Cancion> buscarCanciones(String Titulo ,String Interprete,String  Estilo) {
 		//Expresiones Regulares que se usaran para los filtros
-		String patronTitulo = "*"+Titulo+"*";
-		String patronInterprete = "*"+Interprete+"*";
-		String patronEstilo = "*"+Estilo+"*";
+		String patronTitulo = "(.*)"+Titulo+"(.*)";
+		String patronInterprete = "(.*)"+Interprete+"(.*)";
+		String patronEstilo = "(.*)"+Estilo+"(.*)";
 
 		Set<Cancion> matching = listaCanciones.stream()
 		                            .filter(c -> c.getTitulo().matches(patronTitulo))
@@ -31,6 +35,9 @@ public class CatalogoCanciones {
 		
 		return matching;
 	};
+	
+	
+	
 	
 	
 
