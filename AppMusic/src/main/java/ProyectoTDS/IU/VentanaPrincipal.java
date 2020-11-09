@@ -8,8 +8,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -18,7 +21,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JScrollBar;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.ScrollPaneConstants;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -26,6 +34,7 @@ public class VentanaPrincipal extends JFrame {
 	private JTextField txtInterprete;
 	private JTextField textTitulo;
 	private ProyectoTDS.Controlador.Controlador Controlador;
+	private JTable table_1;
 
 	public VentanaPrincipal() {
 		setTitle("Ventana principal");
@@ -34,7 +43,6 @@ public class VentanaPrincipal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 749, 570);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -121,14 +129,19 @@ public class VentanaPrincipal extends JFrame {
 		comboBoxEstilo.addItem("ROMANTICA");
 		contentPane.add(comboBoxEstilo);
 		
-	  String[][] tituloEInterpretes = new String[][] {}; 
+
+	  
+	  JScrollPane scrollPane = new JScrollPane();
+	  scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+	  scrollPane.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+	  scrollPane.setBounds(211, 186, 512, 331);
+	  contentPane.add(scrollPane);
+	  String[][] tituloEInterpretes = new String[][] {{"EjemploTitulo", "EjemploInterprete"},
+			  {"Aqui habra las canciones", "segun se necesiten en busquedas, etc"}}; 
 	  String[] columnas = new String[] {"Titulo", "Interprete"};
 	  JTable table = new JTable();
-	  table.setSize(473, 219);
-	  table.setLocation(232, 190);
-	  table.setModel(new DefaultTableModel(tituloEInterpretes, columnas));
-	  //table.add(new JScrollPane(table), BorderLayout.CENTER);
-	  contentPane.add(table);
+	  table.setModel(new DefaultTableModel(tituloEInterpretes, columnas));	  
+	  scrollPane.setViewportView(table);
 	}
 	
 	
