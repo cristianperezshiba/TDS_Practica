@@ -78,8 +78,7 @@ public class VentanaPrincipal extends JFrame {
 		panelLeft.add(btnMisListas);
 		
 		txtInterprete = new JTextField();
-		txtInterprete.setText("Interprete");
-		txtInterprete.setBounds(250, 118, 149, 23);
+		txtInterprete.setBounds(420, 118, 149, 23);
 		contentPane.add(txtInterprete);
 		txtInterprete.setColumns(10);
 		
@@ -107,9 +106,8 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		textTitulo = new JTextField();
-		textTitulo.setText("Titulo");
 		textTitulo.setColumns(10);
-		textTitulo.setBounds(420, 118, 149, 23);
+		textTitulo.setBounds(250, 118, 149, 23);
 		contentPane.add(textTitulo);
 		
 		JLabel lblUsuario = new JLabel("Hola " + Controlador.getUsuarioActivo() + "!");
@@ -119,6 +117,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		comboBoxEstilo.setBounds(579, 118, 126, 23);
+		comboBoxEstilo.addItem("TODOS");
 		comboBoxEstilo.addItem("BOLERO");
 		comboBoxEstilo.addItem("CANTAUTOR");
 		comboBoxEstilo.addItem("CLASICA");
@@ -179,6 +178,21 @@ public class VentanaPrincipal extends JFrame {
 		btnCancelar.setBounds(470, 152, 89, 23);
 		
 		contentPane.add(btnCancelar);
+		
+		JLabel lblInterprete = new JLabel("Interprete:");
+		lblInterprete.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblInterprete.setBounds(420, 99, 89, 14);
+		contentPane.add(lblInterprete);
+		
+		JLabel lblNewLabel = new JLabel("Titulo:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(250, 99, 46, 14);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblEstilo = new JLabel("Estilo:");
+		lblEstilo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEstilo.setBounds(579, 99, 89, 14);
+		contentPane.add(lblEstilo);
 	}
 	
 	
