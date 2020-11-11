@@ -154,18 +154,7 @@ public class VentanaExplorar extends JFrame {
 		contentPane.add(lblUsuario);
 		
 		
-		comboBoxEstilo.setBounds(579, 118, 126, 23);
-		comboBoxEstilo.addItem("TODOS");
-		comboBoxEstilo.addItem("BOLERO");
-		comboBoxEstilo.addItem("CANTAUTOR");
-		comboBoxEstilo.addItem("CLASICA");
-		comboBoxEstilo.addItem("FLAMENCO");
-		comboBoxEstilo.addItem("JAZZ");
-		comboBoxEstilo.addItem("OPERA");
-		comboBoxEstilo.addItem("POP");
-		comboBoxEstilo.addItem("ROCK");
-		comboBoxEstilo.addItem("ROMANTICA");
-		contentPane.add(comboBoxEstilo);
+		
 		
 
 	  

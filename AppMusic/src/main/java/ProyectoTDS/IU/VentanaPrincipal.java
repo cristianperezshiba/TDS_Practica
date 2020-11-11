@@ -63,7 +63,7 @@ public class VentanaPrincipal extends JFrame {
 		btnNuevaLista.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				abrirVentanaMisListas();
+				abrirVentanaNuevaLista();
 				dispose();
 			}
 		});

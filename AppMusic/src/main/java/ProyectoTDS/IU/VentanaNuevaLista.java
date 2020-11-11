@@ -36,6 +36,9 @@ public class VentanaNuevaLista extends JFrame {
 
 	private JPanel contentPane;
 	private ProyectoTDS.Controlador.Controlador Controlador;
+	private JTable tableIzq;
+	private JTable tableDcha;
+	private JTextField textFieldNombrePlaylist;
 	
 	
 	public VentanaNuevaLista() {
@@ -43,7 +46,7 @@ public class VentanaNuevaLista extends JFrame {
 		Controlador = Controlador.getUnicaInstancia();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 749, 570);
+		setBounds(100, 100, 1073, 569);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -58,6 +61,45 @@ public class VentanaNuevaLista extends JFrame {
 		btnExplorar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnExplorar.setBounds(39, 25, 117, 44);
 		panelLeft.add(btnExplorar);
+		
+		JLabel lblInterprete = new JLabel("Interprete:");
+		lblInterprete.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblInterprete.setBounds(420, 99, 89, 14);
+		contentPane.add(lblInterprete);
+		
+		JLabel lblNewLabel = new JLabel("Titulo:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(250, 99, 46, 14);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblEstilo = new JLabel("Estilo:");
+		lblEstilo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEstilo.setBounds(579, 99, 89, 14);
+		contentPane.add(lblEstilo);
+		
+		JTextField textTitulo = new JTextField();
+		textTitulo.setColumns(10);
+		textTitulo.setBounds(250, 118, 149, 23);
+		contentPane.add(textTitulo);
+		
+		JTextField txtInterprete = new JTextField();
+		txtInterprete.setBounds(420, 118, 149, 23);
+		contentPane.add(txtInterprete);
+		txtInterprete.setColumns(10);
+		
+		JComboBox comboBoxEstilo = new JComboBox();
+		comboBoxEstilo.setBounds(579, 118, 126, 23);
+		comboBoxEstilo.addItem("TODOS");
+		comboBoxEstilo.addItem("BOLERO");
+		comboBoxEstilo.addItem("CANTAUTOR");
+		comboBoxEstilo.addItem("CLASICA");
+		comboBoxEstilo.addItem("FLAMENCO");
+		comboBoxEstilo.addItem("JAZZ");
+		comboBoxEstilo.addItem("OPERA");
+		comboBoxEstilo.addItem("POP");
+		comboBoxEstilo.addItem("ROCK");
+		comboBoxEstilo.addItem("ROMANTICA");
+		contentPane.add(comboBoxEstilo);
 		
 		JButton btnNuevaLista = new JButton("Nueva lista");
 		btnNuevaLista.addMouseListener(new MouseAdapter() {
@@ -97,7 +139,7 @@ public class VentanaNuevaLista extends JFrame {
 		
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
 		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnMejoraCuenta.setBounds(433, 11, 167, 37);
+		btnMejoraCuenta.setBounds(700, 11, 167, 37);
 		contentPane.add(btnMejoraCuenta);
 
 
@@ -114,15 +156,78 @@ public class VentanaNuevaLista extends JFrame {
 			}
 		});
 		
-		btnLogout.setBounds(625, 11, 98, 37);
+		btnLogout.setBounds(936, 11, 98, 37);
 		contentPane.add(btnLogout);
 		
 		JLabel lblUsuario = new JLabel("Hola " + Controlador.getUsuarioActivo() + "!");
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblUsuario.setBounds(106, 19, 293, 19);
+		lblUsuario.setBounds(291, 19, 293, 19);
 		contentPane.add(lblUsuario);
-	  
 		
+		JScrollPane scrollPaneIzq = new JScrollPane();
+		scrollPaneIzq.setBounds(211, 157, 373, 265);
+		contentPane.add(scrollPaneIzq);
+		
+		tableIzq = new JTable();
+		scrollPaneIzq.setViewportView(tableIzq);
+		
+		JScrollPane scrollPaneDcha = new JScrollPane();
+		scrollPaneDcha.setBounds(663, 152, 371, 265);
+		contentPane.add(scrollPaneDcha);
+		
+		tableDcha = new JTable();
+		scrollPaneDcha.setViewportView(tableDcha);
+		
+		JButton btnCrear = new JButton("Crear playlist");
+		btnCrear.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCrear.setBounds(652, 59, 111, 31);
+		contentPane.add(btnCrear);
+		
+		textFieldNombrePlaylist = new JTextField();
+		textFieldNombrePlaylist.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		textFieldNombrePlaylist.setBounds(469, 62, 173, 26);
+		contentPane.add(textFieldNombrePlaylist);
+		textFieldNombrePlaylist.setColumns(10);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnBuscar.setBounds(738, 107, 133, 40);
+		contentPane.add(btnBuscar);
+		
+		JButton btnIZQ_DCHA = new JButton("<<");
+		btnIZQ_DCHA.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnIZQ_DCHA.setBounds(590, 222, 68, 48);
+		contentPane.add(btnIZQ_DCHA);
+		
+		JButton btnDCHA_IZQ = new JButton(">>");
+		btnDCHA_IZQ.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnDCHA_IZQ.setBounds(590, 300, 68, 48);
+		contentPane.add(btnDCHA_IZQ);
+		
+		JButton btnEliminarPlaylist = new JButton("Eliminar playlist");
+		btnEliminarPlaylist.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnEliminarPlaylist.setBounds(783, 59, 126, 31);
+		contentPane.add(btnEliminarPlaylist);
+	  
+		btnBuscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ArrayList<List<String>> cancionesEncontradas = Controlador.buscarCanciones(textTitulo.getText() ,txtInterprete.getText(), comboBoxEstilo.getSelectedItem().toString());
+				List<String> listaTitulos = cancionesEncontradas.get(0);
+				List<String> listaInterpretes = cancionesEncontradas.get(1);
+				
+				String[] columnas = new String[] {"Titulo", "Interprete"};
+				DefaultTableModel tableMode = new DefaultTableModel(null, columnas);
+				for(int i=0 ; i<listaTitulos.size(); i++) {
+					Object[] data = new Object[2];
+					data[0] = listaTitulos.get(i);
+					data[1] = listaInterpretes.get(i);
+					tableMode.addRow(data);
+					}
+				tableIzq.setModel(tableMode);
+				//scrollPaneIzq.setVisible(true);	
+			}
+		});
 		
 		btnExplorar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -176,8 +281,6 @@ public class VentanaNuevaLista extends JFrame {
 			}
 		});
 	}
-	
-
 	
 	private void abrirVentanaReciente() {
 		EventQueue.invokeLater(new Runnable() {
