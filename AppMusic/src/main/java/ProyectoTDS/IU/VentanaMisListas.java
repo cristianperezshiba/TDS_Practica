@@ -172,9 +172,7 @@ public class VentanaMisListas extends JFrame {
 			data[0] = s;
 			tableModelListas.addRow(data);
 		}
-		Object[] data = new Object[1];
-		data[0] = "EEEEASDF";
-		tableModelListas.addRow(data);
+
 		table_listas.setModel(tableModelListas);
 		scrollPaneListas.setViewportView(table_listas);
 		

@@ -33,6 +33,8 @@ import javax.swing.JScrollBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.ScrollPaneConstants;
 
 public class VentanaNuevaLista extends JFrame {
@@ -285,6 +287,58 @@ public class VentanaNuevaLista extends JFrame {
 				cargarCancionesPlaylist(playlistMostrada);
 			}
 		});
+		
+		
+		JScrollPane scrollPaneListas = new JScrollPane();
+		scrollPaneListas.setBounds(10, 283, 181, 138);
+		panelLeft.add(scrollPaneListas);
+		JTable table_listas = new JTable();
+		DefaultTableModel tableModelListas = new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Listas"
+			}
+		);
+		Set<String> misListas = Controlador.cargarMisListas();
+		for  (String s : misListas) {
+			Object[] data = new Object[1];
+			data[0] = s;
+			tableModelListas.addRow(data);
+		}
+		table_listas.setModel(tableModelListas);
+		scrollPaneListas.setViewportView(table_listas);
+		
+		table_listas.setCellSelectionEnabled(true);
+	    ListSelectionModel cellSelectionModel = table_listas.getSelectionModel();
+	    cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+	    cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+	      public void valueChanged(ListSelectionEvent e) {
+	        String selectedData = null;
+	        int[] selectedRow = table_listas.getSelectedRows();
+	        selectedData = (String) table_listas.getValueAt(selectedRow[0], 0);
+	        System.out.println("Selected: " + selectedData);
+
+	        
+	        ArrayList<List<String>> cancionesEncontradas = Controlador.getCancionesLista(selectedData);
+	        
+			List<String> listaTitulos = cancionesEncontradas.get(0);
+			List<String> listaInterpretes = cancionesEncontradas.get(1);
+			
+			DefaultTableModel tableMode = new DefaultTableModel(null,  new String[] {"Titulo", "Interprete"});
+			for(int i=0 ; i<listaTitulos.size(); i++) {
+				Object[] data = new Object[2];
+				data[0] = listaTitulos.get(i);
+				data[1] = listaInterpretes.get(i);
+				tableMode.addRow(data);
+				}
+			tableDcha.setModel(tableMode);
+			playlistMostrada = selectedData;
+	      }
+
+	    });
+	    
 		
 		
 		
