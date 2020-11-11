@@ -252,7 +252,12 @@ public class VentanaNuevaLista extends JFrame {
 		btnEliminarPlaylist.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//Eliminar playlist
+				if (playlistMostrada == null) return;
+				int reply = JOptionPane.showConfirmDialog(null, "Esta seguro de que desea eliminar la playlist " + playlistMostrada + "?","Confirmar accion", JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) { 
+					Controlador.eliminarPlaylist(playlistMostrada);
+					playlistMostrada = null;
+					}
 			}
 		});
 		

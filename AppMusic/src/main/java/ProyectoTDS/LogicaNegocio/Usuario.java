@@ -125,6 +125,14 @@ public class Usuario {
 				.getCanciones();
 
 	}
+	
+	public boolean eliminarPlaylist(String nombrePlaylist){
+		ListaCanciones lista = playlists.stream()	
+						.filter(p -> p.getNombre().equals(nombrePlaylist))
+						.findFirst()
+						.get();
+		return playlists.remove(lista);
+	}
 
 
 

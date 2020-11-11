@@ -119,5 +119,9 @@ public class AppMusic {
 		return UsuarioActivo.borrarCancionDePlaylist(playlist, cancionAborrar);
 	}
 
+	public boolean eliminarPlaylist(String nombre) {
+		return UsuarioActivo.eliminarPlaylist(nombre);
+	}
+	
 	
 }

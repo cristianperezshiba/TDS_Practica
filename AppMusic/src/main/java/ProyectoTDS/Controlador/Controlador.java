@@ -65,5 +65,8 @@ public class Controlador {
 		return AppMusic.borrarCancionDePlaylist(playlistMostrada, cancion, interprete);
 	}
 	
+	public boolean eliminarPlaylist(String nombre) {
+		return AppMusic.eliminarPlaylist(nombre);
+	}
 	
 }
