@@ -88,4 +88,21 @@ public class AppMusic {
 	}
 	
 	
+	public ArrayList<List<String>> getCancionesLista(String lista) {
+		Set<Cancion> canciones = new LinkedHashSet<Cancion>(UsuarioActivo.getCancionesPlaylist(lista));
+		ArrayList<List<String>> ArrayConLasDosListas = new ArrayList<>();
+		List<String> listaTitulos = new ArrayList<String>();
+		List<String> listaInterpretes = new ArrayList<String>();
+	    for (Cancion c : canciones) {
+			listaTitulos.add(c.getTitulo());
+			listaInterpretes.add(c.getInterprete().getNombre());
+		}
+	    ArrayConLasDosListas.add(0, listaTitulos);
+	    ArrayConLasDosListas.add(1, listaInterpretes);
+	    
+		return ArrayConLasDosListas;
+	};
+	
+
+	
 }

@@ -107,6 +107,15 @@ public class Usuario {
 			.filter(l -> l.equals(lista))
 			.forEach(l -> l.añadirCancion(cancion));
 	}
+	
+	public Set<Cancion> getCancionesPlaylist(String lista){
+		return playlists.stream()
+				.filter(p -> p.getNombre().equals(lista))
+				.findFirst()
+				.get()
+				.getCanciones();
+
+	}
 
 
 

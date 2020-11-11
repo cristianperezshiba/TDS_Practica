@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import ProyectoTDS.LogicaNegocio.EstiloMusical;
+
 import java.awt.Color;
 import java.awt.Component;
 
@@ -31,6 +33,8 @@ import javax.swing.JScrollBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.ScrollPaneConstants;
 import java.awt.ScrollPane;
 
@@ -170,8 +174,41 @@ public class VentanaMisListas extends JFrame {
 			data[0] = s;
 			tableModelListas.addRow(data);
 		}
+		Object[] data = new Object[1];
+		data[0] = "EEEEASDF";
+		tableModelListas.addRow(data);
 		table_listas.setModel(tableModelListas);
 		scrollPaneListas.setViewportView(table_listas);
+		
+		table_listas.setCellSelectionEnabled(true);
+	    ListSelectionModel cellSelectionModel = table_listas.getSelectionModel();
+	    cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+	    cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+	      public void valueChanged(ListSelectionEvent e) {
+	        String selectedData = null;
+	        int[] selectedRow = table_listas.getSelectedRows();
+	        selectedData = (String) table_listas.getValueAt(selectedRow[0], 0);
+	        System.out.println("Selected: " + selectedData);
+
+	        
+	        ArrayList<List<String>> cancionesEncontradas = Controlador.getCancionesLista(selectedData);
+	        
+			List<String> listaTitulos = cancionesEncontradas.get(0);
+			List<String> listaInterpretes = cancionesEncontradas.get(1);
+			
+			DefaultTableModel tableMode = new DefaultTableModel(null,  new String[] {"Titulo", "Interprete"});
+			for(int i=0 ; i<listaTitulos.size(); i++) {
+				Object[] data = new Object[2];
+				data[0] = listaTitulos.get(i);
+				data[1] = listaInterpretes.get(i);
+				tableMode.addRow(data);
+				}
+			table.setModel(tableMode);
+			scrollPane.setVisible(true);
+	      }
+
+	    });
 		
 		
 		
@@ -218,6 +255,7 @@ public class VentanaMisListas extends JFrame {
 	}
 	
 	private void abrirVentanaReciente() {
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -229,4 +267,5 @@ public class VentanaMisListas extends JFrame {
 			}
 		});
 	}
+	
 }

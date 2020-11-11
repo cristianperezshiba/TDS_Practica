@@ -48,4 +48,9 @@ public class Controlador {
 		return AppMusic.cargarMisListas();
 	}
 	
+	public ArrayList<List<String>> getCancionesLista(String lista) {
+		return AppMusic.getCancionesLista(lista);
+	};
+	
+	
 }
