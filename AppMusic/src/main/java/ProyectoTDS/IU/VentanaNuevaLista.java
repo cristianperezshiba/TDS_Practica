@@ -32,14 +32,14 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.ScrollPaneConstants;
 
-public class VentanaPrincipal extends JFrame {
+public class VentanaNuevaLista extends JFrame {
 
 	private JPanel contentPane;
 	private ProyectoTDS.Controlador.Controlador Controlador;
 	
 	
-	public VentanaPrincipal() {
-		setTitle("Ventana principal");
+	public VentanaNuevaLista() {
+		setTitle("Ventana nueva lista");
 		Controlador = Controlador.getUnicaInstancia();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -179,18 +179,7 @@ public class VentanaPrincipal extends JFrame {
 		});
 	}
 	
-	private void abrirVentanaNuevaLista() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaNuevaLista frame = new VentanaNuevaLista();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 	
 	private void abrirVentanaReciente() {
 		EventQueue.invokeLater(new Runnable() {

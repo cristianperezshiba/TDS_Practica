@@ -32,14 +32,14 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.ScrollPaneConstants;
 
-public class VentanaPrincipal extends JFrame {
+public class VentanaMisListas extends JFrame {
 
 	private JPanel contentPane;
 	private ProyectoTDS.Controlador.Controlador Controlador;
 	
 	
-	public VentanaPrincipal() {
-		setTitle("Ventana principal");
+	public VentanaMisListas() {
+		setTitle("Ventana mis listas");
 		Controlador = Controlador.getUnicaInstancia();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,18 +60,21 @@ public class VentanaPrincipal extends JFrame {
 		panelLeft.add(btnExplorar);
 		
 		JButton btnNuevaLista = new JButton("Nueva lista");
-		btnNuevaLista.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				abrirVentanaMisListas();
-				dispose();
-			}
-		});
 		btnNuevaLista.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNuevaLista.setBounds(39, 93, 117, 44);
 		panelLeft.add(btnNuevaLista);
+		btnNuevaLista.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				abrirVentanaNuevaLista();
+				dispose();
+			}
+		});
 		
 		JButton btnReciente = new JButton("Reciente");
+		btnReciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnReciente.setBounds(39, 158, 117, 44);
+		panelLeft.add(btnReciente);
 		btnReciente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -79,21 +82,12 @@ public class VentanaPrincipal extends JFrame {
 				dispose();
 			}
 		});
-		btnReciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnReciente.setBounds(39, 158, 117, 44);
-		panelLeft.add(btnReciente);
 		
 		JButton btnMisListas = new JButton("Mis listas");
-		btnMisListas.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				abrirVentanaMisListas();
-				dispose();
-			}
-		});
 		btnMisListas.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnMisListas.setBounds(39, 228, 117, 44);
 		panelLeft.add(btnMisListas);
+		
 		
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
 		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -166,18 +160,7 @@ public class VentanaPrincipal extends JFrame {
 		});
 	}
 	
-	private void abrirVentanaMisListas() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaMisListas frame = new VentanaMisListas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 	
 	private void abrirVentanaNuevaLista() {
 		EventQueue.invokeLater(new Runnable() {

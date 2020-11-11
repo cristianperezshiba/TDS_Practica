@@ -32,14 +32,14 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.ScrollPaneConstants;
 
-public class VentanaPrincipal extends JFrame {
+public class VentanaReciente extends JFrame {
 
 	private JPanel contentPane;
 	private ProyectoTDS.Controlador.Controlador Controlador;
 	
 	
-	public VentanaPrincipal() {
-		setTitle("Ventana principal");
+	public VentanaReciente() {
+		setTitle("Ventana reciente");
 		Controlador = Controlador.getUnicaInstancia();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,13 +72,7 @@ public class VentanaPrincipal extends JFrame {
 		panelLeft.add(btnNuevaLista);
 		
 		JButton btnReciente = new JButton("Reciente");
-		btnReciente.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				abrirVentanaReciente();
-				dispose();
-			}
-		});
+		
 		btnReciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnReciente.setBounds(39, 158, 117, 44);
 		panelLeft.add(btnReciente);
@@ -192,16 +186,4 @@ public class VentanaPrincipal extends JFrame {
 		});
 	}
 	
-	private void abrirVentanaReciente() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaReciente frame = new VentanaReciente();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 }
