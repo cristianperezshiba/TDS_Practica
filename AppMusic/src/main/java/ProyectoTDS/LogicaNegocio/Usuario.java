@@ -1,6 +1,7 @@
 package ProyectoTDS.LogicaNegocio;
 
 import java.util.*;
+import java.util.stream.Collectors; 
 
 public class Usuario {
 	
@@ -90,6 +91,11 @@ public class Usuario {
 		this.premium = premium;
 	}
 	
+	public Set<String> getNombrePlaylists() {
+		return playlists.stream()
+			.map(p -> p.getNombre())
+			.collect(Collectors.toSet());
+	}
 	
 	public void crearNuevaPlaylist(String nombre) {
 		this.playlists.add(new ListaCanciones(nombre));

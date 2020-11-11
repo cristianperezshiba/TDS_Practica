@@ -44,5 +44,8 @@ public class Controlador {
 		return AppMusic.buscarCanciones(Titulo, Interprete, Estilo);
 	};
 	
+	public Set<String> cargarMisListas(){
+		return AppMusic.cargarMisListas();
+	}
 	
 }

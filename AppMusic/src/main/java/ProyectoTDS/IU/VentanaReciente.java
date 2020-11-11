@@ -115,9 +115,7 @@ public class VentanaReciente extends JFrame {
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblUsuario.setBounds(106, 19, 293, 19);
 		contentPane.add(lblUsuario);
-	  /*String[][] tituloEInterpretes = new String[][] {{"EjemploTitulo", "EjemploInterprete"},
-			  {"Aqui habra las canciones", "segun se necesiten en busquedas, etc"}};*/
-	    String[] columnas = new String[] {"Titulo", "Interprete"};
+	  
 		
 		
 		btnExplorar.addMouseListener(new MouseAdapter() {

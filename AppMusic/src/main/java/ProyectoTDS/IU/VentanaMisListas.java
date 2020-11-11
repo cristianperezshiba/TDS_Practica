@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JTable;
 import javax.swing.JComboBox;
@@ -31,11 +32,13 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.ScrollPaneConstants;
+import java.awt.ScrollPane;
 
 public class VentanaMisListas extends JFrame {
 
 	private JPanel contentPane;
 	private ProyectoTDS.Controlador.Controlador Controlador;
+	private JTable table_listas;
 	
 	
 	public VentanaMisListas() {
@@ -89,6 +92,9 @@ public class VentanaMisListas extends JFrame {
 		panelLeft.add(btnMisListas);
 		
 		
+		
+		
+		
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
 		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnMejoraCuenta.setBounds(433, 11, 167, 37);
@@ -115,9 +121,7 @@ public class VentanaMisListas extends JFrame {
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblUsuario.setBounds(106, 19, 293, 19);
 		contentPane.add(lblUsuario);
-	  /*String[][] tituloEInterpretes = new String[][] {{"EjemploTitulo", "EjemploInterprete"},
-			  {"Aqui habra las canciones", "segun se necesiten en busquedas, etc"}};*/
-	    String[] columnas = new String[] {"Titulo", "Interprete"};
+	  
 		
 		
 		btnExplorar.addMouseListener(new MouseAdapter() {
@@ -127,8 +131,48 @@ public class VentanaMisListas extends JFrame {
 				dispose();
 			}
 		});
-		
 
+
+		JScrollPane scrollPane = new JScrollPane();
+		JTable table = new JTable();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		scrollPane.setBounds(211, 113, 512, 252);
+		contentPane.add(scrollPane);
+		/*String[][] tituloEInterpretes = new String[][] {{"EjemploTitulo", "EjemploInterprete"},
+				  {"Aqui habra las canciones", "segun se necesiten en busquedas, etc"}};*/
+		String[] columnas = new String[] {"Titulo", "Interprete"};
+		table.setModel(new DefaultTableModel(null, columnas));	  
+		scrollPane.setViewportView(table);
+		scrollPane.setVisible(false); //Por defecto ocultamos el panel con la tabla, cuando nos haga falta lo activaremos
+		
+		
+		
+		
+		
+		
+		
+		
+		JScrollPane scrollPaneListas = new JScrollPane();
+		scrollPaneListas.setBounds(10, 283, 181, 138);
+		panelLeft.add(scrollPaneListas);
+		table_listas = new JTable();
+		DefaultTableModel tableModelListas = new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Listas"
+			}
+		);
+		Set<String> misListas = Controlador.cargarMisListas();
+		for  (String s : misListas) {
+			Object[] data = new Object[1];
+			data[0] = s;
+			tableModelListas.addRow(data);
+		}
+		table_listas.setModel(tableModelListas);
+		scrollPaneListas.setViewportView(table_listas);
+		
 		
 		
 	}
@@ -159,8 +203,6 @@ public class VentanaMisListas extends JFrame {
 			}
 		});
 	}
-	
-
 	
 	private void abrirVentanaNuevaLista() {
 		EventQueue.invokeLater(new Runnable() {

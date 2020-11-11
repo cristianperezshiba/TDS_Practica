@@ -83,5 +83,9 @@ public class AppMusic {
 		return ArrayConLasDosListas;
 	};
 	
+	public Set<String> cargarMisListas(){
+		return UsuarioActivo.getNombrePlaylists();
+	}
+	
 	
 }
