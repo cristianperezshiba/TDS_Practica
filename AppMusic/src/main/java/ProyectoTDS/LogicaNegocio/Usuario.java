@@ -97,8 +97,8 @@ public class Usuario {
 			.collect(Collectors.toSet());
 	}
 	
-	public void crearNuevaPlaylist(String nombre) {
-		this.playlists.add(new ListaCanciones(nombre));
+	public boolean crearNuevaPlaylist(String nombre) {
+		return this.playlists.add(new ListaCanciones(nombre));
 	}
 	
 	public void añadirCancionAPlaylist(ListaCanciones lista, Cancion cancion) {

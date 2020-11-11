@@ -16,12 +16,15 @@ import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JTable;
 import javax.swing.JComboBox;
@@ -212,20 +215,26 @@ public class VentanaNuevaLista extends JFrame {
 		btnBuscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ArrayList<List<String>> cancionesEncontradas = Controlador.buscarCanciones(textTitulo.getText() ,txtInterprete.getText(), comboBoxEstilo.getSelectedItem().toString());
-				List<String> listaTitulos = cancionesEncontradas.get(0);
-				List<String> listaInterpretes = cancionesEncontradas.get(1);
-				
-				String[] columnas = new String[] {"Titulo", "Interprete"};
-				DefaultTableModel tableMode = new DefaultTableModel(null, columnas);
-				for(int i=0 ; i<listaTitulos.size(); i++) {
-					Object[] data = new Object[2];
-					data[0] = listaTitulos.get(i);
-					data[1] = listaInterpretes.get(i);
-					tableMode.addRow(data);
+				cargarTablaBusqueda(textTitulo.getText() ,txtInterprete.getText(), comboBoxEstilo.getSelectedItem().toString());
+			}
+		});
+		
+		btnCrear.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String nuevaPlaylist = textFieldNombrePlaylist.getText();
+				int reply = JOptionPane.showConfirmDialog(null, "¿Quiere crear una nueva playlist llamada " +nuevaPlaylist + "?", "Crear playlist", JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) {
+					if (Controlador.crearPlaylist(nuevaPlaylist)) {
+						JOptionPane.showMessageDialog(null, "Playlist " + nuevaPlaylist + " creada");
+						//Cargar tabla playlist a la dcha y la de explorar a la izq
+						cargarTablaBusqueda("", "", "TODOS");
+						cargarCancionesPlaylist(nuevaPlaylist);
 					}
-				tableIzq.setModel(tableMode);
-				//scrollPaneIzq.setVisible(true);	
+					
+					else JOptionPane.showMessageDialog(null, "Ya existe una playlist con este nombre", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				
 			}
 		});
 		
@@ -242,6 +251,41 @@ public class VentanaNuevaLista extends JFrame {
 		
 	}
 	
+	private void cargarTablaBusqueda(String titulo, String Interprete, String Estilo) {
+		ArrayList<List<String>> cancionesEncontradas = Controlador.buscarCanciones(titulo, Interprete, Estilo);
+		List<String> listaTitulos = cancionesEncontradas.get(0);
+		List<String> listaInterpretes = cancionesEncontradas.get(1);
+		
+		String[] columnas = new String[] {"Titulo", "Interprete"};
+		DefaultTableModel tableMode = new DefaultTableModel(null, columnas);
+		for(int i=0 ; i<listaTitulos.size(); i++) {
+			Object[] data = new Object[2];
+			data[0] = listaTitulos.get(i);
+			data[1] = listaInterpretes.get(i);
+			tableMode.addRow(data);
+			}
+		tableIzq.setModel(tableMode);
+		//scrollPaneIzq.setVisible(true);
+		
+	}
+	
+	private void cargarCancionesPlaylist(String playlist) {
+		ArrayList<List<String>> canciones = Controlador.getCancionesLista(playlist);
+		
+		List<String> listaTitulos = canciones.get(0);
+		List<String> listaInterpretes = canciones.get(1);
+		
+		String[] columnas = new String[] {"Titulo", "Interprete"};
+		DefaultTableModel tableMode = new DefaultTableModel(null, columnas);
+		for(int i=0 ; i<listaTitulos.size(); i++) {
+			Object[] data = new Object[2];
+			data[0] = listaTitulos.get(i);
+			data[1] = listaInterpretes.get(i);
+			tableMode.addRow(data);
+			}
+		tableDcha.setModel(tableMode);
+		//scrollPaneIzq.setVisible(true);
+	}
 	
 	private void abrirVentanaLogin() {
 		EventQueue.invokeLater(new Runnable() {

@@ -52,5 +52,9 @@ public class Controlador {
 		return AppMusic.getCancionesLista(lista);
 	};
 	
+	public boolean crearPlaylist(String nombre) {
+		return AppMusic.crearPlaylist(nombre);
+	}
+	
 	
 }

@@ -103,6 +103,10 @@ public class AppMusic {
 		return ArrayConLasDosListas;
 	};
 	
+	public boolean crearPlaylist(String nombre) {
+		return UsuarioActivo.crearNuevaPlaylist(nombre);
+	}
+	
 
 	
 }
