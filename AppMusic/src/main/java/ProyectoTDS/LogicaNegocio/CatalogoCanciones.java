@@ -54,9 +54,7 @@ public class CatalogoCanciones {
 			
 		}
 		
-		
 
-		//Interprete AlejandorFernandezMalu = new Interprete("Alejandro Fernandez & Malu");
 	
 		
 		}
@@ -94,6 +92,13 @@ public class CatalogoCanciones {
 		
 		return matching;
 	};
+	
+	public Cancion buscarCancion(String titulo, String interprete) {
+		return listaCanciones.stream()	
+							 .filter(c -> c.getTitulo().equals(titulo) && c.getInterprete().getNombre().equals(interprete))
+							 .findFirst()
+							 .get();
+	}
 	
 	
 	

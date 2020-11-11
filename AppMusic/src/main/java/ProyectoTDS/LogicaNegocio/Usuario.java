@@ -101,11 +101,20 @@ public class Usuario {
 		return this.playlists.add(new ListaCanciones(nombre));
 	}
 	
-	public void añadirCancionAPlaylist(ListaCanciones lista, Cancion cancion) {
-		//TODO: Esto es provisional aun, no se si hara así
-		this.playlists.stream()
-			.filter(l -> l.equals(lista))
-			.forEach(l -> l.añadirCancion(cancion));
+	public boolean añadirCancionAPlaylist(String lista, Cancion cancion) {
+		return this.playlists.stream()
+			.filter(l -> l.getNombre().equals(lista))
+			.findFirst()
+			.get()
+			.añadirCancion(cancion);
+	}
+	
+	public boolean borrarCancionDePlaylist(String playlist, Cancion cancion){
+		return this.playlists.stream()
+				.filter(l -> l.getNombre().equals(playlist))
+				.findFirst()
+				.get()
+				.eliminarCancion(cancion);
 	}
 	
 	public Set<Cancion> getCancionesPlaylist(String lista){

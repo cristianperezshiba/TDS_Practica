@@ -107,6 +107,17 @@ public class AppMusic {
 		return UsuarioActivo.crearNuevaPlaylist(nombre);
 	}
 	
+	public boolean  insertarCancionEnPlaylist(String playlist, String nombreCancion, String interprete) {
+		Cancion cancion = catalogoCanciones.buscarCancion(nombreCancion, interprete);
+		if (cancion == null) return false;
+		return UsuarioActivo.añadirCancionAPlaylist(playlist, cancion);
+	}
+	
+	public boolean borrarCancionDePlaylist(String playlist,String  cancion,String  interprete) {
+		Cancion cancionAborrar = catalogoCanciones.buscarCancion(cancion, interprete);
+		if (cancion == null) return false;
+		return UsuarioActivo.borrarCancionDePlaylist(playlist, cancionAborrar);
+	}
 
 	
 }

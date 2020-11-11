@@ -33,12 +33,12 @@ public class ListaCanciones {
 
 	
 	
-	public void añadirCancion(Cancion cancion) {
-		this.canciones.add(cancion);
+	public boolean añadirCancion(Cancion cancion) {
+		return this.canciones.add(cancion);
 	}
 	
-	public void eliminarCancion(Cancion cancion) {
-		this.canciones.remove(cancion);
+	public boolean eliminarCancion(Cancion cancion) {
+		return this.canciones.remove(cancion);
 	}
 
 

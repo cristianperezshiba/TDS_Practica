@@ -42,7 +42,7 @@ public class VentanaNuevaLista extends JFrame {
 	private JTable tableIzq;
 	private JTable tableDcha;
 	private JTextField textFieldNombrePlaylist;
-	
+	private String playlistMostrada;
 	
 	public VentanaNuevaLista() {
 		setTitle("Ventana nueva lista");
@@ -197,15 +197,15 @@ public class VentanaNuevaLista extends JFrame {
 		btnBuscar.setBounds(738, 107, 133, 40);
 		contentPane.add(btnBuscar);
 		
-		JButton btnIZQ_DCHA = new JButton("<<");
-		btnIZQ_DCHA.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnIZQ_DCHA.setBounds(590, 222, 68, 48);
-		contentPane.add(btnIZQ_DCHA);
-		
-		JButton btnDCHA_IZQ = new JButton(">>");
+		JButton btnDCHA_IZQ = new JButton("<<");
 		btnDCHA_IZQ.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnDCHA_IZQ.setBounds(590, 300, 68, 48);
+		btnDCHA_IZQ.setBounds(594, 283, 59, 48);
 		contentPane.add(btnDCHA_IZQ);
+		
+		JButton btnIZQ_DCHA = new JButton(">>");
+		btnIZQ_DCHA.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnIZQ_DCHA.setBounds(594, 209, 59, 48);
+		contentPane.add(btnIZQ_DCHA);
 		
 		JButton btnEliminarPlaylist = new JButton("Eliminar playlist");
 		btnEliminarPlaylist.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -230,6 +230,7 @@ public class VentanaNuevaLista extends JFrame {
 						//Cargar tabla playlist a la dcha y la de explorar a la izq
 						cargarTablaBusqueda("", "", "TODOS");
 						cargarCancionesPlaylist(nuevaPlaylist);
+						playlistMostrada = nuevaPlaylist;
 					}
 					
 					else JOptionPane.showMessageDialog(null, "Ya existe una playlist con este nombre", "Error", JOptionPane.ERROR_MESSAGE);
@@ -245,6 +246,47 @@ public class VentanaNuevaLista extends JFrame {
 				dispose();
 			}
 		});
+		
+		btnEliminarPlaylist.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//Eliminar playlist
+			}
+		});
+		
+		btnIZQ_DCHA.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//Insertar cancion en la playlist
+				String selectedData = null;
+			    int[] selectedRow = tableIzq.getSelectedRows();
+				String cancion = (String) tableIzq.getValueAt(selectedRow[0], 0);
+				String interprete = (String) tableIzq.getValueAt(selectedRow[0], 1);
+				//System.out.println("Fila selecionada: " + cancion + " " + interprete);
+				if (!Controlador.insertarCancionEnPlaylist(playlistMostrada, cancion.trim(), interprete.trim())) {
+					JOptionPane.showMessageDialog(null, "La cancion no se ha podido insertar", "Error", JOptionPane.ERROR_MESSAGE);
+				};
+				cargarCancionesPlaylist(playlistMostrada);
+			}
+		});
+		
+		btnDCHA_IZQ.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//Eliminar cancion de la playlist
+				String selectedData = null;
+			    int[] selectedRow = tableDcha.getSelectedRows();
+				String cancion = (String) tableDcha.getValueAt(selectedRow[0], 0);
+				String interprete = (String) tableDcha.getValueAt(selectedRow[0], 1);
+				//System.out.println("Fila selecionada: " + cancion + " " + interprete);
+				if (!Controlador.borrarCancionDePlaylist(playlistMostrada, cancion.trim(), interprete.trim())) {
+					JOptionPane.showMessageDialog(null, "La cancion no se ha podido eliminar", "Error", JOptionPane.ERROR_MESSAGE);
+				};
+				cargarCancionesPlaylist(playlistMostrada);
+			}
+		});
+		
+		
 		
 
 		

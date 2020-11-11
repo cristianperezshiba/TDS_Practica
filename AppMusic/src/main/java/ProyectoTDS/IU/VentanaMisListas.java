@@ -143,8 +143,6 @@ public class VentanaMisListas extends JFrame {
 		scrollPane.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		scrollPane.setBounds(211, 113, 512, 252);
 		contentPane.add(scrollPane);
-		/*String[][] tituloEInterpretes = new String[][] {{"EjemploTitulo", "EjemploInterprete"},
-				  {"Aqui habra las canciones", "segun se necesiten en busquedas, etc"}};*/
 		String[] columnas = new String[] {"Titulo", "Interprete"};
 		table.setModel(new DefaultTableModel(null, columnas));	  
 		scrollPane.setViewportView(table);

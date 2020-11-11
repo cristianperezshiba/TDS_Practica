@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import ProyectoTDS.LogicaNegocio.App;
 import ProyectoTDS.LogicaNegocio.Cancion;
 
 public class Controlador {
@@ -54,6 +55,14 @@ public class Controlador {
 	
 	public boolean crearPlaylist(String nombre) {
 		return AppMusic.crearPlaylist(nombre);
+	}
+	
+	public boolean insertarCancionEnPlaylist(String playlistMostrada, String cancion, String interprete) {
+		return AppMusic.insertarCancionEnPlaylist(playlistMostrada, cancion, interprete);
+	}
+	
+	public boolean borrarCancionDePlaylist(String playlistMostrada,String  cancion,String  interprete) {
+		return AppMusic.borrarCancionDePlaylist(playlistMostrada, cancion, interprete);
 	}
 	
 	
