@@ -62,6 +62,20 @@ public class VentanaExplorar extends JFrame {
 		btnExplorar.setBounds(39, 25, 117, 44);
 		panelLeft.add(btnExplorar);
 		
+		JComboBox comboBoxEstilo = new JComboBox();
+		comboBoxEstilo.setBounds(579, 118, 126, 23);
+		comboBoxEstilo.addItem("TODOS");
+		comboBoxEstilo.addItem("BOLERO");
+		comboBoxEstilo.addItem("CANTAUTOR");
+		comboBoxEstilo.addItem("CLASICA");
+		comboBoxEstilo.addItem("FLAMENCO");
+		comboBoxEstilo.addItem("JAZZ");
+		comboBoxEstilo.addItem("OPERA");
+		comboBoxEstilo.addItem("POP");
+		comboBoxEstilo.addItem("ROCK");
+		comboBoxEstilo.addItem("ROMANTICA");
+		contentPane.add(comboBoxEstilo);
+		
 		JButton btnNuevaLista = new JButton("Nueva lista");
 		btnNuevaLista.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNuevaLista.setBounds(39, 93, 117, 44);

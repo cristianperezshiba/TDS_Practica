@@ -23,9 +23,12 @@ public class CatalogoCanciones {
 		try {
 			Files.walk(Paths.get(pathCanciones)).forEach(ruta-> {
 			    if (Files.isRegularFile(ruta)) {
+			    	
 			    	String stringRuta = ruta.toString();
+			    	String rutaCancion = stringRuta.replace(pathLocal, ""); //ruta que añadiremos al objeto cancion
 			    	//Separamos la cabecera de la ruta y nos quedamos unicamente con "ESTILO\interprete-cancion"
 			    	stringRuta = stringRuta.replace(pathCanciones + "\\", "");
+			    	
 			    	//Ahora separamos el estilo de interprete-cancion
 			    	String[] partes1 = stringRuta.split(Pattern.quote ("\\"));
 			    	String estilo = partes1[0];
@@ -42,7 +45,9 @@ public class CatalogoCanciones {
 			    	//System.out.println(stringRuta); System.out.println("   " + estilo); System.out.println("   " + interprete); System.out.println("   " + titulo);
 			    	EstiloMusical estiloEnum = EstiloMusical.valueOf(estilo);
 			    	// Creamos las canciones añadiendolas a la lista 
-			    	listaCanciones.add(new Cancion(titulo, new Interprete(interprete), estiloEnum, stringRuta));
+			    	
+			    	listaCanciones.add(new Cancion(titulo, new Interprete(interprete), estiloEnum, rutaCancion));
+			    	
 			    	
 			    	
 			    }
