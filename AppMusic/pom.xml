@@ -25,7 +25,15 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.toedter/jcalendar -->
+	<dependency>
+    	<groupId>com.toedter</groupId>
+    	<artifactId>jcalendar</artifactId>
+    	<version>1.4</version>
+	</dependency>
+    
   </dependencies>
+
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
