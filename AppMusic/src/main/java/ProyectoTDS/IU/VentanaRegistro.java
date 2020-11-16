@@ -128,22 +128,29 @@ public class VentanaRegistro extends JFrame {
 				String repite = textFieldRepite.getText();
 				String nombre = textFieldNombre.getText();
 				String apellidos = textFieldApellidos.getText();
-				String fechaNacimiento = textFieldFecha.getDateFormatString();
+				String fechaNacimiento = "";
+				try {
+					fechaNacimiento = textFieldFecha.getDate().toString(); //Si no se hace el getDate.toString siempre devuelve un D MM AA, por lo que no funciona la comprobación de si está vacio
+				}
+				catch (Exception e1) {
+				}
 				String email = textFieldEmail.getText();
 				//Las comprobaciones las hacemos aquí mismo, ya que como bien dice el patrón experto, tenemos que implementar la funcionalidad allí donde tengamos la información
 				//disponible para hacerlo, por lo que las comprovaciones las hacemos a nivel de vista, además esto en un sistema de host-servidor también mejora el tiempo de respuesta
-				if (!contrasena.equals(repite)) JOptionPane.showMessageDialog (null, "Las contraseñas no coinciden", "Error!", JOptionPane.ERROR_MESSAGE);
+
+					if (!contrasena.equals(repite)) JOptionPane.showMessageDialog (null, "Las contraseñas no coinciden", "Error!", JOptionPane.ERROR_MESSAGE);
+					
+					else if (usuario.length()==0 || contrasena.length()==0 || 
+							nombre.length()==0 || apellidos.length()==0 || 
+							fechaNacimiento.length()<0 || email.length()==0) JOptionPane.showMessageDialog (null, "Todos los campos deben ser rellenados", "Error!", JOptionPane.ERROR_MESSAGE);
+					else if (!Controlador.RegistroUsuario(usuario, contrasena, repite, nombre, apellidos, fechaNacimiento, email)) {
+						JOptionPane.showMessageDialog (null, "Este usuario/email ya esta registrado, el usuario no se ha creado", "Error!", JOptionPane.ERROR_MESSAGE);
+					}
+					else {
+						abrirVentanaLogin();
+						dispose();
+					}
 				
-				else if (usuario.length()==0 || contrasena.length()==0 || 
-						nombre.length()==0 || apellidos.length()==0 || 
-						fechaNacimiento.length()==0 || email.length()==0) JOptionPane.showMessageDialog (null, "Todos los campos deben ser rellenados", "Error!", JOptionPane.ERROR_MESSAGE);
-				else if (!Controlador.RegistroUsuario(usuario, contrasena, repite, nombre, apellidos, fechaNacimiento, email)) {
-					JOptionPane.showMessageDialog (null, "Este usuario/email ya esta registrado, el usuario no se ha creado", "Error!", JOptionPane.ERROR_MESSAGE);
-				}
-				else {
-					abrirVentanaLogin();
-					dispose();
-				}
 				
 				
 			}
