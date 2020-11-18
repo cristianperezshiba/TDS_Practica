@@ -107,7 +107,10 @@ public class CatalogoCanciones {
 	
 	
 	
-	
+	public void ReproducirCancion(String nombre, String artista) {
+		Cancion cancionAreproducir = buscarCancion(nombre, artista);
+		Reproductor.reproducirCancion(cancionAreproducir);
+	} 
 	
 
 	/*

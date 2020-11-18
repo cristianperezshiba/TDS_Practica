@@ -2,37 +2,33 @@ package ProyectoTDS.LogicaNegocio;
 
 import java.io.File;
 import javafx.scene.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 
 
 public class Reproductor {
 		
-		public Reproductor() {
-			
-		
-		}
+		public Reproductor() {}
 		
 		
-		public void reproducirCancion(Cancion cancion) {
-			/*URL uri = null;
+		public static void reproducirCancion(Cancion cancion) {
+			// activar reproductor
 			try {
-			com.sun.javafx.application.PlatformImpl.startup(() -> {});
-			uri = new URL(url);
-			System.setProperty("java.io.tmpdir", tempPath);
-			Path mp3 = Files.createTempFile("now-playing", ".mp3");
-			System.out.println(mp3.getFileName());
-			try (InputStream stream = uri.openStream()) {
-			Files.copy(stream, mp3, StandardCopyOption.REPLACE_EXISTING);
-			}
-			System.out.println("finished-copy: " + mp3.getFileName());
-			Media media = new Media(mp3.toFile().toURI().toString());
-			mediaPlayer = new MediaPlayer(media);
+			com.sun.javafx.application.PlatformImpl.startup(()->{});
+			} catch(Exception ex) {
+			ex.printStackTrace();
+			System.out.println("Exception: " + ex.getMessage());
+			 }
+			// reproducir una canción
+			String fileName = cancion.getRutaFichero();
+			String pathLocal = System.getProperty("user.dir");
+			File f = new File(pathLocal +fileName);
+			System.out.println("Ruta fichero mp3 que intentaremos abrir: " + f.toURI().toString());
+			Media hit = new Media(f.toURI().toString());
+			MediaPlayer mediaPlayer = new  MediaPlayer(hit); 
 			mediaPlayer.play();
-			} catch (MalformedURLException e1) {
-			e1.printStackTrace();
-			} catch (IOException e1) {
-			e1.printStackTrace();
-			}*/
+			//Añadir dicha cancion a Usuario.CancionesRecientes
 		}
 
 }

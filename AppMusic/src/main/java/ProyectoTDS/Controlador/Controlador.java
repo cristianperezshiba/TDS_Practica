@@ -69,4 +69,10 @@ public class Controlador {
 		return AppMusic.eliminarPlaylist(nombre);
 	}
 	
+	
+	public void ReproducirCancion(String nombre, String artista) {
+		AppMusic.ReproducirCancion(nombre, artista);
+	}
+	
+	
 }

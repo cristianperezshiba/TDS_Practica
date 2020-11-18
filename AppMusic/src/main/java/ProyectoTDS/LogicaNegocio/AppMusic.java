@@ -124,4 +124,8 @@ public class AppMusic {
 	}
 	
 	
+	public void ReproducirCancion(String nombre, String artista) {
+		catalogoCanciones.ReproducirCancion(nombre, artista);
+	}
+	
 }

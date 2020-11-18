@@ -176,7 +176,7 @@ public class VentanaExplorar extends JFrame {
 	  JTable table = new JTable();
 	  scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	  scrollPane.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-	  scrollPane.setBounds(211, 186, 512, 331);
+	  scrollPane.setBounds(211, 186, 512, 240);
 	  contentPane.add(scrollPane);
 	  /*String[][] tituloEInterpretes = new String[][] {{"EjemploTitulo", "EjemploInterprete"},
 			  {"Aqui habra las canciones", "segun se necesiten en busquedas, etc"}};*/
@@ -220,6 +220,23 @@ public class VentanaExplorar extends JFrame {
 		btnCancelar.setBounds(470, 152, 89, 23);
 		
 		contentPane.add(btnCancelar);
+		
+		JButton btnPlay = new JButton("Play");
+		btnPlay.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				///////////////////////////////////////////////////////////
+				String nombre = null;
+				String artista = null;
+		        int[] selectedRow = table.getSelectedRows();
+		        nombre = (String) table.getValueAt(selectedRow[0], 0);
+		        artista = (String) table.getValueAt(selectedRow[0], 1);
+		        Controlador.ReproducirCancion(nombre, artista);
+		    
+			}
+		});
+		btnPlay.setBounds(445, 449, 53, 32);
+		contentPane.add(btnPlay);
 		
 		
 	}
