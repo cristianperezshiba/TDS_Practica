@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class Usuario {
 	
+	static final int TAM_COLA_CANCIONES_RECIENTES = 7;
 
 
 	private String usuario;
@@ -16,7 +17,7 @@ public class Usuario {
 	private boolean premium;
 	private Set<ListaCanciones> playlists;
 	
-	private List<Cancion> cancionesRecientes;
+	private Queue<Cancion> cancionesRecientes;
 	
 	
 
@@ -132,6 +133,15 @@ public class Usuario {
 						.findFirst()
 						.get();
 		return playlists.remove(lista);
+	}
+	
+	
+	public void nuevaCancionReciente(Cancion cancion) {
+		if (cancion == null) return;
+		else if (cancionesRecientes.size() >= TAM_COLA_CANCIONES_RECIENTES) {
+			cancionesRecientes.poll();
+		}
+		cancionesRecientes.offer(cancion);
 	}
 
 

@@ -125,7 +125,7 @@ public class AppMusic {
 	
 	
 	public void ReproducirCancion(String nombre, String artista) {
-		catalogoCanciones.ReproducirCancion(nombre, artista);
+		catalogoCanciones.ReproducirCancion(nombre, artista, UsuarioActivo);
 	}
 	
 }

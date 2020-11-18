@@ -28,7 +28,6 @@ public class Reproductor {
 			Media hit = new Media(f.toURI().toString());
 			MediaPlayer mediaPlayer = new  MediaPlayer(hit); 
 			mediaPlayer.play();
-			//Añadir dicha cancion a Usuario.CancionesRecientes
 		}
 
 }
