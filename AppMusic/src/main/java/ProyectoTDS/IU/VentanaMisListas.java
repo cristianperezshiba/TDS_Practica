@@ -141,7 +141,7 @@ public class VentanaMisListas extends JFrame {
 		JTable table = new JTable();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		scrollPane.setBounds(211, 113, 512, 252);
+		scrollPane.setBounds(211, 118, 512, 252);
 		contentPane.add(scrollPane);
 		String[] columnas = new String[] {"Titulo", "Interprete"};
 		table.setModel(new DefaultTableModel(null, columnas));	  
@@ -206,6 +206,73 @@ public class VentanaMisListas extends JFrame {
 
 	    });
 		
+		JButton btnPlay = new JButton("Play");
+		btnPlay.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				///////////////////////////////////////////////////////////
+				String nombre = null;
+				String artista = null;
+				int[] selectedRow = table.getSelectedRows();
+				nombre = (String) table.getValueAt(selectedRow[0], 0);
+				artista = (String) table.getValueAt(selectedRow[0], 1);
+				Controlador.ReproducirCancion(nombre, artista);
+
+			}
+		});
+		btnPlay.setBounds(433, 405, 66, 37);
+		contentPane.add(btnPlay);
+
+		JButton btnPause = new JButton("Pause");
+		btnPause.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Controlador.pausarCancion();
+			}
+		});
+
+		btnPause.setBounds(433, 453, 66, 35);
+		contentPane.add(btnPause);
+
+		JButton btnCancionAnterior = new JButton("<<");
+		btnCancionAnterior.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Coger fila seleccionada y coger la anterior y reproducirla
+				String nombre = null;
+				String artista = null;
+				int[] selectedRow = table.getSelectedRows();
+				if (selectedRow[0] == 0)
+					return;
+				int numFilas = table.getRowCount();
+				table.setRowSelectionInterval((selectedRow[0] - 1) % numFilas, (selectedRow[0] - 1) % numFilas);
+				nombre = (String) table.getValueAt((selectedRow[0] - 1) % numFilas, 0);
+				artista = (String) table.getValueAt((selectedRow[0] - 1) % numFilas, 1);
+				Controlador.ReproducirCancion(nombre, artista);
+			}
+		});
+		btnCancionAnterior.setBounds(370, 433, 53, 35);
+		contentPane.add(btnCancionAnterior);
+
+		JButton btnCancionSiguiente = new JButton(">>");
+		btnCancionSiguiente.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Coger fila seleccionada y coger la siguiente y reproducirla
+				String nombre = null;
+				String artista = null;
+				int[] selectedRow = table.getSelectedRows();
+				if (selectedRow[0] == table.getRowCount() - 1)
+					return;
+				int numFilas = table.getRowCount();
+				table.setRowSelectionInterval((selectedRow[0] + 1) % numFilas, (selectedRow[0] + 1) % numFilas);
+				nombre = (String) table.getValueAt((selectedRow[0] + 1) % numFilas, 0);
+				artista = (String) table.getValueAt((selectedRow[0] + 1) % numFilas, 1);
+				Controlador.ReproducirCancion(nombre, artista);
+			}
+		});
+		btnCancionSiguiente.setBounds(516, 433, 53, 35);
+		contentPane.add(btnCancionSiguiente);
 		
 		
 	}
