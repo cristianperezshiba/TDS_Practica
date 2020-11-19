@@ -82,5 +82,9 @@ public class Controlador {
 		return AppMusic.getCancionesRecientes();
 	}
 	
+	public void generarPdf() {
+		AppMusic.generarPdf();
+	}
+	
 	
 }

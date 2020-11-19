@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import com.itextpdf.text.DocumentException;
+
 public class AppMusic {
 	//Usamos patron singleton
 	private static AppMusic AppMusic = null;
@@ -145,6 +147,15 @@ public class AppMusic {
 	    ArrayConLasDosListas.add(1, listaInterpretes);
 	    
 		return ArrayConLasDosListas;
+	}
+	
+	public void generarPdf() {
+		try {
+			UsuarioActivo.crearPDF();
+		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

@@ -37,6 +37,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.ScrollPaneConstants;
 import java.awt.ScrollPane;
+import javax.swing.SwingConstants;
 
 public class VentanaMisListas extends JFrame {
 
@@ -274,6 +275,16 @@ public class VentanaMisListas extends JFrame {
 		btnCancionSiguiente.setBounds(516, 433, 53, 35);
 		contentPane.add(btnCancionSiguiente);
 		
+		JButton btnPdf = new JButton("PDF");
+		btnPdf.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Controlador.generarPdf();
+			}
+		});
+		btnPdf.setBounds(608, 453, 98, 67);
+		contentPane.add(btnPdf);
+		
 		
 	}
 	
@@ -330,5 +341,4 @@ public class VentanaMisListas extends JFrame {
 			}
 		});
 	}
-	
 }
