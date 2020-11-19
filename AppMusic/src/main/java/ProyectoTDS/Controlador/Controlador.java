@@ -74,5 +74,9 @@ public class Controlador {
 		AppMusic.ReproducirCancion(nombre, artista);
 	}
 	
+	public void pausarCancion() {
+		AppMusic.pausarCancion();
+	}
+	
 	
 }

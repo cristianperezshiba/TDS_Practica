@@ -235,8 +235,57 @@ public class VentanaExplorar extends JFrame {
 		    
 			}
 		});
-		btnPlay.setBounds(445, 449, 53, 32);
+		btnPlay.setBounds(443, 437, 66, 37);
 		contentPane.add(btnPlay);
+		
+		JButton btnPause = new JButton("Pause");
+		btnPause.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Controlador.pausarCancion();
+			}
+		});
+		
+		btnPause.setBounds(443, 485, 66, 35);
+		contentPane.add(btnPause);
+		
+		JButton btnCancionAnterior = new JButton("<<");
+		btnCancionAnterior.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//Coger fila seleccionada y coger la anterior y reproducirla
+				String nombre = null;
+				String artista = null;
+		        int[] selectedRow = table.getSelectedRows();
+		        if (selectedRow[0] == 0) return;
+		        int numFilas = table.getRowCount();
+		        table.setRowSelectionInterval((selectedRow[0]-1)%numFilas, (selectedRow[0]-1)%numFilas);
+		        nombre = (String) table.getValueAt((selectedRow[0]-1)%numFilas, 0);
+		        artista = (String) table.getValueAt((selectedRow[0]-1)%numFilas, 1);
+		        Controlador.ReproducirCancion(nombre, artista);
+			}
+		});
+		btnCancionAnterior.setBounds(380, 464, 53, 35);
+		contentPane.add(btnCancionAnterior);
+		
+		JButton btnCancionSiguiente = new JButton(">>");
+		btnCancionSiguiente.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//Coger fila seleccionada y coger la siguiente y reproducirla
+				String nombre = null;
+				String artista = null;
+		        int[] selectedRow = table.getSelectedRows();
+		        if (selectedRow[0] == table.getRowCount()-1) return;
+		        int numFilas = table.getRowCount();
+		        table.setRowSelectionInterval((selectedRow[0]+1)%numFilas, (selectedRow[0]+1)%numFilas);
+		        nombre = (String) table.getValueAt((selectedRow[0]+1)%numFilas, 0);
+		        artista = (String) table.getValueAt((selectedRow[0]+1)%numFilas, 1);
+		        Controlador.ReproducirCancion(nombre, artista);
+			}
+		});
+		btnCancionSiguiente.setBounds(516, 464, 53, 35);
+		contentPane.add(btnCancionSiguiente);
 		
 		
 	}

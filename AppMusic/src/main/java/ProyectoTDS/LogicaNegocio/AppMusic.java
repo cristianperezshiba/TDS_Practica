@@ -128,4 +128,8 @@ public class AppMusic {
 		catalogoCanciones.ReproducirCancion(nombre, artista, UsuarioActivo);
 	}
 	
+	public void pausarCancion() {
+		Reproductor.pausarCancion();
+	}
+	
 }
