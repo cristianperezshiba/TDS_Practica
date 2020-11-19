@@ -1,5 +1,13 @@
 package ProyectoTDS.IU;
-
+/*
+ * 
+ * 
+ * Esta ventana no es necesaria, al hacer el login abrimos directamente la VentanaRecientes
+ * Lo dice la especificación en la página 6 abajo
+ * 
+ * 
+ * 
+ * */
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 

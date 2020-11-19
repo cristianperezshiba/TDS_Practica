@@ -97,7 +97,7 @@ public class VentanaLogin extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (Controlador.ComprobarLoginUsuario(textFieldUsuario.getText(), textFieldContrasena.getText())) {
-					abrirVentanaPrincipal();
+					abrirVentanaReciente();
 					dispose();
 				}
 				else JOptionPane.showMessageDialog (null, "Usuario y/o contraseña incorrecta", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -123,11 +123,11 @@ public class VentanaLogin extends JFrame {
 		});
 	}
 	
-	private void abrirVentanaPrincipal() {
+	private void abrirVentanaReciente() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaPrincipal frame = new VentanaPrincipal();
+					VentanaReciente frame = new VentanaReciente();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

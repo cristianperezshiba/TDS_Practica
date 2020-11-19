@@ -78,5 +78,9 @@ public class Controlador {
 		AppMusic.pausarCancion();
 	}
 	
+	public ArrayList<List<String>> getCancionesRecientes() {
+		return AppMusic.getCancionesRecientes();
+	}
+	
 	
 }
