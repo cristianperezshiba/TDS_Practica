@@ -42,7 +42,7 @@ public class VentanaReciente extends JFrame {
 		Controlador = Controlador.getUnicaInstancia();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 749, 570);
+		setBounds(100, 100, 749, 437);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -125,7 +125,7 @@ public class VentanaReciente extends JFrame {
 		JTable table = new JTable();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		scrollPane.setBounds(211, 186, 512, 240);
+		scrollPane.setBounds(211, 117, 512, 186);
 		contentPane.add(scrollPane);
 		String[] columnas = new String[] { "Titulo", "Interprete" };
 		table.setModel(new DefaultTableModel(null, columnas));
@@ -147,7 +147,7 @@ public class VentanaReciente extends JFrame {
 
 			}
 		});
-		btnPlay.setBounds(443, 437, 66, 37);
+		btnPlay.setBounds(443, 314, 66, 37);
 		contentPane.add(btnPlay);
 
 		JButton btnPause = new JButton("Pause");
@@ -158,7 +158,7 @@ public class VentanaReciente extends JFrame {
 			}
 		});
 
-		btnPause.setBounds(443, 485, 66, 35);
+		btnPause.setBounds(443, 362, 66, 35);
 		contentPane.add(btnPause);
 
 		JButton btnCancionAnterior = new JButton("<<");
@@ -178,7 +178,7 @@ public class VentanaReciente extends JFrame {
 				Controlador.ReproducirCancion(nombre, artista);
 			}
 		});
-		btnCancionAnterior.setBounds(380, 464, 53, 35);
+		btnCancionAnterior.setBounds(380, 340, 53, 35);
 		contentPane.add(btnCancionAnterior);
 
 		JButton btnCancionSiguiente = new JButton(">>");
@@ -198,7 +198,7 @@ public class VentanaReciente extends JFrame {
 				Controlador.ReproducirCancion(nombre, artista);
 			}
 		});
-		btnCancionSiguiente.setBounds(516, 464, 53, 35);
+		btnCancionSiguiente.setBounds(519, 340, 53, 35);
 		contentPane.add(btnCancionSiguiente);
 
 	}
