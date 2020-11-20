@@ -223,6 +223,7 @@ public class Usuario {
 	}
 
 	public void nuevaCancionReproducida(Cancion nuevaCancion) {
+		//TODO: No estoy seguro de si esto funcionara bien, mucho lio con referencias
 		ArrayList<Object> DuplaValores = cancionesMasReproducidas.stream()	
 								.filter(l -> l.get(0).equals(nuevaCancion))
 								.findFirst().get();
@@ -236,6 +237,7 @@ public class Usuario {
 			DuplaValores.set(1,(int)DuplaValores.get(1) + 1);
 		}
 	};
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -45,6 +45,7 @@ public class VentanaNuevaLista extends JFrame {
 	private JTable tableDcha;
 	private JTextField textFieldNombrePlaylist;
 	private String playlistMostrada;
+	private String ultimaPlaylistCreada;
 	
 	public VentanaNuevaLista() {
 		setTitle("Ventana nueva lista");
@@ -226,6 +227,7 @@ public class VentanaNuevaLista extends JFrame {
 						cargarTablaBusqueda("", "", "TODOS");
 						cargarCancionesPlaylist(nuevaPlaylist);
 						playlistMostrada = nuevaPlaylist;
+						ultimaPlaylistCreada = nuevaPlaylist;
 					}
 					
 					else JOptionPane.showMessageDialog(null, "Ya existe una playlist con este nombre", "Error", JOptionPane.ERROR_MESSAGE);
@@ -308,6 +310,28 @@ public class VentanaNuevaLista extends JFrame {
 		scrollPaneListas.setViewportView(table_listas);
 		
 		table_listas.setCellSelectionEnabled(true);
+		
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//TODO: Guardar en persistencia la lista que acabamos de crear o directamente guardar todas las playlists
+			}
+		});
+		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAceptar.setBounds(461, 450, 136, 38);
+		contentPane.add(btnAceptar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (ultimaPlaylistCreada != null) Controlador.eliminarPlaylist(ultimaPlaylistCreada);
+			}
+		});
+		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCancelar.setBounds(637, 449, 136, 40);
+		contentPane.add(btnCancelar);
 	    ListSelectionModel cellSelectionModel = table_listas.getSelectionModel();
 	    cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
