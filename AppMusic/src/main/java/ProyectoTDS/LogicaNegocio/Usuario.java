@@ -5,15 +5,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
-import java.util.stream.Collectors; 
+import java.util.stream.Collectors;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.util.Arrays;
 
 public class Usuario {
-	
-	static final int TAM_COLA_CANCIONES_RECIENTES = 10;
 
+	static final int TAM_COLA_CANCIONES_RECIENTES = 10;
 
 	private String usuario;
 	private String contrasena;
@@ -23,12 +22,14 @@ public class Usuario {
 	private String email;
 	private boolean premium;
 	private Set<ListaCanciones> playlists;
-	
-	private List<Cancion> cancionesRecientes;
-	
-	
 
-	public Usuario(String usuario, String contrasena, String nombre, String apellidos, String fechaNacimiento, String email) {
+	private List<Cancion> cancionesRecientes;
+
+	private List<ArrayList<Object>> cancionesMasReproducidas; // Cada elemento será un par (cancion,
+																// numVecesReproducida)
+
+	public Usuario(String usuario, String contrasena, String nombre, String apellidos, String fechaNacimiento,
+			String email) {
 		super();
 		this.usuario = usuario;
 		this.contrasena = contrasena;
@@ -40,9 +41,7 @@ public class Usuario {
 		this.playlists = new LinkedHashSet<ListaCanciones>();
 		this.cancionesRecientes = new LinkedList<Cancion>();
 	}
-	
-	
-	
+
 	public String getUsuario() {
 		return usuario;
 	}
@@ -98,143 +97,145 @@ public class Usuario {
 	public void setPremium(boolean premium) {
 		this.premium = premium;
 	}
-	
+
 	public Set<String> getNombrePlaylists() {
-		return playlists.stream()
-			.map(p -> p.getNombre())
-			.collect(Collectors.toSet());
+		return playlists.stream().map(p -> p.getNombre()).collect(Collectors.toSet());
 	}
-	
+
 	public boolean crearNuevaPlaylist(String nombre) {
 		return this.playlists.add(new ListaCanciones(nombre));
 	}
-	
+
 	public boolean añadirCancionAPlaylist(String lista, Cancion cancion) {
-		return this.playlists.stream()
-			.filter(l -> l.getNombre().equals(lista))
-			.findFirst()
-			.get()
-			.añadirCancion(cancion);
+		return this.playlists.stream().filter(l -> l.getNombre().equals(lista)).findFirst().get()
+				.añadirCancion(cancion);
 	}
-	
-	public boolean borrarCancionDePlaylist(String playlist, Cancion cancion){
-		return this.playlists.stream()
-				.filter(l -> l.getNombre().equals(playlist))
-				.findFirst()
-				.get()
+
+	public boolean borrarCancionDePlaylist(String playlist, Cancion cancion) {
+		return this.playlists.stream().filter(l -> l.getNombre().equals(playlist)).findFirst().get()
 				.eliminarCancion(cancion);
 	}
-	
-	public Set<Cancion> getCancionesPlaylist(String lista){
-		return playlists.stream()
-				.filter(p -> p.getNombre().equals(lista))
-				.findFirst()
-				.get()
-				.getCanciones();
+
+	public Set<Cancion> getCancionesPlaylist(String lista) {
+		return playlists.stream().filter(p -> p.getNombre().equals(lista)).findFirst().get().getCanciones();
 
 	}
-	
-	public boolean eliminarPlaylist(String nombrePlaylist){
-		ListaCanciones lista = playlists.stream()	
-						.filter(p -> p.getNombre().equals(nombrePlaylist))
-						.findFirst()
-						.get();
+
+	public boolean eliminarPlaylist(String nombrePlaylist) {
+		ListaCanciones lista = playlists.stream().filter(p -> p.getNombre().equals(nombrePlaylist)).findFirst().get();
 		return playlists.remove(lista);
 	}
-	
-	
+
 	public void nuevaCancionReciente(Cancion cancion) {
-		if (cancion == null || cancionesRecientes.contains(cancion)) return;
+		if (cancion == null || cancionesRecientes.contains(cancion))
+			return;
 		else if (cancionesRecientes.size() >= TAM_COLA_CANCIONES_RECIENTES) {
-			cancionesRecientes.remove(cancionesRecientes.size()-1);
+			cancionesRecientes.remove(cancionesRecientes.size() - 1);
 		}
 		cancionesRecientes.add(0, cancion);
 	}
-	
-	public List<Cancion> getCancionesRecientes(){
+
+	public List<Cancion> getCancionesRecientes() {
 		return cancionesRecientes;
 
 	}
-	 public void crearPDF() throws DocumentException{
-		    
-		 	String archivo = System.getProperty("user.dir")+"/playlists.pdf";
-	        //Declaramos un documento como un objecto Document. 
-	        Document documento = new Document(PageSize.LETTER, 80, 80, 75, 75);
-	        //writer es declarado como el método utilizado para escribir en el archivo.
-	        PdfWriter writer = null;
 
-	        try{
-	            //Obtenemos la instancia del archivo a utilizar.
-	            writer = PdfWriter.getInstance(documento, new FileOutputStream(archivo));
-	        }catch(FileNotFoundException | DocumentException ex){
-	            ex.getMessage();
-	        }
+	public void crearPDF() throws DocumentException {
 
-	        //Agregamos un título al documento.
-	        documento.addTitle("ARCHIVO PDF GENERADO DESDE JAVA");
+		String archivo = System.getProperty("user.dir") + "/playlists.pdf";
+		// Declaramos un documento como un objecto Document.
+		Document documento = new Document(PageSize.LETTER, 80, 80, 75, 75);
+		// writer es declarado como el método utilizado para escribir en el archivo.
+		PdfWriter writer = null;
 
-	        //Abrimos el documento a editar.
-	        documento.open();
+		try {
+			// Obtenemos la instancia del archivo a utilizar.
+			writer = PdfWriter.getInstance(documento, new FileOutputStream(archivo));
+		} catch (FileNotFoundException | DocumentException ex) {
+			ex.getMessage();
+		}
 
-	        try{
-	            //Obtenemos la instancia de la imagen/logo.
-	            Image imagen = Image.getInstance("..\\imagenes\\LOGO.png");
-	            //Alineamos la imagen al centro del documento.
-	            imagen.setAlignment(Image.ALIGN_CENTER);
-	            //Agregamos la imagen al documento.
-	            documento.add(imagen);
-	        }catch(IOException | DocumentException ex){
-	            ex.getMessage();
-	        }
+		// Agregamos un título al documento.
+		documento.addTitle("ARCHIVO PDF GENERADO DESDE JAVA");
 
-	        //Creamos un párrafo nuevo llamado "vacio1" para espaciar los elementos.
-	        Paragraph vacio1 = new Paragraph();
-	        vacio1.add("\n\n");
-	        documento.add(vacio1);
+		// Abrimos el documento a editar.
+		documento.open();
 
-	        //Declaramos un texto como Paragraph. Le podemos dar formato alineado, tamaño, color, etc.
-	        Paragraph titulo = new Paragraph();
-	        titulo.setAlignment(Paragraph.ALIGN_CENTER);
-	        titulo.setFont(FontFactory.getFont("Times New Roman", 24, Font.BOLD, BaseColor.BLACK));
-	        titulo.add("Tus playlists");
+		try {
+			// Obtenemos la instancia de la imagen/logo.
+			Image imagen = Image.getInstance("..\\imagenes\\LOGO.png");
+			// Alineamos la imagen al centro del documento.
+			imagen.setAlignment(Image.ALIGN_CENTER);
+			// Agregamos la imagen al documento.
+			documento.add(imagen);
+		} catch (IOException | DocumentException ex) {
+			ex.getMessage();
+		}
 
-	        try{
-	            //Agregamos el texto al documento.
-	            documento.add(titulo);
-	        }catch(DocumentException ex){
-	            ex.getMessage();
-	        }
+		// Creamos un párrafo nuevo llamado "vacio1" para espaciar los elementos.
+		Paragraph vacio1 = new Paragraph();
+		vacio1.add("\n\n");
+		documento.add(vacio1);
 
-	        //Creamos un párrafo nuevo llamado "saltolinea" simulando un salto de linea para espaciar
-	        //los elementos del PDF.
-	        Paragraph saltolinea = new Paragraph();
-	        saltolinea.add("\n\n");
-	        documento.add(saltolinea);
+		// Declaramos un texto como Paragraph. Le podemos dar formato alineado, tamaño,
+		// color, etc.
+		Paragraph titulo = new Paragraph();
+		titulo.setAlignment(Paragraph.ALIGN_CENTER);
+		titulo.setFont(FontFactory.getFont("Times New Roman", 24, Font.BOLD, BaseColor.BLACK));
+		titulo.add("Tus playlists");
 
-	        //Creamos un párrafo llamado "parrafo" donde irá el contenido del PDF.
-	        Paragraph parrafo = new Paragraph();
-	        for (ListaCanciones lista : playlists) {
-	            parrafo = new Paragraph();
-	            parrafo.setAlignment(Paragraph.ALIGN_LEFT);
-	            parrafo.setFont(FontFactory.getFont("Times New Roman", 15, Font.BOLD, BaseColor.BLACK));
-	            //Añadimos al párrafo "parrafo" el nombre de la playlists.
-	            parrafo.add(lista.getNombre() + "\n");
-	            //Añadimos ese párrafo "parrafo" al documento "documento".
-	            for (Cancion cancion : lista.getCanciones()) {
-	            	parrafo.setFont(FontFactory.getFont("Times New Roman", 12, Font.ITALIC, BaseColor.BLACK));
-	            	parrafo.add("	" + cancion.getTitulo() + ", " + cancion.getInterprete().getNombre()  + ", "+ cancion.getEstilo().toString() + "\n");
-				}
-	            parrafo.add("\n");
-	            documento.add(parrafo);
-	        }
+		try {
+			// Agregamos el texto al documento.
+			documento.add(titulo);
+		} catch (DocumentException ex) {
+			ex.getMessage();
+		}
 
-	        //Cerramos el documento.
-	        documento.close();
-	        //Cerramos el writer.
-	        writer.close();
-	    }
+		// Creamos un párrafo nuevo llamado "saltolinea" simulando un salto de linea
+		// para espaciar
+		// los elementos del PDF.
+		Paragraph saltolinea = new Paragraph();
+		saltolinea.add("\n\n");
+		documento.add(saltolinea);
 
+		// Creamos un párrafo llamado "parrafo" donde irá el contenido del PDF.
+		Paragraph parrafo = new Paragraph();
+		for (ListaCanciones lista : playlists) {
+			parrafo = new Paragraph();
+			parrafo.setAlignment(Paragraph.ALIGN_LEFT);
+			parrafo.setFont(FontFactory.getFont("Times New Roman", 15, Font.BOLD, BaseColor.BLACK));
+			// Añadimos al párrafo "parrafo" el nombre de la playlists.
+			parrafo.add(lista.getNombre() + "\n");
+			// Añadimos ese párrafo "parrafo" al documento "documento".
+			for (Cancion cancion : lista.getCanciones()) {
+				parrafo.setFont(FontFactory.getFont("Times New Roman", 12, Font.ITALIC, BaseColor.BLACK));
+				parrafo.add("	" + cancion.getTitulo() + ", " + cancion.getInterprete().getNombre() + ", "
+						+ cancion.getEstilo().toString() + "\n");
+			}
+			parrafo.add("\n");
+			documento.add(parrafo);
+		}
 
+		// Cerramos el documento.
+		documento.close();
+		// Cerramos el writer.
+		writer.close();
+	}
+
+	public void nuevaCancionReproducida(Cancion nuevaCancion) {
+		ArrayList<Object> DuplaValores = cancionesMasReproducidas.stream()	
+								.filter(l -> l.get(0).equals(nuevaCancion))
+								.findFirst().get();
+		if (DuplaValores.isEmpty()) {
+			ArrayList<Object> nuevaDuplaValores = new ArrayList<Object>();
+			nuevaDuplaValores.add(0, nuevaCancion);
+			nuevaDuplaValores.add(1, 1);
+			cancionesMasReproducidas.add(nuevaDuplaValores);
+		}
+		else {
+			DuplaValores.set(1,(int)DuplaValores.get(1) + 1);
+		}
+	};
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -243,8 +244,6 @@ public class Usuario {
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -267,9 +266,5 @@ public class Usuario {
 			return false;
 		return true;
 	}
-	
-	
 
-	
-	
 }
