@@ -222,7 +222,7 @@ public class Usuario {
 	            //Añadimos ese párrafo "parrafo" al documento "documento".
 	            for (Cancion cancion : lista.getCanciones()) {
 	            	parrafo.setFont(FontFactory.getFont("Times New Roman", 12, Font.ITALIC, BaseColor.BLACK));
-	            	parrafo.add("	" + cancion.getTitulo() + ", " + cancion.getInterprete().getNombre() + "\n");
+	            	parrafo.add("	" + cancion.getTitulo() + ", " + cancion.getInterprete().getNombre()  + ", "+ cancion.getEstilo().toString() + "\n");
 				}
 	            parrafo.add("\n");
 	            documento.add(parrafo);

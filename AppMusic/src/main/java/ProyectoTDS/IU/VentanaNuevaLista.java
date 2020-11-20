@@ -107,13 +107,6 @@ public class VentanaNuevaLista extends JFrame {
 		contentPane.add(comboBoxEstilo);
 		
 		JButton btnNuevaLista = new JButton("Nueva lista");
-		btnNuevaLista.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				abrirVentanaMisListas();
-				dispose();
-			}
-		});
 		btnNuevaLista.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNuevaLista.setBounds(39, 93, 117, 44);
 		panelLeft.add(btnNuevaLista);

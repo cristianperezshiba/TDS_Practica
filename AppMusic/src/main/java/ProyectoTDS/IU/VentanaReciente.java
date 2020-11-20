@@ -62,7 +62,7 @@ public class VentanaReciente extends JFrame {
 		btnNuevaLista.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				abrirVentanaMisListas();
+				abrirVentanaNuevaLista();
 				dispose();
 			}
 		});
@@ -123,6 +123,19 @@ public class VentanaReciente extends JFrame {
 
 		JScrollPane scrollPane = new JScrollPane();
 		JTable table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2 && table.getSelectedRow() != -1) {
+					String nombre = null;
+					String artista = null;
+					int[] selectedRow = table.getSelectedRows();
+					nombre = (String) table.getValueAt(selectedRow[0], 0);
+					artista = (String) table.getValueAt(selectedRow[0], 1);
+					Controlador.ReproducirCancion(nombre, artista);
+				}
+			}
+		});
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		scrollPane.setBounds(211, 117, 512, 186);
@@ -131,8 +144,7 @@ public class VentanaReciente extends JFrame {
 		table.setModel(new DefaultTableModel(null, columnas));
 		scrollPane.setViewportView(table);
 		cargarCancionesRecientesTabla(table, scrollPane);
-		
-		
+
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addMouseListener(new MouseAdapter() {
 			@Override
@@ -254,19 +266,31 @@ public class VentanaReciente extends JFrame {
 			}
 		});
 	}
-	
+
 	private void cargarCancionesRecientesTabla(JTable table, JScrollPane scrollPane) {
 		ArrayList<List<String>> cancionesEncontradas = Controlador.getCancionesRecientes();
 		List<String> listaTitulos = cancionesEncontradas.get(0);
 		List<String> listaInterpretes = cancionesEncontradas.get(1);
-		
-		DefaultTableModel tableMode = new DefaultTableModel(null,  new String[] {"Titulo", "Interprete"});
-		for(int i=0 ; i<listaTitulos.size(); i++) {
+
+		DefaultTableModel tableMode = new DefaultTableModel(null, new String[] { "Titulo", "Interprete" }){
+
+		    /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		       //all cells false
+		       return false;
+		    }
+		};
+		for (int i = 0; i < listaTitulos.size(); i++) {
 			Object[] data = new Object[2];
 			data[0] = listaTitulos.get(i);
 			data[1] = listaInterpretes.get(i);
 			tableMode.addRow(data);
-			}
+		}
 		table.setModel(tableMode);
 		scrollPane.setVisible(true);
 	}
