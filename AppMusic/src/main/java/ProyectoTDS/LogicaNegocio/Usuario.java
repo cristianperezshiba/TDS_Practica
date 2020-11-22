@@ -32,6 +32,7 @@ public class Usuario {
 	public Usuario(String usuario, String contrasena, String nombre, String apellidos, String fechaNacimiento,
 			String email) {
 		super();
+		codigo = 0;
 		this.usuario = usuario;
 		this.contrasena = contrasena;
 		this.nombre = nombre;

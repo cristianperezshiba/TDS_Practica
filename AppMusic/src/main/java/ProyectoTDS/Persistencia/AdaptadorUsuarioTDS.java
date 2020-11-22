@@ -62,5 +62,11 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 		
 	}
 
+	@Override
+	public Usuario recuperarUsuario(int codigo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
