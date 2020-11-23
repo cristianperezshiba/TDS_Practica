@@ -28,6 +28,7 @@ public class CatalogoCanciones {
 			    	String rutaCancion = stringRuta.replace(pathLocal, ""); //ruta que añadiremos al objeto cancion
 			    	//Separamos la cabecera de la ruta y nos quedamos unicamente con "ESTILO\interprete-cancion"
 			    	stringRuta = stringRuta.replace(pathCanciones + File.separator, "");
+
 			    	
 			    	//Ahora separamos el estilo de interprete-cancion
 			    	String[] partes1 = stringRuta.split(Pattern.quote (File.separator));
