@@ -2,16 +2,26 @@ package ProyectoTDS.LogicaNegocio;
 import java.util.*;
 
 public class ListaCanciones {
+	private int codigo;
 	private String nombre;
 	private Set<Cancion> canciones;
 	
 	
 	public ListaCanciones(String nombre) {
 		super();
+		codigo=0;
 		this.nombre = nombre;
 		this.canciones = new LinkedHashSet<Cancion>();
 	}
 
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public int getCodigo() {
+		return codigo;
+	}
 
 	public String getNombre() {
 		return nombre;

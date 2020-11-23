@@ -13,7 +13,8 @@ import java.util.Arrays;
 public class Usuario {
 
 	static final int TAM_COLA_CANCIONES_RECIENTES = 10;
-
+	
+	private int codigo;
 	private String usuario;
 	private String contrasena;
 	private String nombre;
@@ -31,6 +32,7 @@ public class Usuario {
 	public Usuario(String usuario, String contrasena, String nombre, String apellidos, String fechaNacimiento,
 			String email) {
 		super();
+		codigo = 0;
 		this.usuario = usuario;
 		this.contrasena = contrasena;
 		this.nombre = nombre;
@@ -41,6 +43,16 @@ public class Usuario {
 		this.playlists = new LinkedHashSet<ListaCanciones>();
 		this.cancionesRecientes = new LinkedList<Cancion>();
 	}
+	
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public int getCodigo() {
+		return codigo;
+	}
+
 
 	public String getUsuario() {
 		return usuario;
