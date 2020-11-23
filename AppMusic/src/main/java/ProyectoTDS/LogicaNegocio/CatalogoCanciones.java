@@ -17,7 +17,7 @@ public class CatalogoCanciones {
 		
 		//Leemos las canciones de los directorios
 		String pathLocal = System.getProperty("user.dir");
-		String pathCanciones = pathLocal + "\\" + "Canciones";
+		String pathCanciones = pathLocal + File.separator + "Canciones";
 		//System.out.println(pathCanciones);
 		
 		try {
@@ -27,10 +27,10 @@ public class CatalogoCanciones {
 			    	String stringRuta = ruta.toString();
 			    	String rutaCancion = stringRuta.replace(pathLocal, ""); //ruta que añadiremos al objeto cancion
 			    	//Separamos la cabecera de la ruta y nos quedamos unicamente con "ESTILO\interprete-cancion"
-			    	stringRuta = stringRuta.replace(pathCanciones + "\\", "");
+			    	stringRuta = stringRuta.replace(pathCanciones + File.separator, "");
 			    	
 			    	//Ahora separamos el estilo de interprete-cancion
-			    	String[] partes1 = stringRuta.split(Pattern.quote ("\\"));
+			    	String[] partes1 = stringRuta.split(Pattern.quote (File.separator));
 			    	String estilo = partes1[0];
 			    	String titulo_interprete = partes1[1];
 			    	//System.out.println(estilo + "  " + titulo_interprete);
