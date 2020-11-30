@@ -109,6 +109,10 @@ public class Usuario {
 	public void setPremium(boolean premium) {
 		this.premium = premium;
 	}
+	
+	public Set<ListaCanciones> getPlaylists(){
+		return this.playlists;
+	}
 
 	public Set<String> getNombrePlaylists() {
 		return playlists.stream().map(p -> p.getNombre()).collect(Collectors.toSet());

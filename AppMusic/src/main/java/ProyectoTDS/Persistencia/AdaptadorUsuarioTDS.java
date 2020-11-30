@@ -2,7 +2,10 @@ package ProyectoTDS.Persistencia;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 
+import ProyectoTDS.LogicaNegocio.Cancion;
+import ProyectoTDS.LogicaNegocio.ListaCanciones;
 import ProyectoTDS.LogicaNegocio.Usuario;
 import beans.Entidad;
 import beans.Propiedad;
@@ -40,6 +43,21 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 
 		// registrar primero los atributos que son objetos
 		//TODO hacer el registro de las playlists
+		
+		AdaptadorListaCancionesTDS adaptadorListaCanciones = AdaptadorListaCancionesTDS.getUnicaInstancia();
+		for (ListaCanciones lc : usuario.getPlaylists()) {
+			adaptadorListaCanciones.registrarLista(lc);
+		}
+		
+		//Es necesario este registro?? Ya que no estamos registrando una cancion sino una canción reciente
+		AdaptadorCancionTDS adaptadorCancion = AdaptadorCancionTDS.getUnicaInstancia();
+		for (Cancion c : usuario.getCancionesRecientes()) {
+			
+		}
+		
+		//Igual con las canciones mas reproducidas
+			
+		
 		// crear entidad Cliente
 		eUsuario = new Entidad();
 		eUsuario.setNombre("usuario");
@@ -47,7 +65,8 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 				Arrays.asList(new Propiedad("usuario", usuario.getUsuario()), new Propiedad("contrasena", usuario.getContrasena()),
 						new Propiedad("nombre", usuario.getNombre()), new Propiedad("apellidos", usuario.getApellidos()), 
 						new Propiedad("fechaNacimiento", usuario.getFechaNacimiento()), new Propiedad("email", usuario.getEmail()),
-						new Propiedad("premium", Boolean.toString(usuario.isPremium())) )));
+						new Propiedad("premium", Boolean.toString(usuario.isPremium())), 
+						new Propiedad("listaCanciones", obtenerCodigosListaCanciones(usuario.getPlaylists())))));
 		
 		// registrar entidad cliente
 		eUsuario = servPersistencia.registrarEntidad(eUsuario);
@@ -69,5 +88,12 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 		return null;
 	}
 
+	private String obtenerCodigosListaCanciones(Set<ListaCanciones> set) {
+		String aux = "";
+		for (ListaCanciones lc : set) {
+			aux += lc.getCodigo() + " ";
+		}
+		return aux.trim();
+	}
 
 }
