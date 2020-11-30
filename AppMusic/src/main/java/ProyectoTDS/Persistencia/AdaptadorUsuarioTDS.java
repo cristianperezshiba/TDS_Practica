@@ -1,8 +1,12 @@
 package ProyectoTDS.Persistencia;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import ProyectoTDS.LogicaNegocio.Cancion;
 import ProyectoTDS.LogicaNegocio.ListaCanciones;
@@ -66,7 +70,7 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 						new Propiedad("nombre", usuario.getNombre()), new Propiedad("apellidos", usuario.getApellidos()), 
 						new Propiedad("fechaNacimiento", usuario.getFechaNacimiento()), new Propiedad("email", usuario.getEmail()),
 						new Propiedad("premium", Boolean.toString(usuario.isPremium())), 
-						new Propiedad("listaCanciones", obtenerCodigosListaCanciones(usuario.getPlaylists())))));
+						new Propiedad("listaCanciones", obtenerCodigosPlaylists(usuario.getPlaylists())))));
 		
 		// registrar entidad cliente
 		eUsuario = servPersistencia.registrarEntidad(eUsuario);
@@ -85,15 +89,72 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 	@Override
 	public Usuario recuperarUsuario(int codigo) {
 		// TODO Auto-generated method stub
+		
+		// Si la entidad est� en el pool la devuelve directamente
+		if (PoolDAO.getUnicaInstancia().contiene(codigo))
+			return (Usuario) PoolDAO.getUnicaInstancia().getObjeto(codigo);
+
+		// si no, la recupera de la base de datos
+		
+		String usuario = null;
+		String contrasena = null;
+		String nombre = null;
+		String apellidos = null;
+		String fechaNacimiento = null;
+		String email = null;
+		boolean premium = false;
+		Set<ListaCanciones> playlists;
+
+		List<Cancion> cancionesRecientes;
+
+		List<ArrayList<Object>> cancionesMasReproducidas;
+		// recuperar entidad
+		Entidad eUsuario = servPersistencia.recuperarEntidad(codigo);
+		
+		try {
+			premium = Boolean.parseBoolean(servPersistencia.recuperarPropiedadEntidad(eUsuario, "premium"));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// recuperar propiedades que no son objetos
+		Usuario persona = new Usuario(usuario, contrasena, nombre, apellidos, fechaNacimiento, email);
+		persona.setCodigo(codigo);
+		persona.setPremium(premium);
+		persona.setUsuario(servPersistencia.recuperarPropiedadEntidad(eUsuario, "usuario"));
+		persona.setContrasena(servPersistencia.recuperarPropiedadEntidad(eUsuario, "contrasena"));
+		persona.setNombre(servPersistencia.recuperarPropiedadEntidad(eUsuario, "nombre"));
+		persona.setApellidos(servPersistencia.recuperarPropiedadEntidad(eUsuario, "apellidos"));
+		persona.setFechaNacimiento(servPersistencia.recuperarPropiedadEntidad(eUsuario, "fechaNacimiento"));
+		persona.setEmail(servPersistencia.recuperarPropiedadEntidad(eUsuario, "email"));
+		
+		PoolDAO.getUnicaInstancia().addObjeto(codigo, persona);
+		
+		AdaptadorListaCancionesTDS adaptadorListaCanciones = AdaptadorListaCancionesTDS.getUnicaInstancia();
+		playlists = obtenerListaCancionesDesdeCodigos(servPersistencia.recuperarPropiedadEntidad(eUsuario, "listaCanciones"));
+		
+		
 		return null;
 	}
 
-	private String obtenerCodigosListaCanciones(Set<ListaCanciones> set) {
+	private String obtenerCodigosPlaylists(Set<ListaCanciones> set) {
 		String aux = "";
 		for (ListaCanciones lc : set) {
 			aux += lc.getCodigo() + " ";
 		}
 		return aux.trim();
+	}
+	
+	private Set<ListaCanciones> obtenerListaCancionesDesdeCodigos(String lista) {
+
+		Set<ListaCanciones> listaCanciones = null;
+		StringTokenizer strTok = new StringTokenizer(lista, " ");
+		AdaptadorListaCancionesTDS adaptadorLV = AdaptadorListaCancionesTDS.getUnicaInstancia();
+		while (strTok.hasMoreTokens()) {
+			listaCanciones.add(adaptadorLV.recuperarLista(Integer.valueOf((String) strTok.nextElement())));
+		}
+		return listaCanciones;
 	}
 
 }
