@@ -53,12 +53,6 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 			adaptadorListaCanciones.registrarLista(lc);
 		}
 		
-		//Es necesario este registro?? Ya que no estamos registrando una cancion sino una canción reciente
-		AdaptadorCancionTDS adaptadorCancion = AdaptadorCancionTDS.getUnicaInstancia();
-		for (Cancion c : usuario.getCancionesRecientes()) {
-			
-		}
-		
 		//Igual con las canciones mas reproducidas
 			
 		
