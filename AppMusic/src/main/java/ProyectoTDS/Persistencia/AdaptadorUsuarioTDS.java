@@ -64,7 +64,9 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 						new Propiedad("nombre", usuario.getNombre()), new Propiedad("apellidos", usuario.getApellidos()), 
 						new Propiedad("fechaNacimiento", usuario.getFechaNacimiento()), new Propiedad("email", usuario.getEmail()),
 						new Propiedad("premium", Boolean.toString(usuario.isPremium())), 
-						new Propiedad("listaCanciones", obtenerCodigosPlaylists(usuario.getPlaylists())))));
+						new Propiedad("listaCanciones", obtenerCodigosPlaylists(usuario.getPlaylists())),
+						new Propiedad("cancionesRecientes", obtenerCodigosCancionesRecientes(usuario.getCancionesRecientes())), 
+						new Propiedad("cancionesMasReproducidas", obtenerCodigosCancionesMasReproducidas(usuario.getCancionesMasReproducidas())))));
 		
 		// registrar entidad cliente
 		eUsuario = servPersistencia.registrarEntidad(eUsuario);
@@ -73,6 +75,7 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 		usuario.setCodigo(eUsuario.getId()); 
 		
 	}
+
 
 	@Override
 	public void borrarUsuario(Usuario usuario) {
@@ -128,8 +131,12 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 		AdaptadorListaCancionesTDS adaptadorListaCanciones = AdaptadorListaCancionesTDS.getUnicaInstancia();
 		playlists = obtenerListaCancionesDesdeCodigos(servPersistencia.recuperarPropiedadEntidad(eUsuario, "listaCanciones"));
 		
+		cancionesRecientes = obtenerCancionesRecientesDesdeCodigos(servPersistencia.recuperarPropiedadEntidad(eUsuario, "listaCanciones"));
+		for (Cancion c: cancionesRecientes) {
+			persona.nuevaCancionReciente(c);
+		}
 		
-		return null;
+		return persona;
 	}
 
 	private String obtenerCodigosPlaylists(Set<ListaCanciones> set) {
@@ -144,11 +151,38 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 
 		Set<ListaCanciones> listaCanciones = null;
 		StringTokenizer strTok = new StringTokenizer(lista, " ");
-		AdaptadorListaCancionesTDS adaptadorLV = AdaptadorListaCancionesTDS.getUnicaInstancia();
+		AdaptadorListaCancionesTDS adaptadorLC = AdaptadorListaCancionesTDS.getUnicaInstancia();
 		while (strTok.hasMoreTokens()) {
-			listaCanciones.add(adaptadorLV.recuperarLista(Integer.valueOf((String) strTok.nextElement())));
+			listaCanciones.add(adaptadorLC.recuperarLista(Integer.valueOf((String) strTok.nextElement())));
 		}
 		return listaCanciones;
 	}
+	
+	private String obtenerCodigosCancionesRecientes(List<Cancion> cancionesRecientes) {
+		String aux = "";
+		for (Cancion lc : cancionesRecientes) {
+			aux += lc.getCodigo() + " ";
+		}
+		return aux.trim();
+	}
+	
+	private List<Cancion> obtenerCancionesRecientesDesdeCodigos(String lista){
+		List<Cancion> cancionesRecientes = null;
+		StringTokenizer strTok = new StringTokenizer(lista, " ");
+		AdaptadorCancionTDS adaptadorCR = AdaptadorCancionTDS.getUnicaInstancia();
+		while (strTok.hasMoreTokens()) {
+			cancionesRecientes.add(adaptadorCR.recuperarCancion(Integer.valueOf((String) strTok.nextElement())));
+		}
+		return cancionesRecientes;
+	}
+	
+	private String obtenerCodigosCancionesMasReproducidas(List<ArrayList<Object>> cancionesMasReproducidas) {
+		String aux = "";
+		for (ArrayList<Object> lc : cancionesMasReproducidas) {
+			//aux += lc.getCodigo() + " ";
+		}
+		return aux.trim();
+	}
+
 
 }

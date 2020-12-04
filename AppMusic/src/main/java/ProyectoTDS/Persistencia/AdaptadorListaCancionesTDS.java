@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import ProyectoTDS.LogicaNegocio.Cancion;
 import ProyectoTDS.LogicaNegocio.ListaCanciones;
+import ProyectoTDS.LogicaNegocio.Usuario;
 import beans.Entidad;
 import beans.Propiedad;
 import tds.driver.FactoriaServicioPersistencia;
@@ -64,8 +66,8 @@ public class AdaptadorListaCancionesTDS implements IAdaptadorListaCancionesDAO{
 
 	@Override
 	public void borrarLista(ListaCanciones lista) {
-		// TODO Auto-generated method stub
-		
+		Entidad eLista = servPersistencia.recuperarEntidad(lista.getCodigo());
+		servPersistencia.borrarEntidad(eLista);
 	}
 
 	@Override
@@ -76,8 +78,25 @@ public class AdaptadorListaCancionesTDS implements IAdaptadorListaCancionesDAO{
 
 	@Override
 	public ListaCanciones recuperarLista(int codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		if (PoolDAO.getUnicaInstancia().contiene(codigo))
+			return (ListaCanciones) PoolDAO.getUnicaInstancia().getObjeto(codigo);
+		
+		String nombre = null;
+		Set<Cancion> canciones;
+		
+		Entidad eListaCanciones = servPersistencia.recuperarEntidad(codigo);
+		
+		ListaCanciones playlist = new ListaCanciones(nombre);
+		playlist.setNombre(servPersistencia.recuperarPropiedadEntidad(eListaCanciones, "nombre"));
+		
+		PoolDAO.getUnicaInstancia().addObjeto(codigo, playlist);
+		
+		canciones =  obtenerCancionesDesdeCodigos(servPersistencia.recuperarPropiedadEntidad(eListaCanciones, "canciones"));
+		for (Cancion c: canciones) {
+			playlist.añadirCancion(c);
+		}
+		
+		return playlist;
 	}
 	
 	private String obtenerCodigosCanciones(Set<Cancion> canciones) {
@@ -87,6 +106,18 @@ public class AdaptadorListaCancionesTDS implements IAdaptadorListaCancionesDAO{
 		}
 		return aux.trim();
 	}
+	
+	private Set<Cancion> obtenerCancionesDesdeCodigos(String lista){
+		Set<Cancion> canciones = null;
+		StringTokenizer strTok = new StringTokenizer(lista, " ");
+		AdaptadorCancionTDS adaptadorCR = AdaptadorCancionTDS.getUnicaInstancia();
+		while (strTok.hasMoreTokens()) {
+			canciones.add(adaptadorCR.recuperarCancion(Integer.valueOf((String) strTok.nextElement())));
+		}
+		return canciones;
+	}
+	
+	
 
 
 }

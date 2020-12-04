@@ -155,6 +155,10 @@ public class Usuario {
 		return cancionesRecientes;
 
 	}
+	
+	public List<ArrayList<Object>> getCancionesMasReproducidas(){
+		return cancionesMasReproducidas;
+	}
 
 	public void crearPDF() throws DocumentException {
 

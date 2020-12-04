@@ -59,4 +59,11 @@ public class AdaptadorCancionTDS implements IAdaptadorCancionDAO{
 		
 	}
 
+	@Override
+	public Cancion recuperarCancion(int codigo) {
+		// TODO Auto-generated method stub
+		return null;
+		
+	}
+
 }

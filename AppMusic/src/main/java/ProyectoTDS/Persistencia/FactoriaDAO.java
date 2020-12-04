@@ -41,6 +41,7 @@ public abstract class FactoriaDAO {
 	//public abstract IAdaptadorVentaDAO getVentaDAO();
 	//public abstract IAdaptadorLineaVentaDAO getLineaVentaDAO();
 	//public abstract IAdaptadorProductoDAO getProductoDAO();
-	public abstract IAdaptadorUsuarioDAO getUsuairoDAO();
+	public abstract IAdaptadorUsuarioDAO getUsuarioDAO();
+	public abstract IAdaptadorListaCancionesDAO getListaCancionesDAO();
 
 }
