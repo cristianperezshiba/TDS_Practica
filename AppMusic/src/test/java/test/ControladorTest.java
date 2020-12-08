@@ -1,9 +1,11 @@
-package ProyectoTDS.Controlador;
+package test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ProyectoTDS.Controlador.Controlador;
 
 public class ControladorTest {
 
@@ -43,8 +45,5 @@ public class ControladorTest {
 		boolean resultado=controlador.ComprobarLoginUsuario("francisquito", "123");
 		assertEquals(resultado,false);
 	}
-	
-	
-	
 
 }
