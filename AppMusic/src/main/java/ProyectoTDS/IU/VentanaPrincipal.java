@@ -25,6 +25,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -43,12 +45,12 @@ import javax.swing.ScrollPaneConstants;
 public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
-	private ProyectoTDS.Controlador.Controlador Controlador;
+	private ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador;
 	
 	
 	public VentanaPrincipal() {
 		setTitle("Ventana principal");
-		Controlador = Controlador.getUnicaInstancia();
+		controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 749, 570);
@@ -68,9 +70,9 @@ public class VentanaPrincipal extends JFrame {
 		panelLeft.add(btnExplorar);
 		
 		JButton btnNuevaLista = new JButton("Nueva lista");
-		btnNuevaLista.addMouseListener(new MouseAdapter() {
+		btnNuevaLista.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaNuevaLista();
 				dispose();
 			}
@@ -80,9 +82,9 @@ public class VentanaPrincipal extends JFrame {
 		panelLeft.add(btnNuevaLista);
 		
 		JButton btnReciente = new JButton("Reciente");
-		btnReciente.addMouseListener(new MouseAdapter() {
+		btnReciente.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaReciente();
 				dispose();
 			}
@@ -92,9 +94,9 @@ public class VentanaPrincipal extends JFrame {
 		panelLeft.add(btnReciente);
 		
 		JButton btnMisListas = new JButton("Mis listas");
-		btnMisListas.addMouseListener(new MouseAdapter() {
+		btnMisListas.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaMisListas();
 				dispose();
 			}
@@ -112,10 +114,10 @@ public class VentanaPrincipal extends JFrame {
 		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLogout.addMouseListener(new MouseAdapter() {
+		btnLogout.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				Controlador.logout();
+			public void actionPerformed(ActionEvent arg0) {
+				controlador.logout();
 				abrirVentanaLogin();
 				dispose();
 				
@@ -125,7 +127,7 @@ public class VentanaPrincipal extends JFrame {
 		btnLogout.setBounds(625, 11, 98, 37);
 		contentPane.add(btnLogout);
 		
-		JLabel lblUsuario = new JLabel("Hola " + Controlador.getUsuarioActivo() + "!");
+		JLabel lblUsuario = new JLabel("Hola " + controlador.getUsuarioActivo() + "!");
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblUsuario.setBounds(106, 19, 293, 19);
 		contentPane.add(lblUsuario);
@@ -134,9 +136,9 @@ public class VentanaPrincipal extends JFrame {
 	    String[] columnas = new String[] {"Titulo", "Interprete"};
 		
 		
-		btnExplorar.addMouseListener(new MouseAdapter() {
+		btnExplorar.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaExplorar();
 				dispose();
 			}

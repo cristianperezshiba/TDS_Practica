@@ -7,16 +7,14 @@ import ProyectoTDS.Persistencia.FactoriaDAO;
 import ProyectoTDS.Persistencia.IAdaptadorUsuarioDAO;
 
 
-public class CatalogoUsuarios {
-
-	//Usar patron singleton �?
+public enum CatalogoUsuarios {
+	INSTANCE;
 	private Set<Usuario> listaUsuarios;
 	private IAdaptadorUsuarioDAO adaptadorUsuario;
 	
 		
 	
-	public CatalogoUsuarios() {
-		super();
+	 CatalogoUsuarios() {
 		inicializarAdaptador();
 		this.listaUsuarios = new LinkedHashSet<Usuario>();
 	}
@@ -39,12 +37,11 @@ public class CatalogoUsuarios {
 		return listaUsuarios.stream().anyMatch(u -> (usuario.equals(u.getUsuario()) && password.equals(u.getContrasena())));
 	}
 	
-	public boolean registrarUsuario(String usuario, String contrasena, String repite, String nombre, String apellidos, String fechaNacimiento, String email) {
-		Usuario usuarioNuevo = new Usuario(usuario, contrasena, nombre, apellidos, fechaNacimiento, email);
-		adaptadorUsuario.registrarUsuario(usuarioNuevo);
+	public boolean registrarUsuario(Usuario nuevoUsuario) {
+		adaptadorUsuario.registrarUsuario(nuevoUsuario);
 		//Si ya hay una persona con el mismo Usuario o el mismo email entonces gracias a que la lista es un Set, y a que hemos añadido los metodos hashCode y equal en la clase usuario,
 		//el usuario no se insertará la propia función nos devolverá false
-		return listaUsuarios.add(usuarioNuevo);
+		return listaUsuarios.add(nuevoUsuario);
 		
 	}
 	

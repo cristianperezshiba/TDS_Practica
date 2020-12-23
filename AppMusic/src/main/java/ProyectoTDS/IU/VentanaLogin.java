@@ -29,13 +29,13 @@ public class VentanaLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField textFieldUsuario;
 	private JTextField textFieldContrasena;
-	private ProyectoTDS.Controlador.Controlador Controlador;
+	private ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador;
 
 	/**
 	 * Create the frame.
 	 */
 	public VentanaLogin() {
-		this.Controlador = Controlador.getUnicaInstancia();
+		this.controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 		/////////////////////////////////////////////////////////
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -79,9 +79,9 @@ public class VentanaLogin extends JFrame {
 		
 		
 		JButton btnNewButton = new JButton("Registrate");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		btnNewButton.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0){
 				abrirVentanaRegistro();
 				dispose();
 			}
@@ -93,10 +93,10 @@ public class VentanaLogin extends JFrame {
 		
 		/////////////////////////////////////////////////////////////
 		JButton btnNewButton_1 = new JButton("Iniciar");
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
+		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (Controlador.ComprobarLoginUsuario(textFieldUsuario.getText(), textFieldContrasena.getText())) {
+			public void actionPerformed(ActionEvent arg0){
+				if (controlador.comprobarLoginUsuario(textFieldUsuario.getText(), textFieldContrasena.getText())) {
 					abrirVentanaReciente();
 					dispose();
 				}

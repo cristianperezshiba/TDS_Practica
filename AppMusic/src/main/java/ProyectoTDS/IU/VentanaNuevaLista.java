@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -40,7 +42,7 @@ import javax.swing.ScrollPaneConstants;
 public class VentanaNuevaLista extends JFrame {
 
 	private JPanel contentPane;
-	private ProyectoTDS.Controlador.Controlador Controlador;
+	private ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador;
 	private JTable tableIzq;
 	private JTable tableDcha;
 	private JTextField textFieldNombrePlaylist;
@@ -49,7 +51,7 @@ public class VentanaNuevaLista extends JFrame {
 	
 	public VentanaNuevaLista() {
 		setTitle("Ventana nueva lista");
-		Controlador = Controlador.getUnicaInstancia();
+		controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1073, 569);
@@ -113,9 +115,9 @@ public class VentanaNuevaLista extends JFrame {
 		panelLeft.add(btnNuevaLista);
 		
 		JButton btnReciente = new JButton("Reciente");
-		btnReciente.addMouseListener(new MouseAdapter() {
+		btnReciente.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaReciente();
 				dispose();
 			}
@@ -125,9 +127,9 @@ public class VentanaNuevaLista extends JFrame {
 		panelLeft.add(btnReciente);
 		
 		JButton btnMisListas = new JButton("Mis listas");
-		btnMisListas.addMouseListener(new MouseAdapter() {
+		btnMisListas.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaMisListas();
 				dispose();
 			}
@@ -145,10 +147,10 @@ public class VentanaNuevaLista extends JFrame {
 		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLogout.addMouseListener(new MouseAdapter() {
+		btnLogout.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				Controlador.logout();
+			public void actionPerformed(ActionEvent arg0) {
+				controlador.logout();
 				abrirVentanaLogin();
 				dispose();
 				
@@ -158,7 +160,7 @@ public class VentanaNuevaLista extends JFrame {
 		btnLogout.setBounds(936, 11, 98, 37);
 		contentPane.add(btnLogout);
 		
-		JLabel lblUsuario = new JLabel("Hola " + Controlador.getUsuarioActivo() + "!");
+		JLabel lblUsuario = new JLabel("Hola " + controlador.getUsuarioActivo() + "!");
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblUsuario.setBounds(291, 19, 293, 19);
 		contentPane.add(lblUsuario);
@@ -208,20 +210,20 @@ public class VentanaNuevaLista extends JFrame {
 		btnEliminarPlaylist.setBounds(783, 59, 126, 31);
 		contentPane.add(btnEliminarPlaylist);
 	  
-		btnBuscar.addMouseListener(new MouseAdapter() {
+		btnBuscar.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				cargarTablaBusqueda(textTitulo.getText() ,txtInterprete.getText(), comboBoxEstilo.getSelectedItem().toString());
 			}
 		});
 		
-		btnCrear.addMouseListener(new MouseAdapter() {
+		btnCrear.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				String nuevaPlaylist = textFieldNombrePlaylist.getText();
 				int reply = JOptionPane.showConfirmDialog(null, "¿Quiere crear una nueva playlist llamada " +nuevaPlaylist + "?", "Crear playlist", JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) {
-					if (Controlador.crearPlaylist(nuevaPlaylist)) {
+					if (controlador.crearPlaylist(nuevaPlaylist)) {
 						JOptionPane.showMessageDialog(null, "Playlist " + nuevaPlaylist + " creada");
 						//Cargar tabla playlist a la dcha y la de explorar a la izq
 						cargarTablaBusqueda("", "", "TODOS");
@@ -236,52 +238,52 @@ public class VentanaNuevaLista extends JFrame {
 			}
 		});
 		
-		btnExplorar.addMouseListener(new MouseAdapter() {
+		btnExplorar.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaExplorar();
 				dispose();
 			}
 		});
 		
-		btnEliminarPlaylist.addMouseListener(new MouseAdapter() {
+		btnEliminarPlaylist.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				if (playlistMostrada == null) return;
 				int reply = JOptionPane.showConfirmDialog(null, "Esta seguro de que desea eliminar la playlist " + playlistMostrada + "?","Confirmar accion", JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) { 
-					Controlador.eliminarPlaylist(playlistMostrada);
+					controlador.eliminarPlaylist(playlistMostrada);
 					playlistMostrada = null;
 					}
 			}
 		});
 		
-		btnIZQ_DCHA.addMouseListener(new MouseAdapter() {
+		btnIZQ_DCHA.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				//Insertar cancion en la playlist
 				String selectedData = null;
 			    int[] selectedRow = tableIzq.getSelectedRows();
 				String cancion = (String) tableIzq.getValueAt(selectedRow[0], 0);
 				String interprete = (String) tableIzq.getValueAt(selectedRow[0], 1);
 				//System.out.println("Fila selecionada: " + cancion + " " + interprete);
-				if (!Controlador.insertarCancionEnPlaylist(playlistMostrada, cancion.trim(), interprete.trim())) {
+				if (!controlador.insertarCancionEnPlaylist(playlistMostrada, cancion.trim(), interprete.trim())) {
 					JOptionPane.showMessageDialog(null, "La cancion no se ha podido insertar", "Error", JOptionPane.ERROR_MESSAGE);
 				};
 				cargarCancionesPlaylist(playlistMostrada);
 			}
 		});
 		
-		btnDCHA_IZQ.addMouseListener(new MouseAdapter() {
+		btnDCHA_IZQ.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				//Eliminar cancion de la playlist
 				String selectedData = null;
 			    int[] selectedRow = tableDcha.getSelectedRows();
 				String cancion = (String) tableDcha.getValueAt(selectedRow[0], 0);
 				String interprete = (String) tableDcha.getValueAt(selectedRow[0], 1);
 				//System.out.println("Fila selecionada: " + cancion + " " + interprete);
-				if (!Controlador.borrarCancionDePlaylist(playlistMostrada, cancion.trim(), interprete.trim())) {
+				if (!controlador.borrarCancionDePlaylist(playlistMostrada, cancion.trim(), interprete.trim())) {
 					JOptionPane.showMessageDialog(null, "La cancion no se ha podido eliminar", "Error", JOptionPane.ERROR_MESSAGE);
 				};
 				cargarCancionesPlaylist(playlistMostrada);
@@ -300,7 +302,7 @@ public class VentanaNuevaLista extends JFrame {
 				"Listas"
 			}
 		);
-		Set<String> misListas = Controlador.cargarMisListas();
+		Set<String> misListas = controlador.cargarMisListas();
 		for  (String s : misListas) {
 			Object[] data = new Object[1];
 			data[0] = s;
@@ -312,9 +314,9 @@ public class VentanaNuevaLista extends JFrame {
 		table_listas.setCellSelectionEnabled(true);
 		
 		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addMouseListener(new MouseAdapter() {
+		btnAceptar.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				//TODO: Guardar en persistencia la lista que acabamos de crear o directamente guardar todas las playlists
 			}
 		});
@@ -323,10 +325,10 @@ public class VentanaNuevaLista extends JFrame {
 		contentPane.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addMouseListener(new MouseAdapter() {
+		btnCancelar.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (ultimaPlaylistCreada != null) Controlador.eliminarPlaylist(ultimaPlaylistCreada);
+			public void actionPerformed(ActionEvent arg0) {
+				if (ultimaPlaylistCreada != null) controlador.eliminarPlaylist(ultimaPlaylistCreada);
 			}
 		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -343,7 +345,7 @@ public class VentanaNuevaLista extends JFrame {
 	        System.out.println("Selected: " + selectedData);
 
 	        
-	        ArrayList<List<String>> cancionesEncontradas = Controlador.getCancionesLista(selectedData);
+	        ArrayList<List<String>> cancionesEncontradas = controlador.getCancionesLista(selectedData);
 	        
 			List<String> listaTitulos = cancionesEncontradas.get(0);
 			List<String> listaInterpretes = cancionesEncontradas.get(1);
@@ -370,7 +372,7 @@ public class VentanaNuevaLista extends JFrame {
 	}
 	
 	private void cargarTablaBusqueda(String titulo, String Interprete, String Estilo) {
-		ArrayList<List<String>> cancionesEncontradas = Controlador.buscarCanciones(titulo, Interprete, Estilo);
+		ArrayList<List<String>> cancionesEncontradas = controlador.buscarCanciones(titulo, Interprete, Estilo);
 		List<String> listaTitulos = cancionesEncontradas.get(0);
 		List<String> listaInterpretes = cancionesEncontradas.get(1);
 		
@@ -388,7 +390,7 @@ public class VentanaNuevaLista extends JFrame {
 	}
 	
 	private void cargarCancionesPlaylist(String playlist) {
-		ArrayList<List<String>> canciones = Controlador.getCancionesLista(playlist);
+		ArrayList<List<String>> canciones = controlador.getCancionesLista(playlist);
 		
 		List<String> listaTitulos = canciones.get(0);
 		List<String> listaInterpretes = canciones.get(1);
