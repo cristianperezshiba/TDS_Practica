@@ -80,8 +80,17 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 
 	@Override
 	public void borrarUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
+		Entidad eUsuario;
+		try{
+			eUsuario = servPersistencia.recuperarEntidad(usuario.getCodigo());
+		} catch(NullPointerException e) {return;}
 		
+		AdaptadorListaCancionesTDS adaptadorListaCanciones = AdaptadorListaCancionesTDS.getUnicaInstancia();
+		for (ListaCanciones listaCanciones : usuario.getPlaylists()) {
+				ListaCanciones lista = (ListaCanciones) listaCanciones;
+				adaptadorListaCanciones.borrarLista(lista);
+		}
+		servPersistencia.borrarEntidad(eUsuario);
 	}
 
 	@Override
@@ -139,6 +148,17 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 		
 		return persona;
 	}
+	
+	@Override
+	public List<Usuario> recuperarTodosLosUsuarios() {
+		List<Usuario> usuarios = new LinkedList<Usuario>();
+		List<Entidad> eUsuarios = servPersistencia.recuperarEntidades("Usuario");
+		
+		for (Entidad usuario : eUsuarios) {
+			usuarios.add(recuperarUsuario(usuario.getId()));
+		}
+		return usuarios;
+	}
 
 	private String obtenerCodigosPlaylists(Set<ListaCanciones> set) {
 		String aux = "";
@@ -184,6 +204,8 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 		}
 		return aux.trim();
 	}
+
+
 
 
 }

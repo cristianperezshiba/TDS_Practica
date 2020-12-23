@@ -58,7 +58,7 @@ public enum ControladorAppMusic {
 	};
 	
 	public boolean RegistroUsuario(String usuario, String contrasena, String repite, String nombre, String apellidos, String fechaNacimiento, String email) {
-		Usuario nuevoUsuario = new Usuario(usuario, contrasena, nombre, apellidos, fechaNacimiento, email);
+		ProyectoTDS.LogicaNegocio.Usuario nuevoUsuario = new ProyectoTDS.LogicaNegocio.Usuario(usuario, contrasena, nombre, apellidos, fechaNacimiento, email);
 		return this.catalogoUsuarios.registrarUsuario(nuevoUsuario);
 	};
 	
@@ -151,5 +151,4 @@ public enum ControladorAppMusic {
 	}
 	
 
-	
 }
