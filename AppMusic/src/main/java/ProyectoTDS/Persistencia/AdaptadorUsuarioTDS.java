@@ -65,8 +65,9 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 						new Propiedad("fechaNacimiento", usuario.getFechaNacimiento()), new Propiedad("email", usuario.getEmail()),
 						new Propiedad("premium", Boolean.toString(usuario.isPremium())), 
 						new Propiedad("listaCanciones", obtenerCodigosPlaylists(usuario.getPlaylists())),
-						new Propiedad("cancionesRecientes", obtenerCodigosCancionesRecientes(usuario.getCancionesRecientes())), 
-						new Propiedad("cancionesMasReproducidas", obtenerCodigosCancionesMasReproducidas(usuario.getCancionesMasReproducidas())))));
+						new Propiedad("cancionesRecientes", obtenerCodigosCancionesRecientes(usuario.getCancionesRecientes())))));
+						//new Propiedad("cancionesMasReproducidas", obtenerCodigosCancionesMasReproducidas(usuario.getCancionesMasReproducidas()))
+						//)));
 		
 		// registrar entidad cliente
 		eUsuario = servPersistencia.registrarEntidad(eUsuario);

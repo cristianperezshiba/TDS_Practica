@@ -35,7 +35,7 @@ public class CatalogoUsuarios {
 
 	public boolean loginUsuario(String usuario, String password) {
 		//Comprobamos si el usuario y el password son correctos mediante un stream
-		
+		//adaptadorUsuario.recuperarUsuario();
 		return listaUsuarios.stream().anyMatch(u -> (usuario.equals(u.getUsuario()) && password.equals(u.getContrasena())));
 	}
 	
