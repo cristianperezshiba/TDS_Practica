@@ -125,9 +125,9 @@ public class VentanaReciente extends JFrame {
 
 		JScrollPane scrollPane = new JScrollPane();
 		JTable table = new JTable();
-		table.addActionListener(new ActionListener() {
+		table.addMouseListener(new MouseAdapter() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2 && table.getSelectedRow() != -1) {
 					String nombre = null;
 					String artista = null;
