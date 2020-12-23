@@ -22,8 +22,6 @@ public enum ControladorAppMusic {
 
 
 	private ControladorAppMusic() {
-		this.catalogoCanciones = new CatalogoCanciones();
-		this.catalogoUsuarios = new CatalogoUsuarios();
 		this.cancionesMasReproducidas = new LinkedList<Cancion>();
 		this.usuarioActivo = null;
 	}

@@ -17,6 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -59,9 +61,9 @@ public class VentanaReciente extends JFrame {
 		panelLeft.add(btnExplorar);
 
 		JButton btnNuevaLista = new JButton("Nueva lista");
-		btnNuevaLista.addMouseListener(new MouseAdapter() {
+		btnNuevaLista.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaNuevaLista();
 				dispose();
 			}
@@ -77,9 +79,9 @@ public class VentanaReciente extends JFrame {
 		panelLeft.add(btnReciente);
 
 		JButton btnMisListas = new JButton("Mis listas");
-		btnMisListas.addMouseListener(new MouseAdapter() {
+		btnMisListas.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaMisListas();
 				dispose();
 			}
@@ -95,9 +97,9 @@ public class VentanaReciente extends JFrame {
 
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLogout.addMouseListener(new MouseAdapter() {
+		btnLogout.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0){
 				controlador.logout();
 				abrirVentanaLogin();
 				dispose();
@@ -113,9 +115,9 @@ public class VentanaReciente extends JFrame {
 		lblUsuario.setBounds(106, 19, 293, 19);
 		contentPane.add(lblUsuario);
 
-		btnExplorar.addMouseListener(new MouseAdapter() {
+		btnExplorar.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaExplorar();
 				dispose();
 			}
@@ -123,9 +125,9 @@ public class VentanaReciente extends JFrame {
 
 		JScrollPane scrollPane = new JScrollPane();
 		JTable table = new JTable();
-		table.addMouseListener(new MouseAdapter() {
+		table.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				if (e.getClickCount() == 2 && table.getSelectedRow() != -1) {
 					String nombre = null;
 					String artista = null;
@@ -146,9 +148,9 @@ public class VentanaReciente extends JFrame {
 		cargarCancionesRecientesTabla(table, scrollPane);
 
 		JButton btnPlay = new JButton("Play");
-		btnPlay.addMouseListener(new MouseAdapter() {
+		btnPlay.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				///////////////////////////////////////////////////////////
 				String nombre = null;
 				String artista = null;
@@ -174,9 +176,9 @@ public class VentanaReciente extends JFrame {
 		contentPane.add(btnPause);
 
 		JButton btnCancionAnterior = new JButton("<<");
-		btnCancionAnterior.addMouseListener(new MouseAdapter() {
+		btnCancionAnterior.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				// Coger fila seleccionada y coger la anterior y reproducirla
 				String nombre = null;
 				String artista = null;
@@ -194,9 +196,9 @@ public class VentanaReciente extends JFrame {
 		contentPane.add(btnCancionAnterior);
 
 		JButton btnCancionSiguiente = new JButton(">>");
-		btnCancionSiguiente.addMouseListener(new MouseAdapter() {
+		btnCancionSiguiente.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				// Coger fila seleccionada y coger la siguiente y reproducirla
 				String nombre = null;
 				String artista = null;

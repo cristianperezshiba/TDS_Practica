@@ -79,9 +79,9 @@ public class VentanaLogin extends JFrame {
 		
 		
 		JButton btnNewButton = new JButton("Registrate");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		btnNewButton.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0){
 				abrirVentanaRegistro();
 				dispose();
 			}
@@ -93,10 +93,10 @@ public class VentanaLogin extends JFrame {
 		
 		/////////////////////////////////////////////////////////////
 		JButton btnNewButton_1 = new JButton("Iniciar");
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
+		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (controlador.ComprobarLoginUsuario(textFieldUsuario.getText(), textFieldContrasena.getText())) {
+			public void actionPerformed(ActionEvent arg0){
+				if (controlador.comprobarLoginUsuario(textFieldUsuario.getText(), textFieldContrasena.getText())) {
 					abrirVentanaReciente();
 					dispose();
 				}

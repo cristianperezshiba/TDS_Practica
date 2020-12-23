@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -113,9 +115,9 @@ public class VentanaNuevaLista extends JFrame {
 		panelLeft.add(btnNuevaLista);
 		
 		JButton btnReciente = new JButton("Reciente");
-		btnReciente.addMouseListener(new MouseAdapter() {
+		btnReciente.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaReciente();
 				dispose();
 			}
@@ -125,9 +127,9 @@ public class VentanaNuevaLista extends JFrame {
 		panelLeft.add(btnReciente);
 		
 		JButton btnMisListas = new JButton("Mis listas");
-		btnMisListas.addMouseListener(new MouseAdapter() {
+		btnMisListas.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaMisListas();
 				dispose();
 			}
@@ -145,9 +147,9 @@ public class VentanaNuevaLista extends JFrame {
 		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLogout.addMouseListener(new MouseAdapter() {
+		btnLogout.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				controlador.logout();
 				abrirVentanaLogin();
 				dispose();
@@ -208,16 +210,16 @@ public class VentanaNuevaLista extends JFrame {
 		btnEliminarPlaylist.setBounds(783, 59, 126, 31);
 		contentPane.add(btnEliminarPlaylist);
 	  
-		btnBuscar.addMouseListener(new MouseAdapter() {
+		btnBuscar.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				cargarTablaBusqueda(textTitulo.getText() ,txtInterprete.getText(), comboBoxEstilo.getSelectedItem().toString());
 			}
 		});
 		
-		btnCrear.addMouseListener(new MouseAdapter() {
+		btnCrear.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				String nuevaPlaylist = textFieldNombrePlaylist.getText();
 				int reply = JOptionPane.showConfirmDialog(null, "¿Quiere crear una nueva playlist llamada " +nuevaPlaylist + "?", "Crear playlist", JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) {
@@ -236,17 +238,17 @@ public class VentanaNuevaLista extends JFrame {
 			}
 		});
 		
-		btnExplorar.addMouseListener(new MouseAdapter() {
+		btnExplorar.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaExplorar();
 				dispose();
 			}
 		});
 		
-		btnEliminarPlaylist.addMouseListener(new MouseAdapter() {
+		btnEliminarPlaylist.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				if (playlistMostrada == null) return;
 				int reply = JOptionPane.showConfirmDialog(null, "Esta seguro de que desea eliminar la playlist " + playlistMostrada + "?","Confirmar accion", JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) { 
@@ -256,9 +258,9 @@ public class VentanaNuevaLista extends JFrame {
 			}
 		});
 		
-		btnIZQ_DCHA.addMouseListener(new MouseAdapter() {
+		btnIZQ_DCHA.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				//Insertar cancion en la playlist
 				String selectedData = null;
 			    int[] selectedRow = tableIzq.getSelectedRows();
@@ -272,9 +274,9 @@ public class VentanaNuevaLista extends JFrame {
 			}
 		});
 		
-		btnDCHA_IZQ.addMouseListener(new MouseAdapter() {
+		btnDCHA_IZQ.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				//Eliminar cancion de la playlist
 				String selectedData = null;
 			    int[] selectedRow = tableDcha.getSelectedRows();
@@ -312,9 +314,9 @@ public class VentanaNuevaLista extends JFrame {
 		table_listas.setCellSelectionEnabled(true);
 		
 		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addMouseListener(new MouseAdapter() {
+		btnAceptar.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				//TODO: Guardar en persistencia la lista que acabamos de crear o directamente guardar todas las playlists
 			}
 		});
@@ -323,9 +325,9 @@ public class VentanaNuevaLista extends JFrame {
 		contentPane.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addMouseListener(new MouseAdapter() {
+		btnCancelar.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				if (ultimaPlaylistCreada != null) controlador.eliminarPlaylist(ultimaPlaylistCreada);
 			}
 		});

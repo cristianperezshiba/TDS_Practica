@@ -13,6 +13,9 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import com.toedter.calendar.JDateChooser;
@@ -105,9 +108,9 @@ public class VentanaRegistro extends JFrame {
 		
 		JButton btnIrALogin = new JButton("Ya tengo cuenta");
 		btnIrALogin.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnIrALogin.addMouseListener(new MouseAdapter() {
+		btnIrALogin.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaLogin();
 				dispose();
 			}
@@ -120,9 +123,9 @@ public class VentanaRegistro extends JFrame {
 		contentPane.add(textFieldFecha);
 		
 		JButton btnRegistrar = new JButton("Registrarme");
-		btnRegistrar.addMouseListener(new MouseAdapter() {
+		btnRegistrar.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				String usuario = textFieldUsuario.getText();
 				String contrasena = textFieldClave.getText();
 				String repite = textFieldRepite.getText();

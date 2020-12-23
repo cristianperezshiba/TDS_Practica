@@ -19,6 +19,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -71,9 +73,9 @@ public class VentanaMisListas extends JFrame {
 		btnNuevaLista.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNuevaLista.setBounds(39, 93, 117, 44);
 		panelLeft.add(btnNuevaLista);
-		btnNuevaLista.addMouseListener(new MouseAdapter() {
+		btnNuevaLista.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaNuevaLista();
 				dispose();
 			}
@@ -83,9 +85,9 @@ public class VentanaMisListas extends JFrame {
 		btnReciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnReciente.setBounds(39, 158, 117, 44);
 		panelLeft.add(btnReciente);
-		btnReciente.addMouseListener(new MouseAdapter() {
+		btnReciente.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaReciente();
 				dispose();
 			}
@@ -109,9 +111,9 @@ public class VentanaMisListas extends JFrame {
 		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLogout.addMouseListener(new MouseAdapter() {
+		btnLogout.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				controlador.logout();
 				abrirVentanaLogin();
 				dispose();
@@ -129,9 +131,9 @@ public class VentanaMisListas extends JFrame {
 	  
 		
 		
-		btnExplorar.addMouseListener(new MouseAdapter() {
+		btnExplorar.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				abrirVentanaExplorar();
 				dispose();
 			}
@@ -233,9 +235,9 @@ public class VentanaMisListas extends JFrame {
 	    });
 		
 		JButton btnPlay = new JButton("Play");
-		btnPlay.addMouseListener(new MouseAdapter() {
+		btnPlay.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				///////////////////////////////////////////////////////////
 				String nombre = null;
 				String artista = null;
@@ -261,9 +263,9 @@ public class VentanaMisListas extends JFrame {
 		contentPane.add(btnPause);
 
 		JButton btnCancionAnterior = new JButton("<<");
-		btnCancionAnterior.addMouseListener(new MouseAdapter() {
+		btnCancionAnterior.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				// Coger fila seleccionada y coger la anterior y reproducirla
 				String nombre = null;
 				String artista = null;
@@ -281,9 +283,9 @@ public class VentanaMisListas extends JFrame {
 		contentPane.add(btnCancionAnterior);
 
 		JButton btnCancionSiguiente = new JButton(">>");
-		btnCancionSiguiente.addMouseListener(new MouseAdapter() {
+		btnCancionSiguiente.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				// Coger fila seleccionada y coger la siguiente y reproducirla
 				String nombre = null;
 				String artista = null;
@@ -301,9 +303,9 @@ public class VentanaMisListas extends JFrame {
 		contentPane.add(btnCancionSiguiente);
 		
 		JButton btnPdf = new JButton("PDF");
-		btnPdf.addMouseListener(new MouseAdapter() {
+		btnPdf.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				controlador.generarPdf();
 			}
 		});
