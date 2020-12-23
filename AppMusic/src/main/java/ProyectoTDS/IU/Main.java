@@ -23,6 +23,7 @@ public class Main {
 		//y luego abrimos la ventana del Login 
 		//ProyectoTDS.LogicaNegocio.AppMusic appMusic = ProyectoTDS.LogicaNegocio.AppMusic.getUnicaInstancia();
 		ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
+		controlador.cargarCanciones();
 		abrirVentanaLogin();
 		
 	}

@@ -14,10 +14,12 @@ public enum CatalogoCanciones {
 
 	private CatalogoCanciones() {
 		this.listaCanciones = new LinkedHashSet<Cancion>();		
-		CargadorCanciones.cargarCanciones();
 		}
 
-
+	public void cargarCanciones() {
+		CargadorCanciones.cargarCanciones();
+	}
+	
 	public boolean añadirCancionAcatalogo(Cancion c) {
 		return listaCanciones.add(c);
 	}

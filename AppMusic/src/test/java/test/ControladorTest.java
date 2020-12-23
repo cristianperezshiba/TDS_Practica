@@ -4,16 +4,15 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import ProyectoTDS.Controlador.Controlador;
+import ProyectoTDS.LogicaNegocio.*;
 
 public class ControladorTest {
 
-	private Controlador controlador;
+	private  ControladorAppMusic controlador;
 	
 	@Before
 	public void setup() {
-		controlador = Controlador.getUnicaInstancia();
+		controlador = ControladorAppMusic.INSTANCE;
 	}
 
 	@Test	//Comprobar que un usuario se puede registrar correctamente cuando no existe otro
@@ -35,14 +34,14 @@ public class ControladorTest {
 	@Test	//Comprobar que una vez un usuario se ha registrado, puede acceder a la aplicación
 	public void testComprobarLoginUsuario() {
 		controlador.RegistroUsuario("joselito", "1234", "1234", "Jose", "Lopez", "03/10/1990", "tujoselito@gmail.com");
-		boolean resultado=controlador.ComprobarLoginUsuario("joselito", "1234");
+		boolean resultado=controlador.comprobarLoginUsuario("joselito", "1234");
 		assertEquals(resultado,true);
 	}
 	
 	@Test	//Comprobar que una vez un usuario introduciendo valores incorrectos no puede acceder a la aplicación
 	public void testComprobarLoginUsuario2() {
 		controlador.RegistroUsuario("francisquito", "1234", "1234", "Francisco", "Mieres", "23/10/1995", "mieresfrancisco@gmail.com");
-		boolean resultado=controlador.ComprobarLoginUsuario("francisquito", "123");
+		boolean resultado=controlador.comprobarLoginUsuario("francisquito", "123");
 		assertEquals(resultado,false);
 	}
 
