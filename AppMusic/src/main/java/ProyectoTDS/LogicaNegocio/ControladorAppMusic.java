@@ -22,12 +22,16 @@ public enum ControladorAppMusic {
 
 
 	private ControladorAppMusic() {
+		this.catalogoCanciones = CatalogoCanciones.INSTANCE;
+		this.catalogoUsuarios = CatalogoUsuarios.INSTANCE;
 		this.cancionesMasReproducidas = new LinkedList<Cancion>();
 		this.usuarioActivo = null;
 	}
 	
 
-
+	public void cargarCanciones() {
+		catalogoCanciones.cargarCanciones();
+	}
 	public CatalogoCanciones getCatalogoCanciones() {
 		return catalogoCanciones;
 	}
@@ -123,7 +127,7 @@ public enum ControladorAppMusic {
 	}
 	
 	public void pausarCancion() {
-		Reproductor.pausarCancion();
+		Reproductor.INSTANCE.pausarCancion();
 	}
 	
 	public ArrayList<List<String>> getCancionesRecientes() {

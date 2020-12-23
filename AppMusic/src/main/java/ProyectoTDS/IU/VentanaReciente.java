@@ -125,9 +125,10 @@ public class VentanaReciente extends JFrame {
 
 		JScrollPane scrollPane = new JScrollPane();
 		JTable table = new JTable();
-		/*table.addActionListener(new ActionListener() {
+
+		table.addMouseListener(new MouseAdapter() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2 && table.getSelectedRow() != -1) {
 					String nombre = null;
 					String artista = null;
@@ -137,7 +138,8 @@ public class VentanaReciente extends JFrame {
 					controlador.ReproducirCancion(nombre, artista);
 				}
 			}
-		});*/
+		});
+		
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		scrollPane.setBounds(211, 117, 512, 186);

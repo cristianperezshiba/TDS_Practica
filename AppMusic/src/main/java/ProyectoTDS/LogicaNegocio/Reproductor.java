@@ -7,10 +7,10 @@ import javafx.scene.media.MediaPlayer;
 
 
 
-public class Reproductor {
-		
+public enum Reproductor {
+		INSTANCE;
 		static MediaPlayer mediaPlayer;
-		public Reproductor() {}
+		Reproductor() {}
 		
 		
 		public static void reproducirCancion(Cancion cancion) {
