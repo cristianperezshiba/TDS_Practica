@@ -42,13 +42,13 @@ import javax.swing.SwingConstants;
 public class VentanaMisListas extends JFrame {
 
 	private JPanel contentPane;
-	private ProyectoTDS.LogicaNegocio.ControladorAppMusic Controlador;
+	private ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador;
 	private JTable table_listas;
 	
 	
 	public VentanaMisListas() {
 		setTitle("Ventana mis listas");
-		Controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
+		controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 749, 570);
@@ -112,7 +112,7 @@ public class VentanaMisListas extends JFrame {
 		btnLogout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Controlador.logout();
+				controlador.logout();
 				abrirVentanaLogin();
 				dispose();
 				
@@ -122,7 +122,7 @@ public class VentanaMisListas extends JFrame {
 		btnLogout.setBounds(625, 11, 98, 37);
 		contentPane.add(btnLogout);
 		
-		JLabel lblUsuario = new JLabel("Hola " + Controlador.getUsuarioActivo() + "!");
+		JLabel lblUsuario = new JLabel("Hola " + controlador.getUsuarioActivo() + "!");
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblUsuario.setBounds(106, 19, 293, 19);
 		contentPane.add(lblUsuario);
@@ -149,7 +149,7 @@ public class VentanaMisListas extends JFrame {
 					int[] selectedRow = table.getSelectedRows();
 					nombre = (String) table.getValueAt(selectedRow[0], 0);
 					artista = (String) table.getValueAt(selectedRow[0], 1);
-					Controlador.ReproducirCancion(nombre, artista);
+					controlador.ReproducirCancion(nombre, artista);
 				}
 			}
 		});
@@ -180,7 +180,7 @@ public class VentanaMisListas extends JFrame {
 				"Listas"
 			}
 		);
-		Set<String> misListas = Controlador.cargarMisListas();
+		Set<String> misListas = controlador.cargarMisListas();
 		for  (String s : misListas) {
 			Object[] data = new Object[1];
 			data[0] = s;
@@ -202,7 +202,7 @@ public class VentanaMisListas extends JFrame {
 	        System.out.println("Selected: " + selectedData);
 
 	        
-	        ArrayList<List<String>> cancionesEncontradas = Controlador.getCancionesLista(selectedData);
+	        ArrayList<List<String>> cancionesEncontradas = controlador.getCancionesLista(selectedData);
 	        
 			List<String> listaTitulos = cancionesEncontradas.get(0);
 			List<String> listaInterpretes = cancionesEncontradas.get(1);
@@ -242,7 +242,7 @@ public class VentanaMisListas extends JFrame {
 				int[] selectedRow = table.getSelectedRows();
 				nombre = (String) table.getValueAt(selectedRow[0], 0);
 				artista = (String) table.getValueAt(selectedRow[0], 1);
-				Controlador.ReproducirCancion(nombre, artista);
+				controlador.ReproducirCancion(nombre, artista);
 
 			}
 		});
@@ -253,7 +253,7 @@ public class VentanaMisListas extends JFrame {
 		btnPause.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Controlador.pausarCancion();
+				controlador.pausarCancion();
 			}
 		});
 
@@ -274,7 +274,7 @@ public class VentanaMisListas extends JFrame {
 				table.setRowSelectionInterval((selectedRow[0] - 1) % numFilas, (selectedRow[0] - 1) % numFilas);
 				nombre = (String) table.getValueAt((selectedRow[0] - 1) % numFilas, 0);
 				artista = (String) table.getValueAt((selectedRow[0] - 1) % numFilas, 1);
-				Controlador.ReproducirCancion(nombre, artista);
+				controlador.ReproducirCancion(nombre, artista);
 			}
 		});
 		btnCancionAnterior.setBounds(370, 433, 53, 35);
@@ -294,7 +294,7 @@ public class VentanaMisListas extends JFrame {
 				table.setRowSelectionInterval((selectedRow[0] + 1) % numFilas, (selectedRow[0] + 1) % numFilas);
 				nombre = (String) table.getValueAt((selectedRow[0] + 1) % numFilas, 0);
 				artista = (String) table.getValueAt((selectedRow[0] + 1) % numFilas, 1);
-				Controlador.ReproducirCancion(nombre, artista);
+				controlador.ReproducirCancion(nombre, artista);
 			}
 		});
 		btnCancionSiguiente.setBounds(516, 433, 53, 35);
@@ -304,7 +304,7 @@ public class VentanaMisListas extends JFrame {
 		btnPdf.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Controlador.generarPdf();
+				controlador.generarPdf();
 			}
 		});
 		btnPdf.setBounds(608, 453, 98, 67);

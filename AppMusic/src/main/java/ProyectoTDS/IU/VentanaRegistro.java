@@ -26,10 +26,10 @@ public class VentanaRegistro extends JFrame {
 	private JTextField textFieldUsuario;
 	private JTextField textFieldClave;
 	private JTextField textFieldRepite;
-	private ProyectoTDS.LogicaNegocio.ControladorAppMusic Controlador;
+	private ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador;
 
 	public VentanaRegistro() {
-		Controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
+		controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 544, 323);
 		this.setTitle("Registro");
@@ -143,7 +143,7 @@ public class VentanaRegistro extends JFrame {
 					else if (usuario.length()==0 || contrasena.length()==0 || 
 							nombre.length()==0 || apellidos.length()==0 || 
 							fechaNacimiento.length()<0 || email.length()==0) JOptionPane.showMessageDialog (null, "Todos los campos deben ser rellenados", "Error!", JOptionPane.ERROR_MESSAGE);
-					else if (!Controlador.RegistroUsuario(usuario, contrasena, repite, nombre, apellidos, fechaNacimiento, email)) {
+					else if (!controlador.RegistroUsuario(usuario, contrasena, repite, nombre, apellidos, fechaNacimiento, email)) {
 						JOptionPane.showMessageDialog (null, "Este usuario/email ya esta registrado, el usuario no se ha creado", "Error!", JOptionPane.ERROR_MESSAGE);
 					}
 					else {

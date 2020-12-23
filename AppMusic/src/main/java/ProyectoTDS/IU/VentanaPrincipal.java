@@ -43,12 +43,12 @@ import javax.swing.ScrollPaneConstants;
 public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
-	private ProyectoTDS.LogicaNegocio.ControladorAppMusic Controlador;
+	private ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador;
 	
 	
 	public VentanaPrincipal() {
 		setTitle("Ventana principal");
-		Controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
+		controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 749, 570);
@@ -115,7 +115,7 @@ public class VentanaPrincipal extends JFrame {
 		btnLogout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Controlador.logout();
+				controlador.logout();
 				abrirVentanaLogin();
 				dispose();
 				
@@ -125,7 +125,7 @@ public class VentanaPrincipal extends JFrame {
 		btnLogout.setBounds(625, 11, 98, 37);
 		contentPane.add(btnLogout);
 		
-		JLabel lblUsuario = new JLabel("Hola " + Controlador.getUsuarioActivo() + "!");
+		JLabel lblUsuario = new JLabel("Hola " + controlador.getUsuarioActivo() + "!");
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblUsuario.setBounds(106, 19, 293, 19);
 		contentPane.add(lblUsuario);

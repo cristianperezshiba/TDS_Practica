@@ -7,16 +7,14 @@ import ProyectoTDS.Persistencia.FactoriaDAO;
 import ProyectoTDS.Persistencia.IAdaptadorUsuarioDAO;
 
 
-public class CatalogoUsuarios {
-
-	//Usar patron singleton �?
+public enum CatalogoUsuarios {
+	INSTANCE;
 	private Set<Usuario> listaUsuarios;
 	private IAdaptadorUsuarioDAO adaptadorUsuario;
 	
 		
 	
-	public CatalogoUsuarios() {
-		super();
+	 CatalogoUsuarios() {
 		inicializarAdaptador();
 		this.listaUsuarios = new LinkedHashSet<Usuario>();
 	}

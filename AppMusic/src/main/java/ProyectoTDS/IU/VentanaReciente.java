@@ -35,11 +35,11 @@ import javax.swing.ScrollPaneConstants;
 public class VentanaReciente extends JFrame {
 
 	private JPanel contentPane;
-	private ProyectoTDS.LogicaNegocio.ControladorAppMusic Controlador;
+	private ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador;
 
 	public VentanaReciente() {
 		setTitle("Ventana reciente");
-		Controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
+		controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 749, 437);
@@ -98,7 +98,7 @@ public class VentanaReciente extends JFrame {
 		btnLogout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Controlador.logout();
+				controlador.logout();
 				abrirVentanaLogin();
 				dispose();
 
@@ -108,7 +108,7 @@ public class VentanaReciente extends JFrame {
 		btnLogout.setBounds(625, 11, 98, 37);
 		contentPane.add(btnLogout);
 
-		JLabel lblUsuario = new JLabel("Hola " + Controlador.getUsuarioActivo() + "!");
+		JLabel lblUsuario = new JLabel("Hola " + controlador.getUsuarioActivo() + "!");
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblUsuario.setBounds(106, 19, 293, 19);
 		contentPane.add(lblUsuario);
@@ -132,7 +132,7 @@ public class VentanaReciente extends JFrame {
 					int[] selectedRow = table.getSelectedRows();
 					nombre = (String) table.getValueAt(selectedRow[0], 0);
 					artista = (String) table.getValueAt(selectedRow[0], 1);
-					Controlador.ReproducirCancion(nombre, artista);
+					controlador.ReproducirCancion(nombre, artista);
 				}
 			}
 		});
@@ -155,7 +155,7 @@ public class VentanaReciente extends JFrame {
 				int[] selectedRow = table.getSelectedRows();
 				nombre = (String) table.getValueAt(selectedRow[0], 0);
 				artista = (String) table.getValueAt(selectedRow[0], 1);
-				Controlador.ReproducirCancion(nombre, artista);
+				controlador.ReproducirCancion(nombre, artista);
 
 			}
 		});
@@ -166,7 +166,7 @@ public class VentanaReciente extends JFrame {
 		btnPause.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Controlador.pausarCancion();
+				controlador.pausarCancion();
 			}
 		});
 
@@ -187,7 +187,7 @@ public class VentanaReciente extends JFrame {
 				table.setRowSelectionInterval((selectedRow[0] - 1) % numFilas, (selectedRow[0] - 1) % numFilas);
 				nombre = (String) table.getValueAt((selectedRow[0] - 1) % numFilas, 0);
 				artista = (String) table.getValueAt((selectedRow[0] - 1) % numFilas, 1);
-				Controlador.ReproducirCancion(nombre, artista);
+				controlador.ReproducirCancion(nombre, artista);
 			}
 		});
 		btnCancionAnterior.setBounds(380, 340, 53, 35);
@@ -207,7 +207,7 @@ public class VentanaReciente extends JFrame {
 				table.setRowSelectionInterval((selectedRow[0] + 1) % numFilas, (selectedRow[0] + 1) % numFilas);
 				nombre = (String) table.getValueAt((selectedRow[0] + 1) % numFilas, 0);
 				artista = (String) table.getValueAt((selectedRow[0] + 1) % numFilas, 1);
-				Controlador.ReproducirCancion(nombre, artista);
+				controlador.ReproducirCancion(nombre, artista);
 			}
 		});
 		btnCancionSiguiente.setBounds(519, 340, 53, 35);
@@ -268,7 +268,7 @@ public class VentanaReciente extends JFrame {
 	}
 
 	private void cargarCancionesRecientesTabla(JTable table, JScrollPane scrollPane) {
-		ArrayList<List<String>> cancionesEncontradas = Controlador.getCancionesRecientes();
+		ArrayList<List<String>> cancionesEncontradas = controlador.getCancionesRecientes();
 		List<String> listaTitulos = cancionesEncontradas.get(0);
 		List<String> listaInterpretes = cancionesEncontradas.get(1);
 

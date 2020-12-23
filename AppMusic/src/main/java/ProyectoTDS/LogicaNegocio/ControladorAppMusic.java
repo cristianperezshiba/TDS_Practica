@@ -16,16 +16,16 @@ public enum ControladorAppMusic {
 	
 	private CatalogoCanciones catalogoCanciones;
 	private CatalogoUsuarios catalogoUsuarios;
-	private LinkedList<Cancion> CancionesMasReproducidas; 
-	private Usuario UsuarioActivo;  //Variable que contendra  el usuario activo
+	private LinkedList<Cancion> cancionesMasReproducidas; 
+	private Usuario usuarioActivo;  //Variable que contendra  el usuario activo
 	
 
 
 	private ControladorAppMusic() {
 		this.catalogoCanciones = new CatalogoCanciones();
 		this.catalogoUsuarios = new CatalogoUsuarios();
-		this.CancionesMasReproducidas = new LinkedList<Cancion>();
-		this.UsuarioActivo = null;
+		this.cancionesMasReproducidas = new LinkedList<Cancion>();
+		this.usuarioActivo = null;
 	}
 	
 
@@ -39,21 +39,21 @@ public enum ControladorAppMusic {
 	}
 
 	public String getUsuarioActivo() {
-		return UsuarioActivo.getUsuario();
+		return usuarioActivo.getUsuario();
 	}
 
-	public void setUsuarioActivo(Usuario usuarioActivo) {
-		UsuarioActivo = usuarioActivo;
+	public void setUsuarioActivo(Usuario nuevoUsuarioActivo) {
+		this.usuarioActivo = nuevoUsuarioActivo;
 	}
 	
 	public void logout() {
-		UsuarioActivo = null;
+		usuarioActivo = null;
 		//Hay que hacer algo mas¿?¿?¿?¿?¿? Supongo que si
 	}
 	
 	public boolean comprobarLoginUsuario(String usuario, String password) {
 		if (this.catalogoUsuarios.loginUsuario(usuario, password)){
-			UsuarioActivo = this.catalogoUsuarios.buscarObjetoUsuario(usuario);
+			usuarioActivo = this.catalogoUsuarios.buscarObjetoUsuario(usuario);
 			return true;
 		}
 		else return false;
@@ -79,12 +79,12 @@ public enum ControladorAppMusic {
 	};
 	
 	public Set<String> cargarMisListas(){
-		return UsuarioActivo.getNombrePlaylists();
+		return usuarioActivo.getNombrePlaylists();
 	}
 	
 	
 	public ArrayList<List<String>> getCancionesLista(String lista) {
-		Set<Cancion> canciones = new LinkedHashSet<Cancion>(UsuarioActivo.getCancionesPlaylist(lista));
+		Set<Cancion> canciones = new LinkedHashSet<Cancion>(usuarioActivo.getCancionesPlaylist(lista));
 		ArrayList<List<String>> ArrayConLasDosListas = new ArrayList<>();
 		List<String> listaTitulos = new ArrayList<String>();
 		List<String> listaInterpretes = new ArrayList<String>();
@@ -99,28 +99,28 @@ public enum ControladorAppMusic {
 	};
 	
 	public boolean crearPlaylist(String nombre) {
-		return UsuarioActivo.crearNuevaPlaylist(nombre);
+		return usuarioActivo.crearNuevaPlaylist(nombre);
 	}
 	
 	public boolean  insertarCancionEnPlaylist(String playlist, String nombreCancion, String interprete) {
 		Cancion cancion = catalogoCanciones.buscarCancion(nombreCancion, interprete);
 		if (cancion == null) return false;
-		return UsuarioActivo.añadirCancionAPlaylist(playlist, cancion);
+		return usuarioActivo.añadirCancionAPlaylist(playlist, cancion);
 	}
 	
 	public boolean borrarCancionDePlaylist(String playlist,String  cancion,String  interprete) {
 		Cancion cancionAborrar = catalogoCanciones.buscarCancion(cancion, interprete);
 		if (cancion == null) return false;
-		return UsuarioActivo.borrarCancionDePlaylist(playlist, cancionAborrar);
+		return usuarioActivo.borrarCancionDePlaylist(playlist, cancionAborrar);
 	}
 
 	public boolean eliminarPlaylist(String nombre) {
-		return UsuarioActivo.eliminarPlaylist(nombre);
+		return usuarioActivo.eliminarPlaylist(nombre);
 	}
 	
 	
 	public void ReproducirCancion(String nombre, String artista) {
-		catalogoCanciones.ReproducirCancion(nombre, artista, UsuarioActivo);
+		catalogoCanciones.ReproducirCancion(nombre, artista, usuarioActivo);
 	}
 	
 	public void pausarCancion() {
@@ -128,7 +128,7 @@ public enum ControladorAppMusic {
 	}
 	
 	public ArrayList<List<String>> getCancionesRecientes() {
-		Set<Cancion> canciones = new LinkedHashSet<Cancion>(UsuarioActivo.getCancionesRecientes());
+		Set<Cancion> canciones = new LinkedHashSet<Cancion>(usuarioActivo.getCancionesRecientes());
 		ArrayList<List<String>> ArrayConLasDosListas = new ArrayList<>();
 		List<String> listaTitulos = new ArrayList<String>();
 		List<String> listaInterpretes = new ArrayList<String>();
@@ -144,7 +144,7 @@ public enum ControladorAppMusic {
 	
 	public void generarPdf() {
 		try {
-			UsuarioActivo.crearPDF();
+			usuarioActivo.crearPDF();
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
