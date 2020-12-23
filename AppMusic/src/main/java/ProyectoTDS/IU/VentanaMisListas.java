@@ -42,13 +42,13 @@ import javax.swing.SwingConstants;
 public class VentanaMisListas extends JFrame {
 
 	private JPanel contentPane;
-	private ProyectoTDS.Controlador.Controlador Controlador;
+	private ProyectoTDS.LogicaNegocio.ControladorAppMusic Controlador;
 	private JTable table_listas;
 	
 	
 	public VentanaMisListas() {
 		setTitle("Ventana mis listas");
-		Controlador = Controlador.getUnicaInstancia();
+		Controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 749, 570);

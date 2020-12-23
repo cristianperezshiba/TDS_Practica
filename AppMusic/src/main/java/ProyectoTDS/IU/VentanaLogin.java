@@ -29,13 +29,13 @@ public class VentanaLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField textFieldUsuario;
 	private JTextField textFieldContrasena;
-	private ProyectoTDS.Controlador.Controlador Controlador;
+	private ProyectoTDS.LogicaNegocio.ControladorAppMusic Controlador;
 
 	/**
 	 * Create the frame.
 	 */
 	public VentanaLogin() {
-		this.Controlador = Controlador.getUnicaInstancia();
+		this.Controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 		/////////////////////////////////////////////////////////
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

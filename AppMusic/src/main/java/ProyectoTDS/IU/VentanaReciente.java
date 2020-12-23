@@ -35,11 +35,11 @@ import javax.swing.ScrollPaneConstants;
 public class VentanaReciente extends JFrame {
 
 	private JPanel contentPane;
-	private ProyectoTDS.Controlador.Controlador Controlador;
+	private ProyectoTDS.LogicaNegocio.ControladorAppMusic Controlador;
 
 	public VentanaReciente() {
 		setTitle("Ventana reciente");
-		Controlador = Controlador.getUnicaInstancia();
+		Controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 749, 437);

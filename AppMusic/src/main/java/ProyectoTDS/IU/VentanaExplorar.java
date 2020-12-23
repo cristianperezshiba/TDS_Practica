@@ -37,13 +37,13 @@ public class VentanaExplorar extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtInterprete;
 	private JTextField textTitulo;
-	private ProyectoTDS.Controlador.Controlador Controlador;
+	private ProyectoTDS.LogicaNegocio.ControladorAppMusic Controlador;
 	private JComboBox comboBoxEstilo = new JComboBox();
 	
 	
 	public VentanaExplorar() {
 		setTitle("Ventana explorar");
-		Controlador = Controlador.getUnicaInstancia();
+		Controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 749, 570);

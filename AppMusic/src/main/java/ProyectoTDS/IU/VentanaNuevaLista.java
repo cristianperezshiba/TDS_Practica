@@ -40,7 +40,7 @@ import javax.swing.ScrollPaneConstants;
 public class VentanaNuevaLista extends JFrame {
 
 	private JPanel contentPane;
-	private ProyectoTDS.Controlador.Controlador Controlador;
+	private ProyectoTDS.LogicaNegocio.ControladorAppMusic Controlador;
 	private JTable tableIzq;
 	private JTable tableDcha;
 	private JTextField textFieldNombrePlaylist;
@@ -49,7 +49,7 @@ public class VentanaNuevaLista extends JFrame {
 	
 	public VentanaNuevaLista() {
 		setTitle("Ventana nueva lista");
-		Controlador = Controlador.getUnicaInstancia();
+		Controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1073, 569);

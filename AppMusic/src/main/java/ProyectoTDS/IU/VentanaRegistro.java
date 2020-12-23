@@ -26,10 +26,10 @@ public class VentanaRegistro extends JFrame {
 	private JTextField textFieldUsuario;
 	private JTextField textFieldClave;
 	private JTextField textFieldRepite;
-	private ProyectoTDS.Controlador.Controlador Controlador;
+	private ProyectoTDS.LogicaNegocio.ControladorAppMusic Controlador;
 
 	public VentanaRegistro() {
-		Controlador = Controlador.getUnicaInstancia();
+		Controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 544, 323);
 		this.setTitle("Registro");

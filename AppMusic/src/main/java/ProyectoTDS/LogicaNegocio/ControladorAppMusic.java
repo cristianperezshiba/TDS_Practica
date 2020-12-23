@@ -8,12 +8,11 @@ import java.util.Set;
 
 import com.itextpdf.text.DocumentException;
 
-public class AppMusic {
+public enum ControladorAppMusic {
+	INSTANCE;
 	//Usamos patron singleton
-	private static AppMusic AppMusic = null;
 	
 	// TODO: private controlador?? Tiene referencia a controlador o no ??
-	
 	
 	private CatalogoCanciones catalogoCanciones;
 	private CatalogoUsuarios catalogoUsuarios;
@@ -22,20 +21,14 @@ public class AppMusic {
 	
 
 
-	private AppMusic() {
-		super();
+	private ControladorAppMusic() {
 		this.catalogoCanciones = new CatalogoCanciones();
 		this.catalogoUsuarios = new CatalogoUsuarios();
 		this.CancionesMasReproducidas = new LinkedList<Cancion>();
 		this.UsuarioActivo = null;
 	}
 	
-	public static AppMusic getUnicaInstancia() {
-		if (AppMusic == null) {
-			AppMusic = new AppMusic();
-		}
-		return AppMusic;
-	}
+
 
 	public CatalogoCanciones getCatalogoCanciones() {
 		return catalogoCanciones;
