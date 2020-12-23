@@ -60,7 +60,8 @@ public enum ControladorAppMusic {
 	};
 	
 	public boolean RegistroUsuario(String usuario, String contrasena, String repite, String nombre, String apellidos, String fechaNacimiento, String email) {
-		return this.catalogoUsuarios.registrarUsuario(usuario, contrasena, repite, nombre, apellidos, fechaNacimiento, email);
+		Usuario nuevoUsuario = new Usuario(usuario, contrasena, nombre, apellidos, fechaNacimiento, email);
+		return this.catalogoUsuarios.registrarUsuario(nuevoUsuario);
 	};
 	
 	public ArrayList<List<String>> buscarCanciones(String Titulo ,String Interprete,String  Estilo) {
