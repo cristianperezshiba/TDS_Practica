@@ -48,6 +48,13 @@ public enum ControladorAppMusic {
 		this.usuarioActivo = nuevoUsuarioActivo;
 	}
 	
+	public boolean isUsuarioActivoPremium() {
+		return usuarioActivo.isPremium();
+	}
+	
+	public void setUsuarioActivoPremium() {
+		usuarioActivo.setPremium(true);
+	}
 	public void logout() {
 		usuarioActivo = null;
 		//Hay que hacer algo mas¿?¿?¿?¿?¿? Supongo que si

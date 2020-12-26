@@ -104,6 +104,12 @@ public class VentanaMisListas extends JFrame {
 		
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
 		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnMejoraCuenta.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controlador.setUsuarioActivoPremium();
+			}
+		});
 		btnMejoraCuenta.setBounds(433, 11, 167, 37);
 		contentPane.add(btnMejoraCuenta);
 
@@ -302,16 +308,24 @@ public class VentanaMisListas extends JFrame {
 		btnCancionSiguiente.setBounds(516, 433, 53, 35);
 		contentPane.add(btnCancionSiguiente);
 		
-		JButton btnPdf = new JButton("PDF");
+		JButton btnPdf = new JButton("Generar PDF");
+		btnPdf.setEnabled(false);
 		btnPdf.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				controlador.generarPdf();
 			}
 		});
-		btnPdf.setBounds(608, 453, 98, 67);
+		btnPdf.setBounds(608, 470, 98, 50);
 		contentPane.add(btnPdf);
 		
+		JLabel lblTipoCuenta = new JLabel("Tipo de cuenta actual: Basica");
+		if (controlador.isUsuarioActivoPremium()) lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
+		lblTipoCuenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTipoCuenta.setBounds(433, 55, 213, 14);
+		contentPane.add(lblTipoCuenta);
+		
+		if (controlador.isUsuarioActivoPremium()) btnPdf.setEnabled(true);
 		
 	}
 	

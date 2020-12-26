@@ -92,6 +92,12 @@ public class VentanaReciente extends JFrame {
 
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
 		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnMejoraCuenta.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controlador.setUsuarioActivoPremium();			
+			}
+		});
 		btnMejoraCuenta.setBounds(433, 11, 167, 37);
 		contentPane.add(btnMejoraCuenta);
 
@@ -216,6 +222,12 @@ public class VentanaReciente extends JFrame {
 		});
 		btnCancionSiguiente.setBounds(519, 340, 53, 35);
 		contentPane.add(btnCancionSiguiente);
+		
+		JLabel lblTipoCuenta = new JLabel("Tipo de cuenta actual: Basica");
+		if (controlador.isUsuarioActivoPremium()) lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
+		lblTipoCuenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTipoCuenta.setBounds(418, 59, 216, 14);
+		contentPane.add(lblTipoCuenta);
 
 	}
 
