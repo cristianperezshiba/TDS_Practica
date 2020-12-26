@@ -330,7 +330,7 @@ public class VentanaReciente extends JFrame {
 	}
 	
 	private void cargarCancionesMasReproducidas(JTable table, JScrollPane scrollPane) {
-		Set<Cancion> cancionesMasReproducidas = controlador.getCancionesMasReproducidasAppMusic();
+		List<Cancion> cancionesMasReproducidas = controlador.getCancionesMasReproducidasAppMusic();
 		List<String> listaTitulos = new LinkedList<String>();
 		List<String> listaInterpretes = new LinkedList<String>();
 		

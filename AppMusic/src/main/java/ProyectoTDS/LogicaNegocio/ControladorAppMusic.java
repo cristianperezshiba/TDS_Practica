@@ -159,7 +159,7 @@ public enum ControladorAppMusic {
 		}
 	}
 	
-	public Set<Cancion> getCancionesMasReproducidasAppMusic(){
+	public List<Cancion> getCancionesMasReproducidasAppMusic(){
 		return catalogoCanciones.getCancionesMasReproducidasAppMusic();
 	}
 	

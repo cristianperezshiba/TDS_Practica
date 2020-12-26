@@ -2,10 +2,12 @@ package ProyectoTDS.LogicaNegocio;
 import static java.util.stream.Collectors.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.PortUnreachableException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Pattern;
+
 
 public enum CatalogoCanciones {
 	INSTANCE;
@@ -72,14 +74,17 @@ public enum CatalogoCanciones {
 	} 
 	
 
-	public Set<Cancion> getCancionesMasReproducidasAppMusic(){
+	public List<Cancion> getCancionesMasReproducidasAppMusic(){
 		
-		Set<Cancion> S = listaCanciones.stream()
-							 .sorted((c1, c2) -> Integer.compare(c2.getNumReproducciones(), c1.getNumReproducciones()))
+		List<Cancion> S = listaCanciones.stream()
+							 .filter(c -> c.getNumReproducciones() > 0)
+							 .sorted(Comparator.comparingInt(Cancion::getNumReproducciones).reversed())
 							 .limit(10)
-							 .collect(toSet());
+							 .collect(toList());
 		
-		S.stream().forEachOrdered(c -> System.out.println(c.getTitulo() + "  " + c.getNumReproducciones()));
+		/*for (Cancion c : S) {
+			System.out.println(c.getNumReproducciones() + "  " + c.getTitulo() + " " + c.getInterprete().getNombre());
+		}*/
 		
 		return S;
 							
