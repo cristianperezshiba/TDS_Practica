@@ -23,6 +23,7 @@ public class Usuario {
 	private String email;
 	private boolean premium;
 	private Set<ListaCanciones> playlists;
+	private Descuento descuentoActivo;
 
 	private List<Cancion> cancionesRecientes;
 
@@ -42,6 +43,7 @@ public class Usuario {
 		this.premium = false;
 		this.playlists = new LinkedHashSet<ListaCanciones>();
 		this.cancionesRecientes = new LinkedList<Cancion>();
+		this.descuentoActivo = null;
 	}
 	
 	public void setCodigo(int codigo) {
@@ -112,6 +114,14 @@ public class Usuario {
 	
 	public Set<ListaCanciones> getPlaylists(){
 		return this.playlists;
+	}
+	
+	public Descuento getDescuentoActivo() {
+		return descuentoActivo;
+	}
+	
+	public void setDescuentoActivo(Descuento d) {
+		this.descuentoActivo = d;
 	}
 
 	public Set<String> getNombrePlaylists() {

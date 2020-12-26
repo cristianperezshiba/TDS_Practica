@@ -2,10 +2,12 @@ package ProyectoTDS.LogicaNegocio;
 import static java.util.stream.Collectors.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.PortUnreachableException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Pattern;
+
 
 public enum CatalogoCanciones {
 	INSTANCE;
@@ -72,27 +74,21 @@ public enum CatalogoCanciones {
 	} 
 	
 
-	/*
-	//Busqueda en la lista de canciones por estilo musical
-	public List<Cancion> buscarCancionPorEstilo(EstiloMusical e){
-		return listaCanciones.stream()
-			.filter(c -> c.getEstilo() == e)
-			.collect(toList());
+	public List<Cancion> getCancionesMasReproducidasAppMusic(){
+		
+		List<Cancion> S = listaCanciones.stream()
+							 .filter(c -> c.getNumReproducciones() > 0)
+							 .sorted(Comparator.comparingInt(Cancion::getNumReproducciones).reversed())
+							 .limit(10)
+							 .collect(toList());
+		
+		/*for (Cancion c : S) {
+			System.out.println(c.getNumReproducciones() + "  " + c.getTitulo() + " " + c.getInterprete().getNombre());
+		}*/
+		
+		return S;
+							
 	}
-	
-	//Busqueda en la lista de canciones por titulo (subcadena)
-	public List<Cancion> buscarCancionPorTitulo(String titulo){
-		return listaCanciones.stream()
-			.filter(c -> c.getInterprete().getNombre().contains(titulo))
-			.collect(toList());
-	}
-	
-	//Busqueda en la lista de canciones por autor (subcadena)
-	public List<Cancion> buscarCancionPorAutor(String autor){
-		return listaCanciones.stream()
-			.filter(c -> c.getTitulo().contains(autor))
-			.collect(toList());
-	}*/
 	
 	
 	

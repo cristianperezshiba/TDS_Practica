@@ -62,8 +62,12 @@ public class Cancion {
 		this.rutaFichero = rutaFichero;
 	}
 	
-	public int numReproducciones() {
+	public int getNumReproducciones() {
 		return numReproducciones;
+	}
+	
+	public void sumarReproduccionCancion() {
+		numReproducciones++;
 	}
 
 

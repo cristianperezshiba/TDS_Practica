@@ -142,12 +142,20 @@ public class VentanaNuevaLista extends JFrame {
 		btnMisListas.setBounds(39, 228, 117, 44);
 		panelLeft.add(btnMisListas);
 		
+		JLabel lblTipoCuenta = new JLabel("Tipo de cuenta actual: Basica");
+		if (controlador.isUsuarioActivoPremium()) lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
+		lblTipoCuenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTipoCuenta.setBounds(469, 23, 215, 14);
+		contentPane.add(lblTipoCuenta);
+		
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
 		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnMejoraCuenta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				abrirVentanaDescuentos();
 				controlador.setUsuarioActivoPremium();
+				lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
 			}
 		});
 		btnMejoraCuenta.setBounds(700, 11, 167, 37);
@@ -362,11 +370,7 @@ public class VentanaNuevaLista extends JFrame {
 		btnCancelar.setBounds(637, 449, 136, 40);
 		contentPane.add(btnCancelar);
 		
-		JLabel lblTipoCuenta = new JLabel("Tipo de cuenta actual: Basica");
-		if (controlador.isUsuarioActivoPremium()) lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
-		lblTipoCuenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblTipoCuenta.setBounds(469, 23, 215, 14);
-		contentPane.add(lblTipoCuenta);
+		
 	    ListSelectionModel cellSelectionModel = table_listas.getSelectionModel();
 	    cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -497,6 +501,19 @@ public class VentanaNuevaLista extends JFrame {
 			public void run() {
 				try {
 					VentanaReciente frame = new VentanaReciente();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	private void abrirVentanaDescuentos() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VentanaDescuentos frame = new VentanaDescuentos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

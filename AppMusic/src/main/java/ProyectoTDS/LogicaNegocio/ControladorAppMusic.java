@@ -16,7 +16,6 @@ public enum ControladorAppMusic {
 	
 	private CatalogoCanciones catalogoCanciones;
 	private CatalogoUsuarios catalogoUsuarios;
-	private LinkedList<Cancion> cancionesMasReproducidas; 
 	private Usuario usuarioActivo;  //Variable que contendra  el usuario activo
 	
 
@@ -24,7 +23,6 @@ public enum ControladorAppMusic {
 	private ControladorAppMusic() {
 		this.catalogoCanciones = CatalogoCanciones.INSTANCE;
 		this.catalogoUsuarios = CatalogoUsuarios.INSTANCE;
-		this.cancionesMasReproducidas = new LinkedList<Cancion>();
 		this.usuarioActivo = null;
 	}
 	
@@ -160,6 +158,20 @@ public enum ControladorAppMusic {
 			e.printStackTrace();
 		}
 	}
+	
+	public List<Cancion> getCancionesMasReproducidasAppMusic(){
+		return catalogoCanciones.getCancionesMasReproducidasAppMusic();
+	}
+	
+	public Descuento getDescuentoActivo() {
+		return usuarioActivo.getDescuentoActivo();
+	}
+	
+	public void setDescuentoActivo(Descuento d) {
+		usuarioActivo.setDescuentoActivo(d);
+	}
+	
+	
 	
 
 }

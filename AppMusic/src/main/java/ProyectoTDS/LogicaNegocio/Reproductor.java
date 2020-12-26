@@ -22,7 +22,7 @@ public enum Reproductor {
 			System.out.println("Exception: " + ex.getMessage());
 			 }
 		
-		
+			cancion.sumarReproduccionCancion();
 			// reproducir una canción
 			String fileName = cancion.getRutaFichero();
 			String pathLocal = System.getProperty("user.dir");

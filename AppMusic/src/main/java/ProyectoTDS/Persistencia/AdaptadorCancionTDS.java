@@ -43,7 +43,7 @@ public class AdaptadorCancionTDS implements IAdaptadorCancionDAO{
 		eCancion.setPropiedades(new ArrayList<Propiedad>(
 				Arrays.asList(new Propiedad("titulo", cancion.getTitulo()), new Propiedad("interprete", cancion.getInterprete().getNombre()), 
 						new Propiedad("estilo", cancion.getEstilo().toString()), new Propiedad("rutaFichero", cancion.getRutaFichero()), 
-						new Propiedad("numReproducciones", String.valueOf(cancion.numReproducciones())))));
+						new Propiedad("numReproducciones", String.valueOf(cancion.getNumReproducciones())))));
 		
 		// registrar entidad producto
 		eCancion = servPersistencia.registrarEntidad(eCancion);
