@@ -16,6 +16,8 @@ import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,6 +45,7 @@ public class VentanaReciente extends JFrame {
 	private ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador;
 
 	public VentanaReciente() {
+		JButton btnCancionesMasReproducidas = new JButton("Top 10 Hits de AppMusic");
 		setTitle("Ventana reciente");
 		controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 
@@ -93,12 +96,23 @@ public class VentanaReciente extends JFrame {
 		btnMisListas.setBounds(39, 228, 117, 44);
 		panelLeft.add(btnMisListas);
 
+		JLabel lblTipoCuenta = new JLabel("Tipo de cuenta actual: Basica");
+		if (controlador.isUsuarioActivoPremium()) lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
+		lblTipoCuenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTipoCuenta.setBounds(418, 59, 216, 14);
+		contentPane.add(lblTipoCuenta);
+		
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
 		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnMejoraCuenta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				controlador.setUsuarioActivoPremium();			
+				abrirVentanaDescuentos();
+				controlador.setUsuarioActivoPremium();	
+				lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
+				btnCancionesMasReproducidas.setEnabled(true);
+				
+				
 			}
 		});
 		btnMejoraCuenta.setBounds(433, 11, 167, 37);
@@ -226,13 +240,8 @@ public class VentanaReciente extends JFrame {
 		btnCancionSiguiente.setBounds(463, 340, 53, 35);
 		contentPane.add(btnCancionSiguiente);
 		
-		JLabel lblTipoCuenta = new JLabel("Tipo de cuenta actual: Basica");
-		if (controlador.isUsuarioActivoPremium()) lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
-		lblTipoCuenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblTipoCuenta.setBounds(418, 59, 216, 14);
-		contentPane.add(lblTipoCuenta);
 		
-		JButton btnCancionesMasReproducidas = new JButton("Top 10 Hits de AppMusic");
+		
 		btnCancionesMasReproducidas.setEnabled(false);
 		if (controlador.isUsuarioActivoPremium()) btnCancionesMasReproducidas.setEnabled(true);
 		btnCancionesMasReproducidas.addActionListener(new ActionListener() {
@@ -360,5 +369,18 @@ public class VentanaReciente extends JFrame {
 		}
 		table.setModel(tableMode);
 		scrollPane.setVisible(true);
+	}
+	
+	private void abrirVentanaDescuentos() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VentanaDescuentos frame = new VentanaDescuentos();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }

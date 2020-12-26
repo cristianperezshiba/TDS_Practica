@@ -24,6 +24,8 @@ import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -110,7 +112,8 @@ public class VentanaPrincipal extends JFrame {
 		btnMejoraCuenta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				controlador.setUsuarioActivoPremium();	
+				abrirVentanaDescuentos();
+				controlador.setUsuarioActivoPremium();
 				
 			}
 		});
@@ -220,6 +223,19 @@ public class VentanaPrincipal extends JFrame {
 			public void run() {
 				try {
 					VentanaReciente frame = new VentanaReciente();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	private void abrirVentanaDescuentos() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VentanaDescuentos frame = new VentanaDescuentos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -18,6 +18,8 @@ import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,6 +53,8 @@ public class VentanaMisListas extends JFrame {
 	public VentanaMisListas() {
 		setTitle("Ventana mis listas");
 		controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
+		
+		JButton btnPdf = new JButton("Generar PDF");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 749, 570);
@@ -100,14 +104,21 @@ public class VentanaMisListas extends JFrame {
 		
 		
 		
-		
+		JLabel lblTipoCuenta = new JLabel("Tipo de cuenta actual: Basica");
+		if (controlador.isUsuarioActivoPremium()) lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
+		lblTipoCuenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTipoCuenta.setBounds(433, 55, 213, 14);
+		contentPane.add(lblTipoCuenta);
 		
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
 		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnMejoraCuenta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				abrirVentanaDescuentos();
 				controlador.setUsuarioActivoPremium();
+				lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
+				btnPdf.setEnabled(true);
 			}
 		});
 		btnMejoraCuenta.setBounds(433, 11, 167, 37);
@@ -308,7 +319,7 @@ public class VentanaMisListas extends JFrame {
 		btnCancionSiguiente.setBounds(516, 433, 53, 35);
 		contentPane.add(btnCancionSiguiente);
 		
-		JButton btnPdf = new JButton("Generar PDF");
+		
 		btnPdf.setEnabled(false);
 		btnPdf.addActionListener(new ActionListener() {
 			@Override
@@ -316,14 +327,10 @@ public class VentanaMisListas extends JFrame {
 				controlador.generarPdf();
 			}
 		});
-		btnPdf.setBounds(608, 470, 98, 50);
+		btnPdf.setBounds(596, 470, 110, 50);
 		contentPane.add(btnPdf);
 		
-		JLabel lblTipoCuenta = new JLabel("Tipo de cuenta actual: Basica");
-		if (controlador.isUsuarioActivoPremium()) lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
-		lblTipoCuenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblTipoCuenta.setBounds(433, 55, 213, 14);
-		contentPane.add(lblTipoCuenta);
+		
 		
 		if (controlador.isUsuarioActivoPremium()) btnPdf.setEnabled(true);
 		
@@ -375,6 +382,19 @@ public class VentanaMisListas extends JFrame {
 			public void run() {
 				try {
 					VentanaReciente frame = new VentanaReciente();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	private void abrirVentanaDescuentos() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VentanaDescuentos frame = new VentanaDescuentos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

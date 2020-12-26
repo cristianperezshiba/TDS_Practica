@@ -16,6 +16,8 @@ import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -121,13 +123,20 @@ public class VentanaExplorar extends JFrame {
 		contentPane.add(txtInterprete);
 		txtInterprete.setColumns(10);
 		
+		JLabel lblTipoCuenta = new JLabel("Tipo de cuenta actual: Basica");
+		if (controlador.isUsuarioActivoPremium()) lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
+		lblTipoCuenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTipoCuenta.setBounds(409, 49, 201, 14);
+		contentPane.add(lblTipoCuenta);
+		
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
 		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnMejoraCuenta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				abrirVentanaDescuentos();
 				controlador.setUsuarioActivoPremium();
-				//controlador.getCancionesMasReproducidasAppMusic(); //TODO: QUITAR ESTO, SOLO ES PARA TESTEAR
+				lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
 			}
 		});
 		btnMejoraCuenta.setBounds(433, 11, 167, 37);
@@ -324,11 +333,7 @@ public class VentanaExplorar extends JFrame {
 		btnCancionSiguiente.setBounds(516, 464, 53, 35);
 		contentPane.add(btnCancionSiguiente);
 		
-		JLabel lblTipoCuenta = new JLabel("Tipo de cuenta actual: Basica");
-		if (controlador.isUsuarioActivoPremium()) lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
-		lblTipoCuenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblTipoCuenta.setBounds(409, 49, 201, 14);
-		contentPane.add(lblTipoCuenta);
+		
 		
 		
 	}
@@ -378,6 +383,19 @@ public class VentanaExplorar extends JFrame {
 			public void run() {
 				try {
 					VentanaReciente frame = new VentanaReciente();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	private void abrirVentanaDescuentos() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VentanaDescuentos frame = new VentanaDescuentos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

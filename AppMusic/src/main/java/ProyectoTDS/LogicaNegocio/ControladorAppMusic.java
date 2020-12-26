@@ -163,5 +163,15 @@ public enum ControladorAppMusic {
 		return catalogoCanciones.getCancionesMasReproducidasAppMusic();
 	}
 	
+	public Descuento getDescuentoActivo() {
+		return usuarioActivo.getDescuentoActivo();
+	}
+	
+	public void setDescuentoActivo(Descuento d) {
+		usuarioActivo.setDescuentoActivo(d);
+	}
+	
+	
+	
 
 }
