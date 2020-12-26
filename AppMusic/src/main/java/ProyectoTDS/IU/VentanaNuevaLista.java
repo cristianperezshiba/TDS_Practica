@@ -75,10 +75,10 @@ public class VentanaNuevaLista extends JFrame {
 		lblInterprete.setBounds(420, 99, 89, 14);
 		contentPane.add(lblInterprete);
 		
-		JLabel lblNewLabel = new JLabel("Titulo:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(250, 99, 46, 14);
-		contentPane.add(lblNewLabel);
+		JLabel lblTitulo = new JLabel("Titulo:");
+		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblTitulo.setBounds(250, 99, 46, 14);
+		contentPane.add(lblTitulo);
 		
 		JLabel lblEstilo = new JLabel("Estilo:");
 		lblEstilo.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -108,6 +108,10 @@ public class VentanaNuevaLista extends JFrame {
 		comboBoxEstilo.addItem("ROCK");
 		comboBoxEstilo.addItem("ROMANTICA");
 		contentPane.add(comboBoxEstilo);
+		
+		
+		JButton btnAceptar = new JButton("Aceptar");
+		JButton btnCancelar = new JButton("Cancelar");
 		
 		JButton btnNuevaLista = new JButton("Nueva lista");
 		btnNuevaLista.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -230,6 +234,23 @@ public class VentanaNuevaLista extends JFrame {
 						cargarCancionesPlaylist(nuevaPlaylist);
 						playlistMostrada = nuevaPlaylist;
 						ultimaPlaylistCreada = nuevaPlaylist;
+						
+						lblInterprete.setVisible(true);
+						lblTitulo.setVisible(true);
+						lblEstilo.setVisible(true);
+						txtInterprete.setVisible(true);
+						textTitulo.setVisible(true);
+						comboBoxEstilo.setVisible(true);
+						tableDcha.setVisible(true);
+						tableIzq.setVisible(true);
+						btnDCHA_IZQ.setVisible(true);
+						btnIZQ_DCHA.setVisible(true);
+						btnBuscar.setVisible(true);
+						btnAceptar.setVisible(true);
+						btnCancelar.setVisible(true);
+						scrollPaneDcha.setVisible(true);
+						scrollPaneIzq.setVisible(true);
+					
 					}
 					
 					else JOptionPane.showMessageDialog(null, "Ya existe una playlist con este nombre", "Error", JOptionPane.ERROR_MESSAGE);
@@ -313,7 +334,7 @@ public class VentanaNuevaLista extends JFrame {
 		
 		table_listas.setCellSelectionEnabled(true);
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		
 		btnAceptar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -324,7 +345,7 @@ public class VentanaNuevaLista extends JFrame {
 		btnAceptar.setBounds(461, 450, 136, 38);
 		contentPane.add(btnAceptar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		
 		btnCancelar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -364,9 +385,22 @@ public class VentanaNuevaLista extends JFrame {
 	    });
 	    
 		
-		
-		
-
+	    lblInterprete.setVisible(false);
+		lblTitulo.setVisible(false);
+		lblEstilo.setVisible(false);
+		txtInterprete.setVisible(false);
+		textTitulo.setVisible(false);
+		comboBoxEstilo.setVisible(false);
+		tableDcha.setVisible(false);
+		tableIzq.setVisible(false);
+		btnDCHA_IZQ.setVisible(false);
+		btnIZQ_DCHA.setVisible(false);
+		btnBuscar.setVisible(false);
+		btnAceptar.setVisible(false);
+		btnCancelar.setVisible(false);
+		scrollPaneDcha.setVisible(false);
+		scrollPaneIzq.setVisible(false);
+	    
 		
 		
 	}
