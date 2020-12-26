@@ -110,7 +110,8 @@ public class VentanaPrincipal extends JFrame {
 		btnMejoraCuenta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				controlador.setUsuarioActivoPremium();		
+				controlador.setUsuarioActivoPremium();	
+				
 			}
 		});
 		btnMejoraCuenta.setBounds(433, 11, 167, 37);

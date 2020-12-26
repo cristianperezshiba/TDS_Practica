@@ -127,6 +127,7 @@ public class VentanaExplorar extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				controlador.setUsuarioActivoPremium();
+				//controlador.getCancionesMasReproducidasAppMusic(); //TODO: QUITAR ESTO, SOLO ES PARA TESTEAR
 			}
 		});
 		btnMejoraCuenta.setBounds(433, 11, 167, 37);
