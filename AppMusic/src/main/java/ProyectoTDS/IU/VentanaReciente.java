@@ -34,6 +34,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.ScrollPaneConstants;
 
+import ProyectoTDS.LogicaNegocio.Cancion;
+import java.util.*;
+
 public class VentanaReciente extends JFrame {
 
 	private JPanel contentPane;
@@ -169,7 +172,7 @@ public class VentanaReciente extends JFrame {
 
 			}
 		});
-		btnPlay.setBounds(443, 314, 66, 37);
+		btnPlay.setBounds(387, 314, 66, 37);
 		contentPane.add(btnPlay);
 
 		JButton btnPause = new JButton("Pause");
@@ -180,7 +183,7 @@ public class VentanaReciente extends JFrame {
 			}
 		});
 
-		btnPause.setBounds(443, 362, 66, 35);
+		btnPause.setBounds(387, 362, 66, 35);
 		contentPane.add(btnPause);
 
 		JButton btnCancionAnterior = new JButton("<<");
@@ -200,7 +203,7 @@ public class VentanaReciente extends JFrame {
 				controlador.ReproducirCancion(nombre, artista);
 			}
 		});
-		btnCancionAnterior.setBounds(380, 340, 53, 35);
+		btnCancionAnterior.setBounds(324, 340, 53, 35);
 		contentPane.add(btnCancionAnterior);
 
 		JButton btnCancionSiguiente = new JButton(">>");
@@ -220,7 +223,7 @@ public class VentanaReciente extends JFrame {
 				controlador.ReproducirCancion(nombre, artista);
 			}
 		});
-		btnCancionSiguiente.setBounds(519, 340, 53, 35);
+		btnCancionSiguiente.setBounds(463, 340, 53, 35);
 		contentPane.add(btnCancionSiguiente);
 		
 		JLabel lblTipoCuenta = new JLabel("Tipo de cuenta actual: Basica");
@@ -228,6 +231,21 @@ public class VentanaReciente extends JFrame {
 		lblTipoCuenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblTipoCuenta.setBounds(418, 59, 216, 14);
 		contentPane.add(lblTipoCuenta);
+		
+		JButton btnCancionesMasReproducidas = new JButton("Top 10 Hits de AppMusic");
+		btnCancionesMasReproducidas.setEnabled(false);
+		if (controlador.isUsuarioActivoPremium()) btnCancionesMasReproducidas.setEnabled(true);
+		btnCancionesMasReproducidas.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				cargarCancionesMasReproducidas(table, scrollPane);
+			}
+		});
+		
+		
+		btnCancionesMasReproducidas.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnCancionesMasReproducidas.setBounds(543, 330, 180, 55);
+		contentPane.add(btnCancionesMasReproducidas);
 
 	}
 
@@ -287,6 +305,39 @@ public class VentanaReciente extends JFrame {
 		ArrayList<List<String>> cancionesEncontradas = controlador.getCancionesRecientes();
 		List<String> listaTitulos = cancionesEncontradas.get(0);
 		List<String> listaInterpretes = cancionesEncontradas.get(1);
+
+		DefaultTableModel tableMode = new DefaultTableModel(null, new String[] { "Titulo", "Interprete" }){
+
+		    /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		       //all cells false
+		       return false;
+		    }
+		};
+		for (int i = 0; i < listaTitulos.size(); i++) {
+			Object[] data = new Object[2];
+			data[0] = listaTitulos.get(i);
+			data[1] = listaInterpretes.get(i);
+			tableMode.addRow(data);
+		}
+		table.setModel(tableMode);
+		scrollPane.setVisible(true);
+	}
+	
+	private void cargarCancionesMasReproducidas(JTable table, JScrollPane scrollPane) {
+		Set<Cancion> cancionesMasReproducidas = controlador.getCancionesMasReproducidasAppMusic();
+		List<String> listaTitulos = new LinkedList<String>();
+		List<String> listaInterpretes = new LinkedList<String>();
+		
+		for (Cancion c : cancionesMasReproducidas) {
+			listaTitulos.add(c.getTitulo());
+			listaInterpretes.add(c.getInterprete().getNombre());
+		}
 
 		DefaultTableModel tableMode = new DefaultTableModel(null, new String[] { "Titulo", "Interprete" }){
 
