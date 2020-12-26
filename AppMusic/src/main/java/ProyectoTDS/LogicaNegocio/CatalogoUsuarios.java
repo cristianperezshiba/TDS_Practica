@@ -1,10 +1,12 @@
 package ProyectoTDS.LogicaNegocio;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import ProyectoTDS.Persistencia.DAOException;
 import ProyectoTDS.Persistencia.FactoriaDAO;
 import ProyectoTDS.Persistencia.IAdaptadorUsuarioDAO;
+
 
 
 public enum CatalogoUsuarios {
@@ -34,8 +36,16 @@ public enum CatalogoUsuarios {
 	public boolean loginUsuario(String usuario, String password) {
 		//Comprobamos si el usuario y el password son correctos mediante un stream
 		//adaptadorUsuario.recuperarUsuario();
+		List<Usuario> todosUsuarios = adaptadorUsuario.recuperarTodosLosUsuarios();
+
+		List<Usuario> usuarioLogin = todosUsuarios.stream()
+				.filter(u -> u.getUsuario().equals(usuario))
+				.collect(Collectors.toList());
 		
-		return listaUsuarios.stream().anyMatch(u -> (usuario.equals(u.getUsuario()) && password.equals(u.getContrasena())));
+		if(usuarioLogin.isEmpty()) return false;
+		else return true;
+
+		//return listaUsuarios.stream().anyMatch(u -> (usuario.equals(u.getUsuario()) && password.equals(u.getContrasena())));
 	}
 	
 	public boolean registrarUsuario(Usuario nuevoUsuario) {
@@ -48,7 +58,12 @@ public enum CatalogoUsuarios {
 	
 	public Usuario buscarObjetoUsuario(String usuario) {
 		//Buscamos el objeto usuario a partir de su String usuario
-		return listaUsuarios.stream().filter(u -> (usuario.equals(u.getUsuario()))).findFirst().get();
+		List<Usuario> todosLosUsuarios = adaptadorUsuario.recuperarTodosLosUsuarios();
+		
+		
+		return todosLosUsuarios.stream()
+				.filter(u -> u.getUsuario().equals(usuario)).findFirst().get();
+		//listaUsuarios.stream().filter(u -> (usuario.equals(u.getUsuario()))).findFirst().get();
 	}
 	
 	

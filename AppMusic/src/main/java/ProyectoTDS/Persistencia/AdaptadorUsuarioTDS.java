@@ -46,7 +46,6 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 		if (existe) return;
 
 		// registrar primero los atributos que son objetos
-		//TODO hacer el registro de las playlists
 		
 		AdaptadorListaCancionesTDS adaptadorListaCanciones = AdaptadorListaCancionesTDS.getUnicaInstancia();
 		for (ListaCanciones lc : usuario.getPlaylists()) {
@@ -60,7 +59,8 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 		eUsuario = new Entidad();
 		eUsuario.setNombre("usuario");
 		eUsuario.setPropiedades(new ArrayList<Propiedad>(
-				Arrays.asList(new Propiedad("usuario", usuario.getUsuario()), new Propiedad("contrasena", usuario.getContrasena()),
+				Arrays.asList(new Propiedad("usuario", usuario.getUsuario()), 
+						new Propiedad("contrasena", usuario.getContrasena()),
 						new Propiedad("nombre", usuario.getNombre()), new Propiedad("apellidos", usuario.getApellidos()), 
 						new Propiedad("fechaNacimiento", usuario.getFechaNacimiento()), new Propiedad("email", usuario.getEmail()),
 						new Propiedad("premium", Boolean.toString(usuario.isPremium())), 
@@ -142,9 +142,9 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 		playlists = obtenerListaCancionesDesdeCodigos(servPersistencia.recuperarPropiedadEntidad(eUsuario, "listaCanciones"));
 		
 		cancionesRecientes = obtenerCancionesRecientesDesdeCodigos(servPersistencia.recuperarPropiedadEntidad(eUsuario, "listaCanciones"));
-		for (Cancion c: cancionesRecientes) {
+		/*for (Cancion c: cancionesRecientes) {
 			persona.nuevaCancionReciente(c);
-		}
+		}*/
 		
 		return persona;
 	}
@@ -152,7 +152,7 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 	@Override
 	public List<Usuario> recuperarTodosLosUsuarios() {
 		List<Usuario> usuarios = new LinkedList<Usuario>();
-		List<Entidad> eUsuarios = servPersistencia.recuperarEntidades("Usuario");
+		List<Entidad> eUsuarios = servPersistencia.recuperarEntidades("usuario");
 		
 		for (Entidad usuario : eUsuarios) {
 			usuarios.add(recuperarUsuario(usuario.getId()));
