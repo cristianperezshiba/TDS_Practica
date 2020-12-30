@@ -84,38 +84,27 @@ public class VentanaExplorar extends JFrame {
 		btnNuevaLista.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNuevaLista.setBounds(39, 93, 117, 44);
 		panelLeft.add(btnNuevaLista);
-		btnNuevaLista.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnNuevaLista.addActionListener(event -> {
 				abrirVentanaNuevaLista();
 				dispose();
-				
-			}
 		});
 		
 		JButton btnReciente = new JButton("Reciente");
 		btnReciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnReciente.setBounds(39, 158, 117, 44);
 		panelLeft.add(btnReciente);
-		btnReciente.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnReciente.addActionListener(event -> {
 				abrirVentanaReciente();
 				dispose();
-			}
 		});
 		
 		JButton btnMisListas = new JButton("Mis listas");
 		btnMisListas.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnMisListas.setBounds(39, 228, 117, 44);
 		panelLeft.add(btnMisListas);
-		btnMisListas.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnMisListas.addActionListener(event -> {
 				abrirVentanaMisListas();
 				dispose();
-			}
 		});
 		
 		txtInterprete = new JTextField();
@@ -131,13 +120,10 @@ public class VentanaExplorar extends JFrame {
 		
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
 		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnMejoraCuenta.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnMejoraCuenta.addActionListener(event -> {
 				abrirVentanaDescuentos();
 				controlador.setUsuarioActivoPremium();
 				lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
-			}
 		});
 		btnMejoraCuenta.setBounds(433, 11, 167, 37);
 		contentPane.add(btnMejoraCuenta);
@@ -161,14 +147,10 @@ public class VentanaExplorar extends JFrame {
 		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLogout.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnLogout.addActionListener(event -> {
 				controlador.logout();
 				abrirVentanaLogin();
 				dispose();
-				
-			}
 		});
 		btnLogout.setBounds(625, 11, 98, 37);
 		contentPane.add(btnLogout);
@@ -220,9 +202,7 @@ public class VentanaExplorar extends JFrame {
 	  
 	  
 	  JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnBuscar.addActionListener(event -> {
 				ArrayList<List<String>> cancionesEncontradas = controlador.buscarCanciones(textTitulo.getText() ,txtInterprete.getText(), comboBoxEstilo.getSelectedItem().toString());
 				List<String> listaTitulos = cancionesEncontradas.get(0);
 				List<String> listaInterpretes = cancionesEncontradas.get(1);
@@ -249,28 +229,21 @@ public class VentanaExplorar extends JFrame {
 				
 				table.setModel(tableMode);
 				scrollPane.setVisible(true);	
-			}
 		});
 		btnBuscar.setBounds(334, 152, 89, 23);
 		contentPane.add(btnBuscar);
 		
 		
 		
-		btnCancelar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnCancelar.addActionListener(event -> {
 				scrollPane.setVisible(false);
-				
-			}
 		});
 		btnCancelar.setBounds(470, 152, 89, 23);
 		
 		contentPane.add(btnCancelar);
 		
 		JButton btnPlay = new JButton("Play");
-		btnPlay.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnPlay.addActionListener(event -> {
 				///////////////////////////////////////////////////////////
 				String nombre = null;
 				String artista = null;
@@ -278,27 +251,20 @@ public class VentanaExplorar extends JFrame {
 		        nombre = (String) table.getValueAt(selectedRow[0], 0);
 		        artista = (String) table.getValueAt(selectedRow[0], 1);
 		        controlador.ReproducirCancion(nombre, artista);
-		    
-			}
 		});
 		btnPlay.setBounds(443, 437, 66, 37);
 		contentPane.add(btnPlay);
 		
 		JButton btnPause = new JButton("Pause");
-		btnPause.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0){
+		btnPause.addActionListener(event -> {
 				controlador.pausarCancion();
-			}
 		});
 		
 		btnPause.setBounds(443, 485, 66, 35);
 		contentPane.add(btnPause);
 		
 		JButton btnCancionAnterior = new JButton("<<");
-		btnCancionAnterior.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent arg0){
+		btnCancionAnterior.addActionListener(event -> {
 				//Coger fila seleccionada y coger la anterior y reproducirla
 				String nombre = null;
 				String artista = null;
@@ -309,15 +275,12 @@ public class VentanaExplorar extends JFrame {
 		        nombre = (String) table.getValueAt((selectedRow[0]-1)%numFilas, 0);
 		        artista = (String) table.getValueAt((selectedRow[0]-1)%numFilas, 1);
 		        controlador.ReproducirCancion(nombre, artista);
-			}
 		});
 		btnCancionAnterior.setBounds(380, 464, 53, 35);
 		contentPane.add(btnCancionAnterior);
 		
 		JButton btnCancionSiguiente = new JButton(">>");
-		btnCancionSiguiente.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnCancionSiguiente.addActionListener(event -> {
 				//Coger fila seleccionada y coger la siguiente y reproducirla
 				String nombre = null;
 				String artista = null;
@@ -328,7 +291,6 @@ public class VentanaExplorar extends JFrame {
 		        nombre = (String) table.getValueAt((selectedRow[0]+1)%numFilas, 0);
 		        artista = (String) table.getValueAt((selectedRow[0]+1)%numFilas, 1);
 		        controlador.ReproducirCancion(nombre, artista);
-			}
 		});
 		btnCancionSiguiente.setBounds(516, 464, 53, 35);
 		contentPane.add(btnCancionSiguiente);

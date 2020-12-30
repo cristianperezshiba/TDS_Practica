@@ -79,13 +79,9 @@ public class VentanaLogin extends JFrame {
 		
 		
 		JButton btnNewButton = new JButton("Registrate");
-		btnNewButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0){
-				abrirVentanaRegistro();
-				dispose();
-			}
-		});
+		btnNewButton.addActionListener(event -> {
+												abrirVentanaRegistro();
+												dispose();});
 		
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnNewButton.setBounds(229, 227, 99, 23);
@@ -93,17 +89,12 @@ public class VentanaLogin extends JFrame {
 		
 		/////////////////////////////////////////////////////////////
 		JButton btnNewButton_1 = new JButton("Iniciar");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0){
-				if (controlador.comprobarLoginUsuario(textFieldUsuario.getText(), textFieldContrasena.getText())) {
+		btnNewButton_1.addActionListener(event -> {
+			if (controlador.comprobarLoginUsuario(textFieldUsuario.getText(), textFieldContrasena.getText())) {
 					abrirVentanaReciente();
 					dispose();
 				}
 				else JOptionPane.showMessageDialog (null, "Usuario y/o contraseña incorrecta", "Error!", JOptionPane.ERROR_MESSAGE);
-				
-			}
-			
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnNewButton_1.setBounds(176, 156, 114, 44);

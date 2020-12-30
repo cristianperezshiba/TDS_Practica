@@ -62,7 +62,9 @@ public enum CatalogoUsuarios {
 		
 		
 		return todosLosUsuarios.stream()
-				.filter(u -> u.getUsuario().equals(usuario)).findFirst().get();
+				.filter(u -> u.getUsuario().equals(usuario)).
+				findFirst()
+				.get();
 		//listaUsuarios.stream().filter(u -> (usuario.equals(u.getUsuario()))).findFirst().get();
 	}
 	

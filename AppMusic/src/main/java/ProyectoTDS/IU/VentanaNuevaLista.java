@@ -119,24 +119,18 @@ public class VentanaNuevaLista extends JFrame {
 		panelLeft.add(btnNuevaLista);
 		
 		JButton btnReciente = new JButton("Reciente");
-		btnReciente.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnReciente.addActionListener(event -> {
 				abrirVentanaReciente();
 				dispose();
-			}
 		});
 		btnReciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnReciente.setBounds(39, 158, 117, 44);
 		panelLeft.add(btnReciente);
 		
 		JButton btnMisListas = new JButton("Mis listas");
-		btnMisListas.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnMisListas.addActionListener(event -> {
 				abrirVentanaMisListas();
 				dispose();
-			}
 		});
 		btnMisListas.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnMisListas.setBounds(39, 228, 117, 44);
@@ -150,13 +144,10 @@ public class VentanaNuevaLista extends JFrame {
 		
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
 		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnMejoraCuenta.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnMejoraCuenta.addActionListener(event -> {
 				abrirVentanaDescuentos();
 				controlador.setUsuarioActivoPremium();
 				lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
-			}
 		});
 		btnMejoraCuenta.setBounds(700, 11, 167, 37);
 		contentPane.add(btnMejoraCuenta);
@@ -165,14 +156,10 @@ public class VentanaNuevaLista extends JFrame {
 		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLogout.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnLogout.addActionListener(event -> {
 				controlador.logout();
 				abrirVentanaLogin();
 				dispose();
-				
-			}
 		});
 		
 		btnLogout.setBounds(936, 11, 98, 37);
@@ -228,16 +215,11 @@ public class VentanaNuevaLista extends JFrame {
 		btnEliminarPlaylist.setBounds(783, 59, 126, 31);
 		contentPane.add(btnEliminarPlaylist);
 	  
-		btnBuscar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnBuscar.addActionListener(event -> {
 				cargarTablaBusqueda(textTitulo.getText() ,txtInterprete.getText(), comboBoxEstilo.getSelectedItem().toString());
-			}
-		});
+					});
 		
-		btnCrear.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnCrear.addActionListener(event -> {
 				String nuevaPlaylist = textFieldNombrePlaylist.getText();
 				int reply = JOptionPane.showConfirmDialog(null, "¿Quiere crear una nueva playlist llamada " +nuevaPlaylist + "?", "Crear playlist", JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) {
@@ -269,33 +251,23 @@ public class VentanaNuevaLista extends JFrame {
 					
 					else JOptionPane.showMessageDialog(null, "Ya existe una playlist con este nombre", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				
-			}
 		});
 		
-		btnExplorar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnExplorar.addActionListener(event -> {
 				abrirVentanaExplorar();
 				dispose();
-			}
 		});
 		
-		btnEliminarPlaylist.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnEliminarPlaylist.addActionListener(event -> {
 				if (playlistMostrada == null) return;
 				int reply = JOptionPane.showConfirmDialog(null, "Esta seguro de que desea eliminar la playlist " + playlistMostrada + "?","Confirmar accion", JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) { 
 					controlador.eliminarPlaylist(playlistMostrada);
 					playlistMostrada = null;
 					}
-			}
 		});
 		
-		btnIZQ_DCHA.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnIZQ_DCHA.addActionListener(nevent -> {
 				//Insertar cancion en la playlist
 				String selectedData = null;
 			    int[] selectedRow = tableIzq.getSelectedRows();
@@ -306,7 +278,6 @@ public class VentanaNuevaLista extends JFrame {
 					JOptionPane.showMessageDialog(null, "La cancion no se ha podido insertar", "Error", JOptionPane.ERROR_MESSAGE);
 				};
 				cargarCancionesPlaylist(playlistMostrada);
-			}
 		});
 		
 		btnDCHA_IZQ.addActionListener(new ActionListener() {
@@ -349,22 +320,16 @@ public class VentanaNuevaLista extends JFrame {
 		table_listas.setCellSelectionEnabled(true);
 		
 		
-		btnAceptar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnAceptar.addActionListener(event -> {
 				//TODO: Guardar en persistencia la lista que acabamos de crear o directamente guardar todas las playlists
-			}
 		});
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAceptar.setBounds(461, 450, 136, 38);
 		contentPane.add(btnAceptar);
 		
 		
-		btnCancelar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnCancelar.addActionListener(event -> {
 				if (ultimaPlaylistCreada != null) controlador.eliminarPlaylist(ultimaPlaylistCreada);
-			}
 		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCancelar.setBounds(637, 449, 136, 40);

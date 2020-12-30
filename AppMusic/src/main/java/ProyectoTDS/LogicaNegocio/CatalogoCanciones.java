@@ -46,13 +46,6 @@ public enum CatalogoCanciones {
 		                            .filter(c -> c.getInterprete().getNombre().matches(patronInterprete))
 		                            .filter(c -> c.getEstilo().toString().matches(patronEstilo))
 		                            .collect(toSet());
-		/*
-		System.out.println("Parametros búsqueda (titulo, interprete, estilo): " + Titulo + " " + Interprete + " " + Estilo);
-		System.out.println("Catalogo canciones: Canciones matching tras hacer busqueda:");
-		for (Cancion cancion : matching) {
-			System.out.println("		" + cancion.getTitulo() + ", " + cancion.getInterprete() + ", " + cancion.getEstilo());
-		}
-		*/ 
 		
 		return matching;
 	};
@@ -81,11 +74,6 @@ public enum CatalogoCanciones {
 							 .sorted(Comparator.comparingInt(Cancion::getNumReproducciones).reversed())
 							 .limit(10)
 							 .collect(toList());
-		
-		/*for (Cancion c : S) {
-			System.out.println(c.getNumReproducciones() + "  " + c.getTitulo() + " " + c.getInterprete().getNombre());
-		}*/
-		
 		return S;
 							
 	}

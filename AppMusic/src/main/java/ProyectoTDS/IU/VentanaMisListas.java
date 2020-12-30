@@ -89,12 +89,9 @@ public class VentanaMisListas extends JFrame {
 		btnReciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnReciente.setBounds(39, 158, 117, 44);
 		panelLeft.add(btnReciente);
-		btnReciente.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnReciente.addActionListener(event -> {
 				abrirVentanaReciente();
 				dispose();
-			}
 		});
 		
 		JButton btnMisListas = new JButton("Mis listas");
@@ -112,14 +109,11 @@ public class VentanaMisListas extends JFrame {
 		
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
 		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnMejoraCuenta.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnMejoraCuenta.addActionListener(event -> {
 				abrirVentanaDescuentos();
 				controlador.setUsuarioActivoPremium();
 				lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
 				btnPdf.setEnabled(true);
-			}
 		});
 		btnMejoraCuenta.setBounds(433, 11, 167, 37);
 		contentPane.add(btnMejoraCuenta);
@@ -128,14 +122,10 @@ public class VentanaMisListas extends JFrame {
 		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLogout.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnLogout.addActionListener(event -> {
 				controlador.logout();
 				abrirVentanaLogin();
 				dispose();
-				
-			}
 		});
 		
 		btnLogout.setBounds(625, 11, 98, 37);
@@ -148,12 +138,9 @@ public class VentanaMisListas extends JFrame {
 	  
 		
 		
-		btnExplorar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnExplorar.addActionListener(event -> {
 				abrirVentanaExplorar();
 				dispose();
-			}
 		});
 
 
@@ -252,9 +239,7 @@ public class VentanaMisListas extends JFrame {
 	    });
 		
 		JButton btnPlay = new JButton("Play");
-		btnPlay.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnPlay.addActionListener(event -> {
 				///////////////////////////////////////////////////////////
 				String nombre = null;
 				String artista = null;
@@ -262,27 +247,20 @@ public class VentanaMisListas extends JFrame {
 				nombre = (String) table.getValueAt(selectedRow[0], 0);
 				artista = (String) table.getValueAt(selectedRow[0], 1);
 				controlador.ReproducirCancion(nombre, artista);
-
-			}
 		});
 		btnPlay.setBounds(433, 405, 66, 37);
 		contentPane.add(btnPlay);
 
 		JButton btnPause = new JButton("Pause");
-		btnPause.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		btnPause.addActionListener(event -> {
 				controlador.pausarCancion();
-			}
 		});
 
 		btnPause.setBounds(433, 453, 66, 35);
 		contentPane.add(btnPause);
 
 		JButton btnCancionAnterior = new JButton("<<");
-		btnCancionAnterior.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnCancionAnterior.addActionListener(event -> {
 				// Coger fila seleccionada y coger la anterior y reproducirla
 				String nombre = null;
 				String artista = null;
@@ -294,15 +272,12 @@ public class VentanaMisListas extends JFrame {
 				nombre = (String) table.getValueAt((selectedRow[0] - 1) % numFilas, 0);
 				artista = (String) table.getValueAt((selectedRow[0] - 1) % numFilas, 1);
 				controlador.ReproducirCancion(nombre, artista);
-			}
 		});
 		btnCancionAnterior.setBounds(370, 433, 53, 35);
 		contentPane.add(btnCancionAnterior);
 
 		JButton btnCancionSiguiente = new JButton(">>");
-		btnCancionSiguiente.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnCancionSiguiente.addActionListener(event -> {
 				// Coger fila seleccionada y coger la siguiente y reproducirla
 				String nombre = null;
 				String artista = null;
@@ -314,18 +289,14 @@ public class VentanaMisListas extends JFrame {
 				nombre = (String) table.getValueAt((selectedRow[0] + 1) % numFilas, 0);
 				artista = (String) table.getValueAt((selectedRow[0] + 1) % numFilas, 1);
 				controlador.ReproducirCancion(nombre, artista);
-			}
 		});
 		btnCancionSiguiente.setBounds(516, 433, 53, 35);
 		contentPane.add(btnCancionSiguiente);
 		
 		
 		btnPdf.setEnabled(false);
-		btnPdf.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnPdf.addActionListener(event -> {
 				controlador.generarPdf();
-			}
 		});
 		btnPdf.setBounds(596, 470, 110, 50);
 		contentPane.add(btnPdf);

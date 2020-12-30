@@ -108,13 +108,10 @@ public class VentanaRegistro extends JFrame {
 		
 		JButton btnIrALogin = new JButton("Ya tengo cuenta");
 		btnIrALogin.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnIrALogin.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnIrALogin.addActionListener(event -> {
 				abrirVentanaLogin();
 				dispose();
-			}
-		});
+			});
 		btnIrALogin.setBounds(382, 243, 136, 30);
 		contentPane.add(btnIrALogin);
 		
@@ -123,9 +120,7 @@ public class VentanaRegistro extends JFrame {
 		contentPane.add(textFieldFecha);
 		
 		JButton btnRegistrar = new JButton("Registrarme");
-		btnRegistrar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnRegistrar.addActionListener(event -> {
 				String usuario = textFieldUsuario.getText();
 				String contrasena = textFieldClave.getText();
 				String repite = textFieldRepite.getText();
@@ -154,9 +149,6 @@ public class VentanaRegistro extends JFrame {
 						dispose();
 					}
 				
-				
-				
-			}
 		});
 		btnRegistrar.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnRegistrar.setBounds(173, 189, 166, 51);

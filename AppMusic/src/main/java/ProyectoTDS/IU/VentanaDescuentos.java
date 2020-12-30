@@ -40,22 +40,17 @@ public class VentanaDescuentos extends JFrame {
 		getContentPane().add(lblNingunDescuentoActivo);
 		
 		JButton btnLimitado = new JButton("Limitado -20%");
-		btnLimitado.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnLimitado.addActionListener(event -> {
 				controlador.setDescuentoActivo(new DescuentoLimitado());
 				lblNingunDescuentoActivo.setText(controlador.getDescuentoActivo().toString());
-			}
+			
 		});
 		btnLimitado.setBounds(110, 127, 229, 32);
 		getContentPane().add(btnLimitado);
 		
 		JButton btnParaMayores = new JButton("-50% para mayores de 65 años");
-		btnParaMayores.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+		btnParaMayores.addActionListener(event -> {
 				controlador.setDescuentoActivo(new DescuentoMayores());
-			}
 		});
 		btnParaMayores.setBounds(110, 170, 229, 32);
 		getContentPane().add(btnParaMayores);

@@ -1,11 +1,11 @@
 package ProyectoTDS.LogicaNegocio;
 
-public class Cancion {
+public final class Cancion {
 	private int codigo;
-	private String titulo;
-	private Interprete interprete;
-	private EstiloMusical estilo;
-	private String rutaFichero;
+	private final String titulo;
+	private final Interprete interprete;
+	private final EstiloMusical estilo;
+	private final String rutaFichero;
 	private int numReproducciones;
 	
 	public Cancion(String titulo, Interprete interprete, EstiloMusical estilo, String rutaFichero) {
@@ -21,46 +21,32 @@ public class Cancion {
 	
 	//TODO: �Generamos solo los getters o tanto los getters como los setters?
 	
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
-
 
 	public int getCodigo() {
 		return codigo;
+	}
+	
+	public void setCodigo(int c) {
+		this.codigo = c;
 	}
 	
 	public String getTitulo() {
 		return titulo;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
 	public Interprete getInterprete() {
 		return interprete;
-	}
-
-	public void setInterprete(Interprete interprete) {
-		this.interprete = interprete;
 	}
 
 	public EstiloMusical getEstilo() {
 		return estilo;
 	}
 
-	public void setEstilo(EstiloMusical estilo) {
-		this.estilo = estilo;
-	}
 
 	public String getRutaFichero() {
 		return rutaFichero;
 	}
 
-	public void setRutaFichero(String rutaFichero) {
-		this.rutaFichero = rutaFichero;
-	}
 	
 	public int getNumReproducciones() {
 		return numReproducciones;
