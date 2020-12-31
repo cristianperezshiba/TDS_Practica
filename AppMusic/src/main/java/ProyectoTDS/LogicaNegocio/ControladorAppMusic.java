@@ -55,7 +55,6 @@ public enum ControladorAppMusic {
 	}
 	public void logout() {
 		usuarioActivo = null;
-		//Hay que hacer algo mas¿?¿?¿?¿?¿? Supongo que si
 	}
 	
 	public boolean comprobarLoginUsuario(String usuario, String password) {

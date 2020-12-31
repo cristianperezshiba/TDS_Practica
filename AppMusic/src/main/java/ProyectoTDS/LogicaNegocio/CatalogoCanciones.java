@@ -69,12 +69,12 @@ public enum CatalogoCanciones {
 
 	public List<Cancion> getCancionesMasReproducidasAppMusic(){
 		
-		List<Cancion> S = listaCanciones.stream()
+		return listaCanciones.stream()
 							 .filter(c -> c.getNumReproducciones() > 0)
 							 .sorted(Comparator.comparingInt(Cancion::getNumReproducciones).reversed())
 							 .limit(10)
 							 .collect(toList());
-		return S;
+		
 							
 	}
 	

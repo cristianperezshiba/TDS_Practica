@@ -17,9 +17,6 @@ public final class Cancion {
 		this.rutaFichero = rutaFichero;
 		this.numReproducciones = 0;
 	}
-
-	
-	//TODO: �Generamos solo los getters o tanto los getters como los setters?
 	
 
 	public int getCodigo() {
