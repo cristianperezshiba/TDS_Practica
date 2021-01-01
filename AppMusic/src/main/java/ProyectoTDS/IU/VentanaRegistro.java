@@ -22,13 +22,6 @@ import com.toedter.calendar.JDateChooser;
 
 public class VentanaRegistro extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField textFieldNombre;
-	private JTextField textFieldApellidos;
-	private JTextField textFieldEmail;
-	private JTextField textFieldUsuario;
-	private JTextField textFieldClave;
-	private JTextField textFieldRepite;
 	private ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador;
 
 	public VentanaRegistro() {
@@ -36,7 +29,7 @@ public class VentanaRegistro extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 544, 323);
 		this.setTitle("Registro");
-		contentPane = new JPanel();
+		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -76,32 +69,32 @@ public class VentanaRegistro extends JFrame {
 		lblClave.setBounds(217, 126, 40, 14);
 		contentPane.add(lblClave);
 		
-		textFieldNombre = new JTextField();
+		JTextField textFieldNombre = new JTextField();
 		textFieldNombre.setBounds(83, 20, 86, 20);
 		contentPane.add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
-		textFieldApellidos = new JTextField();
+		JTextField textFieldApellidos = new JTextField();
 		textFieldApellidos.setColumns(10);
 		textFieldApellidos.setBounds(283, 20, 212, 20);
 		contentPane.add(textFieldApellidos);
 		
-		textFieldEmail = new JTextField();
+		JTextField textFieldEmail = new JTextField();
 		textFieldEmail.setColumns(10);
 		textFieldEmail.setBounds(72, 67, 141, 20);
 		contentPane.add(textFieldEmail);
 		
-		textFieldUsuario = new JTextField();
+		JTextField textFieldUsuario = new JTextField();
 		textFieldUsuario.setColumns(10);
 		textFieldUsuario.setBounds(83, 124, 86, 20);
 		contentPane.add(textFieldUsuario);
 		
-		textFieldClave = new JPasswordField();
+		JTextField textFieldClave = new JPasswordField();
 		textFieldClave.setColumns(10);
 		textFieldClave.setBounds(274, 124, 116, 20);
 		contentPane.add(textFieldClave);
 		
-		textFieldRepite = new JPasswordField();
+		JTextField textFieldRepite = new JPasswordField();
 		textFieldRepite.setColumns(10);
 		textFieldRepite.setBounds(274, 149, 116, 20);
 		contentPane.add(textFieldRepite);

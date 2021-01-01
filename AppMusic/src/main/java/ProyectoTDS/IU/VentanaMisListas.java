@@ -45,9 +45,8 @@ import javax.swing.SwingConstants;
 
 public class VentanaMisListas extends JFrame {
 
-	private JPanel contentPane;
+
 	private ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador;
-	private JTable table_listas;
 	
 	
 	public VentanaMisListas() {
@@ -58,7 +57,7 @@ public class VentanaMisListas extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 749, 570);
-		contentPane = new JPanel();
+		JPanel contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -178,7 +177,7 @@ public class VentanaMisListas extends JFrame {
 		JScrollPane scrollPaneListas = new JScrollPane();
 		scrollPaneListas.setBounds(10, 283, 181, 138);
 		panelLeft.add(scrollPaneListas);
-		table_listas = new JTable();
+		JTable table_listas = new JTable();
 		DefaultTableModel tableModelListas = new DefaultTableModel(
 			new Object[][] {
 			},

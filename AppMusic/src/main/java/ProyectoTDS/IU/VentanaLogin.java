@@ -26,20 +26,14 @@ import java.awt.event.ActionEvent;
 
 public class VentanaLogin extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField textFieldUsuario;
-	private JTextField textFieldContrasena;
 	private ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador;
 
-	/**
-	 * Create the frame.
-	 */
 	public VentanaLogin() {
 		this.controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 		/////////////////////////////////////////////////////////
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
+		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setTitle("Login");
 		setContentPane(contentPane);
@@ -66,12 +60,12 @@ public class VentanaLogin extends JFrame {
 		LabelTexto.setBounds(76, 225, 149, 25);
 		contentPane.add(LabelTexto);
 		
-		textFieldUsuario = new JTextField();
+		JTextField textFieldUsuario = new JTextField();
 		textFieldUsuario.setBounds(161, 81, 140, 20);
 		contentPane.add(textFieldUsuario);
 		textFieldUsuario.setColumns(10);
 		
-		textFieldContrasena = new JPasswordField();
+		JTextField textFieldContrasena = new JPasswordField();
 		textFieldContrasena.setBounds(161, 125, 140, 20);
 		contentPane.add(textFieldContrasena);
 		textFieldContrasena.setColumns(10);

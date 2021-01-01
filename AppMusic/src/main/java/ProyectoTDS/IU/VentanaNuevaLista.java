@@ -41,11 +41,10 @@ import javax.swing.ScrollPaneConstants;
 
 public class VentanaNuevaLista extends JFrame {
 
-	private JPanel contentPane;
 	private ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador;
-	private JTable tableIzq;
-	private JTable tableDcha;
-	private JTextField textFieldNombrePlaylist;
+
+	private JTable tableIzq, tableDcha;
+	
 	private String playlistMostrada;
 	private String ultimaPlaylistCreada;
 	
@@ -55,7 +54,7 @@ public class VentanaNuevaLista extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1073, 569);
-		contentPane = new JPanel();
+		JPanel contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -189,7 +188,7 @@ public class VentanaNuevaLista extends JFrame {
 		btnCrear.setBounds(652, 59, 111, 31);
 		contentPane.add(btnCrear);
 		
-		textFieldNombrePlaylist = new JTextField();
+		JTextField textFieldNombrePlaylist = new JTextField();
 		textFieldNombrePlaylist.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textFieldNombrePlaylist.setBounds(469, 62, 173, 26);
 		contentPane.add(textFieldNombrePlaylist);

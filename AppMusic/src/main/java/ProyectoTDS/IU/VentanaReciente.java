@@ -36,12 +36,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.ScrollPaneConstants;
 
-import ProyectoTDS.LogicaNegocio.Cancion;
 import java.util.*;
 
 public class VentanaReciente extends JFrame {
 
-	private JPanel contentPane;
 	private ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador;
 
 	public VentanaReciente() {
@@ -51,7 +49,7 @@ public class VentanaReciente extends JFrame {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 749, 437);
-		contentPane = new JPanel();
+		JPanel contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
@@ -305,14 +303,10 @@ public class VentanaReciente extends JFrame {
 	}
 	
 	private void cargarCancionesMasReproducidas(JTable table, JScrollPane scrollPane) {
-		List<Cancion> cancionesMasReproducidas = controlador.getCancionesMasReproducidasAppMusic();
+		ArrayList<List<String>> cancionesMasReproducidas = controlador.getCancionesMasReproducidasAppMusic();
 		List<String> listaTitulos = new LinkedList<String>();
 		List<String> listaInterpretes = new LinkedList<String>();
 		
-		for (Cancion c : cancionesMasReproducidas) {
-			listaTitulos.add(c.getTitulo());
-			listaInterpretes.add(c.getInterprete().getNombre());
-		}
 
 		DefaultTableModel tableMode = new DefaultTableModel(null, new String[] { "Titulo", "Interprete" }){
 

@@ -38,11 +38,8 @@ import javax.swing.ScrollPaneConstants;
 
 public class VentanaExplorar extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField txtInterprete;
-	private JTextField textTitulo;
 	private ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador;
-	private JComboBox comboBoxEstilo = new JComboBox();
+
 	
 	
 	public VentanaExplorar() {
@@ -51,7 +48,7 @@ public class VentanaExplorar extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 749, 570);
-		contentPane = new JPanel();
+		 JPanel contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -107,7 +104,7 @@ public class VentanaExplorar extends JFrame {
 				dispose();
 		});
 		
-		txtInterprete = new JTextField();
+		JTextField txtInterprete = new JTextField();
 		txtInterprete.setBounds(420, 118, 149, 23);
 		contentPane.add(txtInterprete);
 		txtInterprete.setColumns(10);
@@ -159,7 +156,7 @@ public class VentanaExplorar extends JFrame {
 		
 		
 		
-		textTitulo = new JTextField();
+		JTextField textTitulo = new JTextField();
 		textTitulo.setColumns(10);
 		textTitulo.setBounds(250, 118, 149, 23);
 		contentPane.add(textTitulo);

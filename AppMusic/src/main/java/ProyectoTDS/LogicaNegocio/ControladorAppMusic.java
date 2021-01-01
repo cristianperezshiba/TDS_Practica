@@ -135,6 +135,7 @@ public enum ControladorAppMusic {
 	}
 	
 	public ArrayList<List<String>> getCancionesRecientes() {
+		//Devolveremos un array que contendra dos listas, una de nombres de canciones y otra de los interpretes de cada una de ellas
 		Set<Cancion> canciones = new LinkedHashSet<Cancion>(usuarioActivo.getCancionesRecientes());
 		ArrayList<List<String>> ArrayConLasDosListas = new ArrayList<>();
 		List<String> listaTitulos = new ArrayList<String>();
@@ -158,8 +159,20 @@ public enum ControladorAppMusic {
 		}
 	}
 	
-	public List<Cancion> getCancionesMasReproducidasAppMusic(){
-		return catalogoCanciones.getCancionesMasReproducidasAppMusic();
+	public ArrayList<List<String>> getCancionesMasReproducidasAppMusic(){//Devolveremos un array que contendra dos listas, una de nombres de canciones y otra de los interpretes de cada una de ellas
+		//Devolveremos un array que contendra dos listas, una de nombres de canciones y otra de los interpretes de cada una de ellas
+		Set<Cancion> canciones = new LinkedHashSet<Cancion>(catalogoCanciones.getCancionesMasReproducidasAppMusic());
+		ArrayList<List<String>> ArrayConLasDosListas = new ArrayList<>();
+		List<String> listaTitulos = new ArrayList<String>();
+		List<String> listaInterpretes = new ArrayList<String>();
+	    for (Cancion c : canciones) {
+			listaTitulos.add(c.getTitulo());
+			listaInterpretes.add(c.getInterprete().getNombre());
+		}
+	    ArrayConLasDosListas.add(0, listaTitulos);
+	    ArrayConLasDosListas.add(1, listaInterpretes);
+	    
+		return ArrayConLasDosListas;
 	}
 	
 	public Descuento getDescuentoActivo() {
