@@ -10,7 +10,7 @@ public final class Cancion {
 	
 	public Cancion(String titulo, Interprete interprete, EstiloMusical estilo, String rutaFichero) {
 		super();
-		codigo=0;
+		this.codigo=0;
 		this.titulo = titulo;
 		this.interprete = interprete;
 		this.estilo = estilo;

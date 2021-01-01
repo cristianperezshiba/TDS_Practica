@@ -27,8 +27,8 @@ public class Usuario {
 
 	private List<Cancion> cancionesRecientes;
 
-	private List<ArrayList<Object>> cancionesMasReproducidas; // Cada elemento será un par (cancion,
-																// numVecesReproducida)
+	private List<ArrayList<Object>> cancionesMasReproducidas; // Cada elemento será un par (cancion, numVecesReproducida)
+																
 
 	public Usuario(String usuario, String contrasena, String nombre, String apellidos, String fechaNacimiento,
 			String email) {

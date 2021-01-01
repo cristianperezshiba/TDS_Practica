@@ -11,6 +11,7 @@ import ProyectoTDS.Persistencia.IAdaptadorUsuarioDAO;
 
 public enum CatalogoUsuarios {
 	INSTANCE;
+	//Uso del patron singleton mediante un enumerado
 	private Set<Usuario> listaUsuarios;
 	private IAdaptadorUsuarioDAO adaptadorUsuario;
 	

@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public enum CatalogoCanciones {
 	INSTANCE;
-	//Usar patron singleton �?
+	//Uso del patron singleton mediante un enumerado
 	private Set<Cancion> listaCanciones;
 
 	private CatalogoCanciones() {

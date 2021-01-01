@@ -36,7 +36,6 @@ public class ListaCanciones {
 
 
 	public Set<Cancion> getCanciones() {
-		//TODO: �Devolvemos la lista o una copia de ella?
 		return canciones;
 	}
 

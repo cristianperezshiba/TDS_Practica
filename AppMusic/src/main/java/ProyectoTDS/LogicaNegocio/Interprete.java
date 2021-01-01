@@ -1,7 +1,8 @@
 package ProyectoTDS.LogicaNegocio;
 
-public class Interprete {
-	private String nombre;
+public final class Interprete {
+	//Clase inmutable
+	private final String nombre;
 	
 	public Interprete(String nombre) {
 		this.nombre = nombre;
@@ -11,7 +12,5 @@ public class Interprete {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+	
 }
