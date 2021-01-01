@@ -66,7 +66,7 @@ public class VentanaReciente extends JFrame {
 
 		JButton btnNuevaLista = new JButton("Nueva lista");
 		btnNuevaLista.addActionListener(event -> {
-				abrirVentanaNuevaLista();
+				ServicioVentanas.abrirVentanaNuevaLista();
 				dispose();
 		});
 		btnNuevaLista.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -81,7 +81,7 @@ public class VentanaReciente extends JFrame {
 
 		JButton btnMisListas = new JButton("Mis listas");
 		btnMisListas.addActionListener(event -> {
-				abrirVentanaMisListas();
+				ServicioVentanas.abrirVentanaMisListas();
 				dispose();
 		});
 		btnMisListas.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -97,7 +97,7 @@ public class VentanaReciente extends JFrame {
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
 		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnMejoraCuenta.addActionListener(event -> {
-				abrirVentanaDescuentos();
+				ServicioVentanas.abrirVentanaDescuentos();
 				controlador.setUsuarioActivoPremium();	
 				lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
 				btnCancionesMasReproducidas.setEnabled(true);
@@ -109,7 +109,7 @@ public class VentanaReciente extends JFrame {
 		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnLogout.addActionListener(event -> {
 				controlador.logout();
-				abrirVentanaLogin();
+				ServicioVentanas.abrirVentanaLogin();
 				dispose();
 		});
 
@@ -122,7 +122,7 @@ public class VentanaReciente extends JFrame {
 		contentPane.add(lblUsuario);
 
 		btnExplorar.addActionListener(event -> {
-				abrirVentanaExplorar();
+				ServicioVentanas.abrirVentanaExplorar();
 				dispose();
 		});
 
@@ -150,7 +150,8 @@ public class VentanaReciente extends JFrame {
 		String[] columnas = new String[] { "Titulo", "Interprete" };
 		table.setModel(new DefaultTableModel(null, columnas));
 		scrollPane.setViewportView(table);
-		cargarCancionesRecientesTabla(table, scrollPane);
+		
+		ServicioVentanas.cargarCanciones(controlador.getCancionesRecientes(), table, scrollPane);
 
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addActionListener(event -> {
@@ -212,7 +213,7 @@ public class VentanaReciente extends JFrame {
 		btnCancionesMasReproducidas.setEnabled(false);
 		if (controlador.isUsuarioActivoPremium()) btnCancionesMasReproducidas.setEnabled(true);
 		btnCancionesMasReproducidas.addActionListener(event -> {
-				cargarCancionesMasReproducidas(table, scrollPane);
+				ServicioVentanas.cargarCanciones(controlador.getCancionesMasReproducidasAppMusic(), table, scrollPane);
 		});
 		
 		
@@ -222,125 +223,10 @@ public class VentanaReciente extends JFrame {
 
 	}
 
-	private void abrirVentanaLogin() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaLogin frame = new VentanaLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	private void abrirVentanaExplorar() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaExplorar frame = new VentanaExplorar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	private void abrirVentanaMisListas() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaMisListas frame = new VentanaMisListas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	private void abrirVentanaNuevaLista() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaNuevaLista frame = new VentanaNuevaLista();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	private void cargarCancionesRecientesTabla(JTable table, JScrollPane scrollPane) {
-		ArrayList<List<String>> cancionesEncontradas = controlador.getCancionesRecientes();
-		List<String> listaTitulos = cancionesEncontradas.get(0);
-		List<String> listaInterpretes = cancionesEncontradas.get(1);
-
-		DefaultTableModel tableMode = new DefaultTableModel(null, new String[] { "Titulo", "Interprete" }){
-
-		    /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-		    public boolean isCellEditable(int row, int column) {
-		       //all cells false
-		       return false;
-		    }
-		};
-		for (int i = 0; i < listaTitulos.size(); i++) {
-			Object[] data = new Object[2];
-			data[0] = listaTitulos.get(i);
-			data[1] = listaInterpretes.get(i);
-			tableMode.addRow(data);
-		}
-		table.setModel(tableMode);
-		scrollPane.setVisible(true);
-	}
 	
-	private void cargarCancionesMasReproducidas(JTable table, JScrollPane scrollPane) {
-		ArrayList<List<String>> cancionesMasReproducidas = controlador.getCancionesMasReproducidasAppMusic();
-		List<String> listaTitulos = new LinkedList<String>();
-		List<String> listaInterpretes = new LinkedList<String>();
-		
-
-		DefaultTableModel tableMode = new DefaultTableModel(null, new String[] { "Titulo", "Interprete" }){
-
-		    /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-		    public boolean isCellEditable(int row, int column) {
-		       //all cells false
-		       return false;
-		    }
-		};
-		for (int i = 0; i < listaTitulos.size(); i++) {
-			Object[] data = new Object[2];
-			data[0] = listaTitulos.get(i);
-			data[1] = listaInterpretes.get(i);
-			tableMode.addRow(data);
-		}
-		table.setModel(tableMode);
-		scrollPane.setVisible(true);
-	}
 	
-	private void abrirVentanaDescuentos() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaDescuentos frame = new VentanaDescuentos();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 }

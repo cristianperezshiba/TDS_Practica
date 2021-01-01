@@ -102,7 +102,7 @@ public class VentanaRegistro extends JFrame {
 		JButton btnIrALogin = new JButton("Ya tengo cuenta");
 		btnIrALogin.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnIrALogin.addActionListener(event -> {
-				abrirVentanaLogin();
+				ServicioVentanas.abrirVentanaLogin();
 				dispose();
 			});
 		btnIrALogin.setBounds(382, 243, 136, 30);
@@ -138,7 +138,7 @@ public class VentanaRegistro extends JFrame {
 						JOptionPane.showMessageDialog (null, "Este usuario/email ya esta registrado, el usuario no se ha creado", "Error!", JOptionPane.ERROR_MESSAGE);
 					}
 					else {
-						abrirVentanaLogin();
+						ServicioVentanas.abrirVentanaLogin();
 						dispose();
 					}
 				
@@ -150,18 +150,6 @@ public class VentanaRegistro extends JFrame {
 
 	}
 	
-	private void abrirVentanaLogin() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaLogin frame = new VentanaLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	
 	
 }

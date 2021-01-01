@@ -159,6 +159,7 @@ public class Usuario {
 			cancionesRecientes.remove(cancionesRecientes.size() - 1);
 		}
 		cancionesRecientes.add(0, cancion);
+		System.out.println("Nueva cancion reciente");
 	}
 
 	public List<Cancion> getCancionesRecientes() {

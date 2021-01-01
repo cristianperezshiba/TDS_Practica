@@ -74,7 +74,7 @@ public class VentanaLogin extends JFrame {
 		
 		JButton btnNewButton = new JButton("Registrate");
 		btnNewButton.addActionListener(event -> {
-												abrirVentanaRegistro();
+												ServicioVentanas.abrirVentanaRegistro();
 												dispose();});
 		
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -85,7 +85,7 @@ public class VentanaLogin extends JFrame {
 		JButton btnNewButton_1 = new JButton("Iniciar");
 		btnNewButton_1.addActionListener(event -> {
 			if (controlador.comprobarLoginUsuario(textFieldUsuario.getText(), textFieldContrasena.getText())) {
-					abrirVentanaReciente();
+					ServicioVentanas.abrirVentanaReciente();
 					dispose();
 				}
 				else JOptionPane.showMessageDialog (null, "Usuario y/o contraseña incorrecta", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -95,29 +95,5 @@ public class VentanaLogin extends JFrame {
 		contentPane.add(btnNewButton_1);
 	}
 	
-	private void abrirVentanaRegistro() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaRegistro frame = new VentanaRegistro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	
-	private void abrirVentanaReciente() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaReciente frame = new VentanaReciente();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 }

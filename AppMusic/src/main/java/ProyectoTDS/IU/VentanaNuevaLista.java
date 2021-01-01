@@ -119,7 +119,7 @@ public class VentanaNuevaLista extends JFrame {
 		
 		JButton btnReciente = new JButton("Reciente");
 		btnReciente.addActionListener(event -> {
-				abrirVentanaReciente();
+				ServicioVentanas.abrirVentanaReciente();
 				dispose();
 		});
 		btnReciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -128,7 +128,7 @@ public class VentanaNuevaLista extends JFrame {
 		
 		JButton btnMisListas = new JButton("Mis listas");
 		btnMisListas.addActionListener(event -> {
-				abrirVentanaMisListas();
+				ServicioVentanas.abrirVentanaMisListas();
 				dispose();
 		});
 		btnMisListas.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -144,7 +144,7 @@ public class VentanaNuevaLista extends JFrame {
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
 		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnMejoraCuenta.addActionListener(event -> {
-				abrirVentanaDescuentos();
+				ServicioVentanas.abrirVentanaDescuentos();
 				controlador.setUsuarioActivoPremium();
 				lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
 		});
@@ -157,7 +157,7 @@ public class VentanaNuevaLista extends JFrame {
 		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnLogout.addActionListener(event -> {
 				controlador.logout();
-				abrirVentanaLogin();
+				ServicioVentanas.abrirVentanaLogin();
 				dispose();
 		});
 		
@@ -215,7 +215,8 @@ public class VentanaNuevaLista extends JFrame {
 		contentPane.add(btnEliminarPlaylist);
 	  
 		btnBuscar.addActionListener(event -> {
-				cargarTablaBusqueda(textTitulo.getText() ,txtInterprete.getText(), comboBoxEstilo.getSelectedItem().toString());
+				ServicioVentanas.cargarCanciones(controlador.buscarCanciones(textTitulo.getText() ,txtInterprete.getText(), comboBoxEstilo.getSelectedItem().toString()), 
+						tableIzq, scrollPaneIzq);
 					});
 		
 		btnCrear.addActionListener(event -> {
@@ -225,8 +226,10 @@ public class VentanaNuevaLista extends JFrame {
 					if (controlador.crearPlaylist(nuevaPlaylist)) {
 						JOptionPane.showMessageDialog(null, "Playlist " + nuevaPlaylist + " creada");
 						//Cargar tabla playlist a la dcha y la de explorar a la izq
-						cargarTablaBusqueda("", "", "TODOS");
-						cargarCancionesPlaylist(nuevaPlaylist);
+						ServicioVentanas.cargarCanciones(controlador.buscarCanciones("" , "", "TODOS"), 
+								tableIzq, scrollPaneIzq);
+						ServicioVentanas.cargarCanciones(controlador.getCancionesLista(nuevaPlaylist), 
+								tableDcha, scrollPaneDcha);
 						playlistMostrada = nuevaPlaylist;
 						ultimaPlaylistCreada = nuevaPlaylist;
 						
@@ -253,7 +256,7 @@ public class VentanaNuevaLista extends JFrame {
 		});
 		
 		btnExplorar.addActionListener(event -> {
-				abrirVentanaExplorar();
+				ServicioVentanas.abrirVentanaExplorar();
 				dispose();
 		});
 		
@@ -276,7 +279,7 @@ public class VentanaNuevaLista extends JFrame {
 				if (!controlador.insertarCancionEnPlaylist(playlistMostrada, cancion.trim(), interprete.trim())) {
 					JOptionPane.showMessageDialog(null, "La cancion no se ha podido insertar", "Error", JOptionPane.ERROR_MESSAGE);
 				};
-				cargarCancionesPlaylist(playlistMostrada);
+				ServicioVentanas.cargarCanciones(controlador.getCancionesLista(playlistMostrada), tableDcha, scrollPaneDcha);
 		});
 		
 		btnDCHA_IZQ.addActionListener(new ActionListener() {
@@ -291,7 +294,7 @@ public class VentanaNuevaLista extends JFrame {
 				if (!controlador.borrarCancionDePlaylist(playlistMostrada, cancion.trim(), interprete.trim())) {
 					JOptionPane.showMessageDialog(null, "La cancion no se ha podido eliminar", "Error", JOptionPane.ERROR_MESSAGE);
 				};
-				cargarCancionesPlaylist(playlistMostrada);
+				ServicioVentanas.cargarCanciones(controlador.getCancionesLista(playlistMostrada), tableDcha, scrollPaneDcha);
 			}
 		});
 		
@@ -348,18 +351,7 @@ public class VentanaNuevaLista extends JFrame {
 	        
 	        ArrayList<List<String>> cancionesEncontradas = controlador.getCancionesLista(selectedData);
 	        
-			List<String> listaTitulos = cancionesEncontradas.get(0);
-			List<String> listaInterpretes = cancionesEncontradas.get(1);
-			
-			DefaultTableModel tableMode = new DefaultTableModel(null,  new String[] {"Titulo", "Interprete"});
-			for(int i=0 ; i<listaTitulos.size(); i++) {
-				Object[] data = new Object[2];
-				data[0] = listaTitulos.get(i);
-				data[1] = listaInterpretes.get(i);
-				tableMode.addRow(data);
-				}
-			tableDcha.setModel(tableMode);
-			playlistMostrada = selectedData;
+			ServicioVentanas.cargarCanciones(cancionesEncontradas, tableDcha, scrollPaneDcha);
 	      }
 
 	    });
@@ -385,104 +377,7 @@ public class VentanaNuevaLista extends JFrame {
 		
 	}
 	
-	private void cargarTablaBusqueda(String titulo, String Interprete, String Estilo) {
-		ArrayList<List<String>> cancionesEncontradas = controlador.buscarCanciones(titulo, Interprete, Estilo);
-		List<String> listaTitulos = cancionesEncontradas.get(0);
-		List<String> listaInterpretes = cancionesEncontradas.get(1);
-		
-		String[] columnas = new String[] {"Titulo", "Interprete"};
-		DefaultTableModel tableMode = new DefaultTableModel(null, columnas);
-		for(int i=0 ; i<listaTitulos.size(); i++) {
-			Object[] data = new Object[2];
-			data[0] = listaTitulos.get(i);
-			data[1] = listaInterpretes.get(i);
-			tableMode.addRow(data);
-			}
-		tableIzq.setModel(tableMode);
-		//scrollPaneIzq.setVisible(true);
-		
-	}
+
 	
-	private void cargarCancionesPlaylist(String playlist) {
-		ArrayList<List<String>> canciones = controlador.getCancionesLista(playlist);
-		
-		List<String> listaTitulos = canciones.get(0);
-		List<String> listaInterpretes = canciones.get(1);
-		
-		String[] columnas = new String[] {"Titulo", "Interprete"};
-		DefaultTableModel tableMode = new DefaultTableModel(null, columnas);
-		for(int i=0 ; i<listaTitulos.size(); i++) {
-			Object[] data = new Object[2];
-			data[0] = listaTitulos.get(i);
-			data[1] = listaInterpretes.get(i);
-			tableMode.addRow(data);
-			}
-		tableDcha.setModel(tableMode);
-		//scrollPaneIzq.setVisible(true);
-	}
 	
-	private void abrirVentanaLogin() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaLogin frame = new VentanaLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	private void abrirVentanaExplorar() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaExplorar frame = new VentanaExplorar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	private void abrirVentanaMisListas() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaMisListas frame = new VentanaMisListas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	private void abrirVentanaReciente() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaReciente frame = new VentanaReciente();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	private void abrirVentanaDescuentos() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaDescuentos frame = new VentanaDescuentos();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 }

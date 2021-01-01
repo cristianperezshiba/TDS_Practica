@@ -79,7 +79,7 @@ public class VentanaMisListas extends JFrame {
 		btnNuevaLista.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				abrirVentanaNuevaLista();
+				ServicioVentanas.abrirVentanaNuevaLista();
 				dispose();
 			}
 		});
@@ -89,7 +89,7 @@ public class VentanaMisListas extends JFrame {
 		btnReciente.setBounds(39, 158, 117, 44);
 		panelLeft.add(btnReciente);
 		btnReciente.addActionListener(event -> {
-				abrirVentanaReciente();
+				ServicioVentanas.abrirVentanaReciente();
 				dispose();
 		});
 		
@@ -109,7 +109,7 @@ public class VentanaMisListas extends JFrame {
 		JButton btnMejoraCuenta = new JButton("Mejora tu cuenta");
 		btnMejoraCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnMejoraCuenta.addActionListener(event -> {
-				abrirVentanaDescuentos();
+				ServicioVentanas.abrirVentanaDescuentos();
 				controlador.setUsuarioActivoPremium();
 				lblTipoCuenta.setText("Tipo de cuenta actual: Premium");
 				btnPdf.setEnabled(true);
@@ -123,7 +123,7 @@ public class VentanaMisListas extends JFrame {
 		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnLogout.addActionListener(event -> {
 				controlador.logout();
-				abrirVentanaLogin();
+				ServicioVentanas.abrirVentanaLogin();
 				dispose();
 		});
 		
@@ -138,7 +138,7 @@ public class VentanaMisListas extends JFrame {
 		
 		
 		btnExplorar.addActionListener(event -> {
-				abrirVentanaExplorar();
+				ServicioVentanas.abrirVentanaExplorar();
 				dispose();
 		});
 
@@ -209,32 +209,8 @@ public class VentanaMisListas extends JFrame {
 	        
 	        ArrayList<List<String>> cancionesEncontradas = controlador.getCancionesLista(selectedData);
 	        
-			List<String> listaTitulos = cancionesEncontradas.get(0);
-			List<String> listaInterpretes = cancionesEncontradas.get(1);
-			
-			DefaultTableModel tableMode = new DefaultTableModel(null,  new String[] {"Titulo", "Interprete"}){
-
-			    /**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
-
-				@Override
-			    public boolean isCellEditable(int row, int column) {
-			       //all cells false
-			       return false;
-			    }
-			};
-			for(int i=0 ; i<listaTitulos.size(); i++) {
-				Object[] data = new Object[2];
-				data[0] = listaTitulos.get(i);
-				data[1] = listaInterpretes.get(i);
-				tableMode.addRow(data);
-				}
-			table.setModel(tableMode);
-			scrollPane.setVisible(true);
+			ServicioVentanas.cargarCanciones(cancionesEncontradas, table, scrollPane);
 	      }
-
 	    });
 		
 		JButton btnPlay = new JButton("Play");
@@ -307,69 +283,5 @@ public class VentanaMisListas extends JFrame {
 	}
 	
 	
-	private void abrirVentanaLogin() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaLogin frame = new VentanaLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	private void abrirVentanaExplorar() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaExplorar frame = new VentanaExplorar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	private void abrirVentanaNuevaLista() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaNuevaLista frame = new VentanaNuevaLista();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	private void abrirVentanaReciente() {
 
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaReciente frame = new VentanaReciente();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	private void abrirVentanaDescuentos() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaDescuentos frame = new VentanaDescuentos();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 }
