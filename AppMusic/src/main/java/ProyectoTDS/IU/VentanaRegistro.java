@@ -19,6 +19,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import com.toedter.calendar.JDateChooser;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class VentanaRegistro extends JFrame {
 
@@ -32,72 +35,137 @@ public class VentanaRegistro extends JFrame {
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JLabel LabelUsuario = new JLabel("Usuario:");
-		LabelUsuario.setFont(new Font("Tahoma", Font.BOLD, 12));
-		LabelUsuario.setBounds(22, 126, 51, 14);
-		contentPane.add(LabelUsuario);
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[]{40, 193, 142, 87, 56, 86, 43, 8, 123, 0};
+		gbl_contentPane.rowHeights = new int[]{20, 23, 43, 37, 30, 20, 51, 30, 0, 0};
+		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		contentPane.setLayout(gbl_contentPane); 
 		
 		JLabel LabelNombre = new JLabel("Nombre:");
 		LabelNombre.setFont(new Font("Tahoma", Font.BOLD, 12));
-		LabelNombre.setBounds(22, 22, 51, 14);
-		contentPane.add(LabelNombre);
+		GridBagConstraints gbc_LabelNombre = new GridBagConstraints();
+		gbc_LabelNombre.anchor = GridBagConstraints.NORTHEAST;
+		gbc_LabelNombre.insets = new Insets(0, 0, 5, 5);
+		gbc_LabelNombre.gridx = 1;
+		gbc_LabelNombre.gridy = 2;
+		contentPane.add(LabelNombre, gbc_LabelNombre);
+		
+		JTextField textFieldNombre = new JTextField();
+		GridBagConstraints gbc_textFieldNombre = new GridBagConstraints();
+		gbc_textFieldNombre.anchor = GridBagConstraints.NORTH;
+		gbc_textFieldNombre.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldNombre.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldNombre.gridx = 2;
+		gbc_textFieldNombre.gridy = 2;
+		contentPane.add(textFieldNombre, gbc_textFieldNombre);
+		textFieldNombre.setColumns(10);
 		
 		JLabel LabelApellidos = new JLabel("Apellidos:");
 		LabelApellidos.setFont(new Font("Tahoma", Font.BOLD, 12));
-		LabelApellidos.setBounds(217, 22, 68, 14);
-		contentPane.add(LabelApellidos);
-		
-		JLabel LabelEmail = new JLabel("Email:");
-		LabelEmail.setFont(new Font("Tahoma", Font.BOLD, 12));
-		LabelEmail.setBounds(22, 69, 40, 14);
-		contentPane.add(LabelEmail);
-		
-		JLabel LabelFechaNacimiento = new JLabel("Fecha de nacimiento:");
-		LabelFechaNacimiento.setFont(new Font("Tahoma", Font.BOLD, 12));
-		LabelFechaNacimiento.setBounds(254, 69, 136, 14);
-		contentPane.add(LabelFechaNacimiento);
-		
-		JLabel LabelRepite = new JLabel("Repite:");
-		LabelRepite.setFont(new Font("Tahoma", Font.BOLD, 12));
-		LabelRepite.setBounds(211, 151, 74, 14);
-		contentPane.add(LabelRepite);
-		
-		JLabel lblClave = new JLabel("Clave:");
-		lblClave.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblClave.setBounds(217, 126, 40, 14);
-		contentPane.add(lblClave);
-		
-		JTextField textFieldNombre = new JTextField();
-		textFieldNombre.setBounds(83, 20, 86, 20);
-		contentPane.add(textFieldNombre);
-		textFieldNombre.setColumns(10);
+		GridBagConstraints gbc_LabelApellidos = new GridBagConstraints();
+		gbc_LabelApellidos.anchor = GridBagConstraints.NORTHEAST;
+		gbc_LabelApellidos.insets = new Insets(0, 0, 5, 5);
+		gbc_LabelApellidos.gridx = 3;
+		gbc_LabelApellidos.gridy = 2;
+		contentPane.add(LabelApellidos, gbc_LabelApellidos);
 		
 		JTextField textFieldApellidos = new JTextField();
 		textFieldApellidos.setColumns(10);
-		textFieldApellidos.setBounds(283, 20, 212, 20);
-		contentPane.add(textFieldApellidos);
+		GridBagConstraints gbc_textFieldApellidos = new GridBagConstraints();
+		gbc_textFieldApellidos.gridwidth = 2;
+		gbc_textFieldApellidos.anchor = GridBagConstraints.NORTH;
+		gbc_textFieldApellidos.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldApellidos.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldApellidos.gridx = 4;
+		gbc_textFieldApellidos.gridy = 2;
+		contentPane.add(textFieldApellidos, gbc_textFieldApellidos);
+		
+		JLabel LabelEmail = new JLabel("Email:");
+		LabelEmail.setFont(new Font("Tahoma", Font.BOLD, 12));
+		GridBagConstraints gbc_LabelEmail = new GridBagConstraints();
+		gbc_LabelEmail.anchor = GridBagConstraints.NORTHEAST;
+		gbc_LabelEmail.insets = new Insets(0, 0, 5, 5);
+		gbc_LabelEmail.gridx = 1;
+		gbc_LabelEmail.gridy = 3;
+		contentPane.add(LabelEmail, gbc_LabelEmail);
 		
 		JTextField textFieldEmail = new JTextField();
 		textFieldEmail.setColumns(10);
-		textFieldEmail.setBounds(72, 67, 141, 20);
-		contentPane.add(textFieldEmail);
+		GridBagConstraints gbc_textFieldEmail = new GridBagConstraints();
+		gbc_textFieldEmail.anchor = GridBagConstraints.NORTH;
+		gbc_textFieldEmail.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldEmail.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldEmail.gridx = 2;
+		gbc_textFieldEmail.gridy = 3;
+		contentPane.add(textFieldEmail, gbc_textFieldEmail);
 		
-		JTextField textFieldUsuario = new JTextField();
-		textFieldUsuario.setColumns(10);
-		textFieldUsuario.setBounds(83, 124, 86, 20);
-		contentPane.add(textFieldUsuario);
+		JLabel lblClave = new JLabel("Clave:");
+		lblClave.setFont(new Font("Tahoma", Font.BOLD, 12));
+		GridBagConstraints gbc_lblClave = new GridBagConstraints();
+		gbc_lblClave.anchor = GridBagConstraints.NORTHEAST;
+		gbc_lblClave.insets = new Insets(0, 0, 5, 5);
+		gbc_lblClave.gridx = 3;
+		gbc_lblClave.gridy = 3;
+		contentPane.add(lblClave, gbc_lblClave);
 		
 		JTextField textFieldClave = new JPasswordField();
 		textFieldClave.setColumns(10);
-		textFieldClave.setBounds(274, 124, 116, 20);
-		contentPane.add(textFieldClave);
+		GridBagConstraints gbc_textFieldClave = new GridBagConstraints();
+		gbc_textFieldClave.anchor = GridBagConstraints.NORTH;
+		gbc_textFieldClave.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldClave.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldClave.gridx = 5;
+		gbc_textFieldClave.gridy = 3;
+		contentPane.add(textFieldClave, gbc_textFieldClave);
+		
+		JLabel LabelUsuario = new JLabel("Usuario:");
+		LabelUsuario.setFont(new Font("Tahoma", Font.BOLD, 12));
+		GridBagConstraints gbc_LabelUsuario = new GridBagConstraints();
+		gbc_LabelUsuario.anchor = GridBagConstraints.NORTHEAST;
+		gbc_LabelUsuario.insets = new Insets(0, 0, 5, 5);
+		gbc_LabelUsuario.gridx = 1;
+		gbc_LabelUsuario.gridy = 4;
+		contentPane.add(LabelUsuario, gbc_LabelUsuario);
+		
+		JTextField textFieldUsuario = new JTextField();
+		textFieldUsuario.setColumns(10);
+		GridBagConstraints gbc_textFieldUsuario = new GridBagConstraints();
+		gbc_textFieldUsuario.anchor = GridBagConstraints.NORTH;
+		gbc_textFieldUsuario.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldUsuario.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldUsuario.gridx = 2;
+		gbc_textFieldUsuario.gridy = 4;
+		contentPane.add(textFieldUsuario, gbc_textFieldUsuario);
+		
+		JLabel LabelRepite = new JLabel("Repite:");
+		LabelRepite.setFont(new Font("Tahoma", Font.BOLD, 12));
+		GridBagConstraints gbc_LabelRepite = new GridBagConstraints();
+		gbc_LabelRepite.anchor = GridBagConstraints.NORTHEAST;
+		gbc_LabelRepite.insets = new Insets(0, 0, 5, 5);
+		gbc_LabelRepite.gridx = 3;
+		gbc_LabelRepite.gridy = 4;
+		contentPane.add(LabelRepite, gbc_LabelRepite);
 		
 		JTextField textFieldRepite = new JPasswordField();
 		textFieldRepite.setColumns(10);
-		textFieldRepite.setBounds(274, 149, 116, 20);
-		contentPane.add(textFieldRepite);
+		GridBagConstraints gbc_textFieldRepite = new GridBagConstraints();
+		gbc_textFieldRepite.gridwidth = 2;
+		gbc_textFieldRepite.anchor = GridBagConstraints.NORTH;
+		gbc_textFieldRepite.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldRepite.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldRepite.gridx = 4;
+		gbc_textFieldRepite.gridy = 4;
+		contentPane.add(textFieldRepite, gbc_textFieldRepite);
+		
+		JDateChooser textFieldFecha = new JDateChooser();
+		GridBagConstraints gbc_textFieldFecha = new GridBagConstraints();
+		gbc_textFieldFecha.anchor = GridBagConstraints.NORTH;
+		gbc_textFieldFecha.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldFecha.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldFecha.gridx = 5;
+		gbc_textFieldFecha.gridy = 6;
+		contentPane.add(textFieldFecha, gbc_textFieldFecha);
 		
 		JButton btnIrALogin = new JButton("Ya tengo cuenta");
 		btnIrALogin.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -105,12 +173,15 @@ public class VentanaRegistro extends JFrame {
 				ServicioVentanas.abrirVentanaLogin();
 				dispose();
 			});
-		btnIrALogin.setBounds(382, 243, 136, 30);
-		contentPane.add(btnIrALogin);
-		
-		JDateChooser textFieldFecha = new JDateChooser();
-		textFieldFecha.setBounds(395, 64, 79, 19);
-		contentPane.add(textFieldFecha);
+		JLabel LabelFechaNacimiento = new JLabel("Fecha de nacimiento:");
+		LabelFechaNacimiento.setFont(new Font("Tahoma", Font.BOLD, 12));
+		GridBagConstraints gbc_LabelFechaNacimiento = new GridBagConstraints();
+		gbc_LabelFechaNacimiento.gridwidth = 2;
+		gbc_LabelFechaNacimiento.anchor = GridBagConstraints.NORTHEAST;
+		gbc_LabelFechaNacimiento.insets = new Insets(0, 0, 5, 5);
+		gbc_LabelFechaNacimiento.gridx = 2;
+		gbc_LabelFechaNacimiento.gridy = 6;
+		contentPane.add(LabelFechaNacimiento, gbc_LabelFechaNacimiento);
 		
 		JButton btnRegistrar = new JButton("Registrarme");
 		btnRegistrar.addActionListener(event -> {
@@ -143,9 +214,25 @@ public class VentanaRegistro extends JFrame {
 					}
 				
 		});
-		btnRegistrar.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnRegistrar.setBounds(173, 189, 166, 51);
-		contentPane.add(btnRegistrar);
+		
+	
+		
+
+		btnRegistrar.setFont(new Font("Dialog", Font.BOLD, 14));
+		
+		
+		GridBagConstraints gbc_btnRegistrar = new GridBagConstraints();
+		gbc_btnRegistrar.fill = GridBagConstraints.VERTICAL;
+		gbc_btnRegistrar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnRegistrar.gridx = 2;
+		gbc_btnRegistrar.gridy = 7;
+		contentPane.add(btnRegistrar, gbc_btnRegistrar);
+		GridBagConstraints gbc_btnIrALogin = new GridBagConstraints();
+		gbc_btnIrALogin.insets = new Insets(0, 0, 5, 5);
+		gbc_btnIrALogin.fill = GridBagConstraints.BOTH;
+		gbc_btnIrALogin.gridx = 5;
+		gbc_btnIrALogin.gridy = 7;
+		contentPane.add(btnIrALogin, gbc_btnIrALogin);
 		
 
 	}
