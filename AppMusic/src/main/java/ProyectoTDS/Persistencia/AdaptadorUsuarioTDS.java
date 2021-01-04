@@ -76,6 +76,39 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 		usuario.setCodigo(eUsuario.getId()); 
 		
 	}
+	
+	@Override
+	public void modificarUsuario(Usuario usuario) {
+		Entidad eUsuario;
+		//comprobamos que la entidad esté registrada primero
+		try {
+			eUsuario = servPersistencia.recuperarEntidad(usuario.getCodigo());
+		} catch(NullPointerException e) {return;}
+		
+		//Si llegamos a este punto es porque el usuario está registrado
+		servPersistencia.eliminarPropiedadEntidad(eUsuario, "usuario");
+		servPersistencia.anadirPropiedadEntidad(eUsuario, "usuario", usuario.getUsuario());
+		servPersistencia.eliminarPropiedadEntidad(eUsuario, "nombre");
+		servPersistencia.anadirPropiedadEntidad(eUsuario, "nombre", usuario.getNombre());
+		servPersistencia.eliminarPropiedadEntidad(eUsuario, "apellidos");
+		servPersistencia.anadirPropiedadEntidad(eUsuario, "apellidos", usuario.getApellidos());
+		servPersistencia.eliminarPropiedadEntidad(eUsuario, "email");
+		servPersistencia.anadirPropiedadEntidad(eUsuario, "email", usuario.getEmail());
+		servPersistencia.eliminarPropiedadEntidad(eUsuario, "fechaNacimiento");
+		servPersistencia.anadirPropiedadEntidad(eUsuario, "fechaNacimiento", usuario.getFechaNacimiento());
+		servPersistencia.eliminarPropiedadEntidad(eUsuario, "contrasena");
+		servPersistencia.anadirPropiedadEntidad(eUsuario, "contrasena", usuario.getContrasena());
+		servPersistencia.eliminarPropiedadEntidad(eUsuario, "premium");
+		servPersistencia.anadirPropiedadEntidad(eUsuario, "premium", Boolean.toString(usuario.isPremium()));
+		
+		String codigoListaCanciones = obtenerCodigosPlaylists(usuario.getPlaylists());
+		servPersistencia.eliminarPropiedadEntidad(eUsuario, "listaCanciones");
+		servPersistencia.anadirPropiedadEntidad(eUsuario, "listaCanciones", codigoListaCanciones);
+		String codigoCancionesRecientes = obtenerCodigosCancionesRecientes(usuario.getCancionesRecientes());
+		servPersistencia.eliminarPropiedadEntidad(eUsuario, "cancionesRecientes");
+		servPersistencia.anadirPropiedadEntidad(eUsuario, "cancionesRecientes", codigoCancionesRecientes);
+	}
+
 
 
 	@Override
@@ -204,6 +237,7 @@ public class AdaptadorUsuarioTDS implements IAdaptadorUsuarioDAO{
 		}
 		return aux.trim();
 	}
+
 
 
 
