@@ -48,13 +48,6 @@ public class VentanaLogin extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		JLabel lblNewLabel = new JLabel("");
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 2;
-		contentPane.add(lblNewLabel, gbc_lblNewLabel);
-		
 		JLabel LabelTitulo = new JLabel("AppMusic");
 		LabelTitulo.setFont(new Font("Tahoma", Font.BOLD, 23));
 		LabelTitulo.setVerticalAlignment(SwingConstants.TOP);
