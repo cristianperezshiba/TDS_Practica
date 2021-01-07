@@ -43,9 +43,9 @@ public class VentanaLogin extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{60, 79, 85, 0, 0, 60, 0};
-		gbl_contentPane.rowHeights = new int[]{33, 0, 0, 25, 19, 0, 19, 39, 25, 32, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{33, 0, 0, 25, 19, 0, 19, 0, 39, 25, 32, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel LabelTitulo = new JLabel("AppMusic");
@@ -86,7 +86,7 @@ public class VentanaLogin extends JFrame {
 		gbc_LabelContrasena.anchor = GridBagConstraints.NORTHWEST;
 		gbc_LabelContrasena.insets = new Insets(0, 0, 5, 5);
 		gbc_LabelContrasena.gridx = 1;
-		gbc_LabelContrasena.gridy = 7;
+		gbc_LabelContrasena.gridy = 6;
 		contentPane.add(LabelContrasena, gbc_LabelContrasena);
 		
 		textFieldContrasena = new JPasswordField();
@@ -95,7 +95,7 @@ public class VentanaLogin extends JFrame {
 		gbc_textFieldContrasena.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldContrasena.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldContrasena.gridx = 2;
-		gbc_textFieldContrasena.gridy = 7;
+		gbc_textFieldContrasena.gridy = 6;
 		contentPane.add(textFieldContrasena, gbc_textFieldContrasena);
 		
 		/////////////////////////////////////////////////////////////
@@ -113,7 +113,7 @@ public class VentanaLogin extends JFrame {
 		gbc_btnNewButton_1.fill = GridBagConstraints.VERTICAL;
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton_1.gridx = 1;
-		gbc_btnNewButton_1.gridy = 9;
+		gbc_btnNewButton_1.gridy = 8;
 		contentPane.add(btnNewButton_1, gbc_btnNewButton_1);
 		////////////////////////////////////////////////////////
 		
@@ -128,7 +128,7 @@ public class VentanaLogin extends JFrame {
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.anchor = GridBagConstraints.SOUTH;
 		gbc_btnNewButton.gridx = 4;
-		gbc_btnNewButton.gridy = 9;
+		gbc_btnNewButton.gridy = 8;
 		contentPane.add(btnNewButton, gbc_btnNewButton);
 	}
 	
