@@ -11,8 +11,7 @@ import com.itextpdf.text.DocumentException;
 public enum ControladorAppMusic {
 	INSTANCE;
 	//Usamos patron singleton
-	
-	// TODO: private controlador?? Tiene referencia a controlador o no ??
+
 	
 	private CatalogoCanciones catalogoCanciones;
 	private CatalogoUsuarios catalogoUsuarios;

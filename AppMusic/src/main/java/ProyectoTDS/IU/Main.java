@@ -21,7 +21,6 @@ public class Main {
 
 		//Creamos el objeto Controlador, que creara automaticamente el objeto AppMusic
 		//y luego abrimos la ventana del Login 
-		//ProyectoTDS.LogicaNegocio.AppMusic appMusic = ProyectoTDS.LogicaNegocio.AppMusic.getUnicaInstancia();
 		ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
 		controlador.cargarCanciones();
 		abrirVentanaLogin();
