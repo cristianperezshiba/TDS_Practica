@@ -69,39 +69,17 @@ public enum ControladorAppMusic {
 		return this.catalogoUsuarios.registrarUsuario(nuevoUsuario);
 	};
 	
-	public ArrayList<List<String>> buscarCanciones(String Titulo ,String Interprete,String  Estilo) {
-		Set<Cancion> canciones = new LinkedHashSet<Cancion>(catalogoCanciones.buscarCanciones(Titulo, Interprete, Estilo));
-		ArrayList<List<String>> ArrayConLasDosListas = new ArrayList<>();
-		List<String> listaTitulos = new ArrayList<String>();
-		List<String> listaInterpretes = new ArrayList<String>();
-	    for (Cancion c : canciones) {
-			listaTitulos.add(c.getTitulo());
-			listaInterpretes.add(c.getInterprete().getNombre());
-		}
-	    ArrayConLasDosListas.add(0, listaTitulos);
-	    ArrayConLasDosListas.add(1, listaInterpretes);
-	    
-		return ArrayConLasDosListas;
+	public List<Cancion> buscarCanciones(String Titulo ,String Interprete,String  Estilo) {
+		return catalogoCanciones.buscarCanciones(Titulo, Interprete, Estilo);
 	};
 	
-	public Set<String> cargarMisListas(){
+	public List<String> cargarMisListas(){
 		return usuarioActivo.getNombrePlaylists();
 	}
 	
 	
-	public ArrayList<List<String>> getCancionesLista(String lista) {
-		Set<Cancion> canciones = new LinkedHashSet<Cancion>(usuarioActivo.getCancionesPlaylist(lista));
-		ArrayList<List<String>> ArrayConLasDosListas = new ArrayList<>();
-		List<String> listaTitulos = new ArrayList<String>();
-		List<String> listaInterpretes = new ArrayList<String>();
-	    for (Cancion c : canciones) {
-			listaTitulos.add(c.getTitulo());
-			listaInterpretes.add(c.getInterprete().getNombre());
-		}
-	    ArrayConLasDosListas.add(0, listaTitulos);
-	    ArrayConLasDosListas.add(1, listaInterpretes);
-	    
-		return ArrayConLasDosListas;
+	public List<Cancion> getCancionesLista(String lista) {
+		return usuarioActivo.getCancionesPlaylist(lista);
 	};
 	
 	public boolean crearPlaylist(String nombre) {
@@ -133,20 +111,9 @@ public enum ControladorAppMusic {
 		Reproductor.INSTANCE.pausarCancion();
 	}
 	
-	public ArrayList<List<String>> getCancionesRecientes() {
-		//Devolveremos un array que contendra dos listas, una de nombres de canciones y otra de los interpretes de cada una de ellas
-		Set<Cancion> canciones = new LinkedHashSet<Cancion>(usuarioActivo.getCancionesRecientes());
-		ArrayList<List<String>> ArrayConLasDosListas = new ArrayList<>();
-		List<String> listaTitulos = new ArrayList<String>();
-		List<String> listaInterpretes = new ArrayList<String>();
-	    for (Cancion c : canciones) {
-			listaTitulos.add(c.getTitulo());
-			listaInterpretes.add(c.getInterprete().getNombre());
-		}
-	    ArrayConLasDosListas.add(0, listaTitulos);
-	    ArrayConLasDosListas.add(1, listaInterpretes);
-	    
-		return ArrayConLasDosListas;
+	public List<Cancion> getCancionesRecientes() {
+		return usuarioActivo.getCancionesRecientes();
+		
 	}
 	
 	public void generarPdf() {
@@ -158,20 +125,8 @@ public enum ControladorAppMusic {
 		}
 	}
 	
-	public ArrayList<List<String>> getCancionesMasReproducidasAppMusic(){//Devolveremos un array que contendra dos listas, una de nombres de canciones y otra de los interpretes de cada una de ellas
-		//Devolveremos un array que contendra dos listas, una de nombres de canciones y otra de los interpretes de cada una de ellas
-		Set<Cancion> canciones = new LinkedHashSet<Cancion>(catalogoCanciones.getCancionesMasReproducidasAppMusic());
-		ArrayList<List<String>> ArrayConLasDosListas = new ArrayList<>();
-		List<String> listaTitulos = new ArrayList<String>();
-		List<String> listaInterpretes = new ArrayList<String>();
-	    for (Cancion c : canciones) {
-			listaTitulos.add(c.getTitulo());
-			listaInterpretes.add(c.getInterprete().getNombre());
-		}
-	    ArrayConLasDosListas.add(0, listaTitulos);
-	    ArrayConLasDosListas.add(1, listaInterpretes);
-	    
-		return ArrayConLasDosListas;
+	public List<Cancion> getCancionesMasReproducidasAppMusic(){
+		return catalogoCanciones.getCancionesMasReproducidasAppMusic();
 	}
 	
 	public Descuento getDescuentoActivo() {

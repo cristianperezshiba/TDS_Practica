@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import ProyectoTDS.LogicaNegocio.Cancion;
 import ProyectoTDS.LogicaNegocio.EstiloMusical;
 
 import java.awt.Color;
@@ -185,7 +186,7 @@ public class VentanaMisListas extends JFrame {
 				"Listas"
 			}
 		);
-		Set<String> misListas = controlador.cargarMisListas();
+		List<String> misListas = controlador.cargarMisListas();
 		for  (String s : misListas) {
 			Object[] data = new Object[1];
 			data[0] = s;
@@ -207,7 +208,7 @@ public class VentanaMisListas extends JFrame {
 	        System.out.println("Selected: " + selectedData);
 
 	        
-	        ArrayList<List<String>> cancionesEncontradas = controlador.getCancionesLista(selectedData);
+	        List<Cancion> cancionesEncontradas = controlador.getCancionesLista(selectedData);
 	        
 			ServicioVentanas.cargarCanciones(cancionesEncontradas, table, scrollPane);
 	      }

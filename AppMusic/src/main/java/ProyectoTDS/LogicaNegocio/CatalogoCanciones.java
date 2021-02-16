@@ -27,7 +27,7 @@ public enum CatalogoCanciones {
 	}
 	
 	
-	public Set<Cancion> buscarCanciones(String Titulo ,String Interprete,String  Estilo) {
+	public List<Cancion> buscarCanciones(String Titulo ,String Interprete,String  Estilo) {
 		//Expresiones Regulares que se usaran para los filtros la (?i) es para no discriminar entre mayusculas y minusculas
 		String patronTitulo;
 		if (Titulo == null) patronTitulo = "(?i)(.*)";
@@ -41,11 +41,11 @@ public enum CatalogoCanciones {
 		if (Estilo.equals("TODOS")) patronEstilo = "(?i)(.*)";
 		else patronEstilo = "(?i)(.*)"+Estilo+"(.*)";
 
-		Set<Cancion> matching = listaCanciones.stream()
+		List<Cancion> matching = listaCanciones.stream()
 		                            .filter(c -> c.getTitulo().matches(patronTitulo))
 		                            .filter(c -> c.getInterprete().getNombre().matches(patronInterprete))
 		                            .filter(c -> c.getEstilo().toString().matches(patronEstilo))
-		                            .collect(toSet());
+		                            .collect(toList());
 		
 		return matching;
 	};

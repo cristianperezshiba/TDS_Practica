@@ -27,7 +27,6 @@ public class Usuario {
 
 	private List<Cancion> cancionesRecientes;
 
-	private List<ArrayList<Object>> cancionesMasReproducidas; // Cada elemento será un par (cancion, numVecesReproducida)
 																
 
 	public Usuario(String usuario, String contrasena, String nombre, String apellidos, String fechaNacimiento,
@@ -124,8 +123,8 @@ public class Usuario {
 		this.descuentoActivo = d;
 	}
 
-	public Set<String> getNombrePlaylists() {
-		return playlists.stream().map(p -> p.getNombre()).collect(Collectors.toSet());
+	public List<String> getNombrePlaylists() {
+		return playlists.stream().map(p -> p.getNombre()).collect(Collectors.toList());
 	}
 
 	public boolean crearNuevaPlaylist(String nombre) {
@@ -142,8 +141,8 @@ public class Usuario {
 				.eliminarCancion(cancion);
 	}
 
-	public Set<Cancion> getCancionesPlaylist(String lista) {
-		return playlists.stream().filter(p -> p.getNombre().equals(lista)).findFirst().get().getCanciones();
+	public List<Cancion> getCancionesPlaylist(String lista) {
+		return (List<Cancion>)playlists.stream().filter(p -> p.getNombre().equals(lista)).findFirst().get().getCanciones();
 
 	}
 
@@ -167,9 +166,6 @@ public class Usuario {
 
 	}
 	
-	public List<ArrayList<Object>> getCancionesMasReproducidas(){
-		return cancionesMasReproducidas;
-	}
 
 	public void crearPDF() throws DocumentException {
 
@@ -253,21 +249,6 @@ public class Usuario {
 		writer.close();
 	}
 
-	public void nuevaCancionReproducida(Cancion nuevaCancion) {
-		//TODO: No estoy seguro de si esto funcionara bien, mucho lio con referencias
-		ArrayList<Object> DuplaValores = cancionesMasReproducidas.stream()	
-								.filter(l -> l.get(0).equals(nuevaCancion))
-								.findFirst().get();
-		if (DuplaValores.isEmpty()) {
-			ArrayList<Object> nuevaDuplaValores = new ArrayList<Object>();
-			nuevaDuplaValores.add(0, nuevaCancion);
-			nuevaDuplaValores.add(1, 1);
-			cancionesMasReproducidas.add(nuevaDuplaValores);
-		}
-		else {
-			DuplaValores.set(1,(int)DuplaValores.get(1) + 1);
-		}
-	};
 	
 	@Override
 	public int hashCode() {

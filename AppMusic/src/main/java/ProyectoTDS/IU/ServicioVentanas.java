@@ -9,6 +9,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import ProyectoTDS.LogicaNegocio.Cancion;
+
 public class ServicioVentanas {
 	//Clase usada para la funcionalidad compartida entre todas las ventanas
 	public static void abrirVentanaLogin() {
@@ -104,10 +106,8 @@ public class ServicioVentanas {
 		});
 	}
 	
-	public static void cargarCanciones(ArrayList<List<String>> cancionesMasReproducidas, JTable table, JScrollPane scrollPane) {
-		List<String> listaTitulos = new LinkedList<String>(cancionesMasReproducidas.get(0));
-		List<String> listaInterpretes = new LinkedList<String>(cancionesMasReproducidas.get(1));
-		
+	public static void cargarCanciones(List<Cancion> listaCanciones, JTable table, JScrollPane scrollPane) {
+
 
 		DefaultTableModel tableMode = new DefaultTableModel(null, new String[] { "Titulo", "Interprete" }){
 			private static final long serialVersionUID = 1L;
@@ -120,10 +120,11 @@ public class ServicioVentanas {
 		};
 		
 		System.out.println("Canciones a cargar:");
-		for (int i = 0; i < listaTitulos.size(); i++) {
+		for (Cancion c : listaCanciones) {
+
 			Object[] data = new Object[2];
-			data[0] = listaTitulos.get(i);
-			data[1] = listaInterpretes.get(i);
+			data[0] = c.getTitulo();
+			data[1] = c.getInterprete().getNombre();
 			System.out.println(" " + data[0]);
 			tableMode.addRow(data);
 		}
