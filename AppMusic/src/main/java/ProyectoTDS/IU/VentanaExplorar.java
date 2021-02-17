@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import ProyectoTDS.LogicaNegocio.Cancion;
+
 import java.awt.Color;
 import java.awt.Component;
 
@@ -39,7 +41,7 @@ import javax.swing.ScrollPaneConstants;
 public class VentanaExplorar extends JFrame {
 
 	private ProyectoTDS.LogicaNegocio.ControladorAppMusic controlador;
-
+    private List<Cancion> listaCancionesMostradas; 
 	
 	
 	public VentanaExplorar() {
@@ -83,7 +85,7 @@ public class VentanaExplorar extends JFrame {
 		panelLeft.add(btnNuevaLista);
 		btnNuevaLista.addActionListener(event -> {
 				ServicioVentanas.abrirVentanaNuevaLista();
-				dispose();
+				this.setVisible(false);
 		});
 		
 		JButton btnReciente = new JButton("Reciente");
@@ -92,7 +94,7 @@ public class VentanaExplorar extends JFrame {
 		panelLeft.add(btnReciente);
 		btnReciente.addActionListener(event -> {
 				ServicioVentanas.abrirVentanaReciente();
-				dispose();
+				this.setVisible(false);
 		});
 		
 		JButton btnMisListas = new JButton("Mis listas");
@@ -101,7 +103,8 @@ public class VentanaExplorar extends JFrame {
 		panelLeft.add(btnMisListas);
 		btnMisListas.addActionListener(event -> {
 				ServicioVentanas.abrirVentanaMisListas();
-				dispose();
+				this.setVisible(false);
+			
 		});
 		
 		JTextField txtInterprete = new JTextField();
@@ -147,7 +150,7 @@ public class VentanaExplorar extends JFrame {
 		btnLogout.addActionListener(event -> {
 				controlador.logout();
 				ServicioVentanas.abrirVentanaLogin();
-				dispose();
+				this.setVisible(false);
 		});
 		btnLogout.setBounds(625, 11, 98, 37);
 		contentPane.add(btnLogout);
@@ -177,12 +180,14 @@ public class VentanaExplorar extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2 && table.getSelectedRow() != -1) {
-					String nombre = null;
-					String artista = null;
 					int[] selectedRow = table.getSelectedRows();
-					nombre = (String) table.getValueAt(selectedRow[0], 0);
-					artista = (String) table.getValueAt(selectedRow[0], 1);
-					controlador.ReproducirCancion(nombre, artista);
+					String nombre = (String) table.getValueAt(selectedRow[0], 0);
+					String artista = (String) table.getValueAt(selectedRow[0], 1);
+					Cancion cancionReproducir = listaCancionesMostradas.stream().filter(
+			        		 c -> c.getTitulo().equals(nombre) && c.getInterprete().getNombre().equals(artista))
+							 .findFirst()
+							 .get();
+			        controlador.ReproducirCancion(cancionReproducir);
 				}
 			}
 		});
@@ -200,8 +205,8 @@ public class VentanaExplorar extends JFrame {
 	  
 	  JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(event -> {
-				ServicioVentanas.cargarCanciones(controlador.buscarCanciones(textTitulo.getText() ,txtInterprete.getText(), comboBoxEstilo.getSelectedItem().toString()),
-												table, scrollPane);
+			    listaCancionesMostradas = controlador.buscarCanciones(textTitulo.getText() ,txtInterprete.getText(), comboBoxEstilo.getSelectedItem().toString());
+				ServicioVentanas.cargarCanciones(listaCancionesMostradas,table, scrollPane);
 		});
 		btnBuscar.setBounds(334, 152, 89, 23);
 		contentPane.add(btnBuscar);
@@ -218,12 +223,14 @@ public class VentanaExplorar extends JFrame {
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addActionListener(event -> {
 				///////////////////////////////////////////////////////////
-				String nombre = null;
-				String artista = null;
 		        int[] selectedRow = table.getSelectedRows();
-		        nombre = (String) table.getValueAt(selectedRow[0], 0);
-		        artista = (String) table.getValueAt(selectedRow[0], 1);
-		        controlador.ReproducirCancion(nombre, artista);
+		        String nombre = (String) table.getValueAt(selectedRow[0], 0);
+		        String artista = (String) table.getValueAt(selectedRow[0], 1);
+		        Cancion cancionReproducir = listaCancionesMostradas.stream().filter(
+		        		 c -> c.getTitulo().equals(nombre) && c.getInterprete().getNombre().equals(artista))
+						 .findFirst()
+						 .get();
+		        controlador.ReproducirCancion(cancionReproducir);
 		});
 		btnPlay.setBounds(443, 437, 66, 37);
 		contentPane.add(btnPlay);
@@ -239,15 +246,17 @@ public class VentanaExplorar extends JFrame {
 		JButton btnCancionAnterior = new JButton("<<");
 		btnCancionAnterior.addActionListener(event -> {
 				//Coger fila seleccionada y coger la anterior y reproducirla
-				String nombre = null;
-				String artista = null;
 		        int[] selectedRow = table.getSelectedRows();
 		        if (selectedRow[0] == 0) return;
 		        int numFilas = table.getRowCount();
 		        table.setRowSelectionInterval((selectedRow[0]-1)%numFilas, (selectedRow[0]-1)%numFilas);
-		        nombre = (String) table.getValueAt((selectedRow[0]-1)%numFilas, 0);
-		        artista = (String) table.getValueAt((selectedRow[0]-1)%numFilas, 1);
-		        controlador.ReproducirCancion(nombre, artista);
+		        String nombre = (String) table.getValueAt((selectedRow[0]-1)%numFilas, 0);
+		        String artista = (String) table.getValueAt((selectedRow[0]-1)%numFilas, 1);
+		        Cancion cancionReproducir = listaCancionesMostradas.stream().filter(
+		        		 c -> c.getTitulo().equals(nombre) && c.getInterprete().getNombre().equals(artista))
+						 .findFirst()
+						 .get();
+		        controlador.ReproducirCancion(cancionReproducir);
 		});
 		btnCancionAnterior.setBounds(380, 464, 53, 35);
 		contentPane.add(btnCancionAnterior);
@@ -255,15 +264,17 @@ public class VentanaExplorar extends JFrame {
 		JButton btnCancionSiguiente = new JButton(">>");
 		btnCancionSiguiente.addActionListener(event -> {
 				//Coger fila seleccionada y coger la siguiente y reproducirla
-				String nombre = null;
-				String artista = null;
 		        int[] selectedRow = table.getSelectedRows();
 		        if (selectedRow[0] == table.getRowCount()-1) return;
 		        int numFilas = table.getRowCount();
 		        table.setRowSelectionInterval((selectedRow[0]+1)%numFilas, (selectedRow[0]+1)%numFilas);
-		        nombre = (String) table.getValueAt((selectedRow[0]+1)%numFilas, 0);
-		        artista = (String) table.getValueAt((selectedRow[0]+1)%numFilas, 1);
-		        controlador.ReproducirCancion(nombre, artista);
+		        String nombre = (String) table.getValueAt((selectedRow[0]+1)%numFilas, 0);
+		        String artista = (String) table.getValueAt((selectedRow[0]+1)%numFilas, 1);
+		        Cancion cancionReproducir = listaCancionesMostradas.stream().filter(
+		        		 c -> c.getTitulo().equals(nombre) && c.getInterprete().getNombre().equals(artista))
+						 .findFirst()
+						 .get();
+		        controlador.ReproducirCancion(cancionReproducir);
 		});
 		btnCancionSiguiente.setBounds(516, 464, 53, 35);
 		contentPane.add(btnCancionSiguiente);

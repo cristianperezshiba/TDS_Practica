@@ -171,7 +171,7 @@ public class VentanaRegistro extends JFrame {
 		btnIrALogin.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnIrALogin.addActionListener(event -> {
 				ServicioVentanas.abrirVentanaLogin();
-				dispose();
+				this.setVisible(false);
 			});
 		JLabel LabelFechaNacimiento = new JLabel("Fecha de nacimiento:");
 		LabelFechaNacimiento.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -210,7 +210,7 @@ public class VentanaRegistro extends JFrame {
 					}
 					else {
 						ServicioVentanas.abrirVentanaLogin();
-						dispose();
+						this.setVisible(false);
 					}
 				
 		});

@@ -61,7 +61,6 @@ public enum CatalogoUsuarios {
 		//Buscamos el objeto usuario a partir de su String usuario
 		List<Usuario> todosLosUsuarios = adaptadorUsuario.recuperarTodosLosUsuarios();
 		
-		
 		return todosLosUsuarios.stream()
 				.filter(u -> u.getUsuario().equals(usuario)).
 				findFirst()

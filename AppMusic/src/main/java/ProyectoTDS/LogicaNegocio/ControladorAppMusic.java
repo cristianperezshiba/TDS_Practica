@@ -86,16 +86,16 @@ public enum ControladorAppMusic {
 		return usuarioActivo.crearNuevaPlaylist(nombre);
 	}
 	
-	public boolean  insertarCancionEnPlaylist(String playlist, String nombreCancion, String interprete) {
-		Cancion cancion = catalogoCanciones.buscarCancion(nombreCancion, interprete);
+	public boolean  insertarCancionEnPlaylist(String playlist, Cancion cancion) {
+		//Cancion cancion = catalogoCanciones.buscarCancion(nombreCancion, interprete);
 		if (cancion == null) return false;
 		return usuarioActivo.añadirCancionAPlaylist(playlist, cancion);
 	}
 	
-	public boolean borrarCancionDePlaylist(String playlist,String  cancion,String  interprete) {
-		Cancion cancionAborrar = catalogoCanciones.buscarCancion(cancion, interprete);
+	public boolean borrarCancionDePlaylist(String playlist, Cancion cancion) {
+		//Cancion cancionAborrar = catalogoCanciones.buscarCancion(cancion, interprete);
 		if (cancion == null) return false;
-		return usuarioActivo.borrarCancionDePlaylist(playlist, cancionAborrar);
+		return usuarioActivo.borrarCancionDePlaylist(playlist, cancion);
 	}
 
 	public boolean eliminarPlaylist(String nombre) {
@@ -103,8 +103,8 @@ public enum ControladorAppMusic {
 	}
 	
 	
-	public void ReproducirCancion(String nombre, String artista) {
-		catalogoCanciones.ReproducirCancion(nombre, artista, usuarioActivo);
+	public void ReproducirCancion(Cancion cancion) {
+		catalogoCanciones.ReproducirCancion(cancion, usuarioActivo);
 	}
 	
 	public void pausarCancion() {

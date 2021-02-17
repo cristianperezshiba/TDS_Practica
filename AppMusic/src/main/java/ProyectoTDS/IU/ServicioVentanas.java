@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -14,96 +15,40 @@ import ProyectoTDS.LogicaNegocio.Cancion;
 public class ServicioVentanas {
 	//Clase usada para la funcionalidad compartida entre todas las ventanas
 	public static void abrirVentanaLogin() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaLogin frame = new VentanaLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		VentanaLogin frame = new VentanaLogin();
+		frame.setVisible(true);
 	}
 	
 	public static void abrirVentanaMisListas() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaMisListas frame = new VentanaMisListas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		VentanaMisListas frame = new VentanaMisListas();
+		frame.setVisible(true);
 	}
 	
 	public static void abrirVentanaNuevaLista() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaNuevaLista frame = new VentanaNuevaLista();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		VentanaNuevaLista frame = new VentanaNuevaLista();
+		frame.setVisible(true);
 	}
 	
 	public static void abrirVentanaReciente() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaReciente frame = new VentanaReciente();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		VentanaReciente frame = new VentanaReciente();
+		frame.setVisible(true);
 	}
 	
 	public static void abrirVentanaDescuentos() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaDescuentos frame = new VentanaDescuentos();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		VentanaDescuentos frame = new VentanaDescuentos();
+		frame.setVisible(true);
 	}
 	
 	public static void abrirVentanaRegistro() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaRegistro frame = new VentanaRegistro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		VentanaRegistro frame = new VentanaRegistro();
+		frame.setVisible(true);
 	}
 	
 	
 
 	public static void abrirVentanaExplorar() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaExplorar frame = new VentanaExplorar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		VentanaExplorar frame = new VentanaExplorar();
+		frame.setVisible(true);
 	}
 	
 	public static void cargarCanciones(List<Cancion> listaCanciones, JTable table, JScrollPane scrollPane) {

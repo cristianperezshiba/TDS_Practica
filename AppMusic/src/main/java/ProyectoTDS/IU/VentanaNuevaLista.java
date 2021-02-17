@@ -49,7 +49,8 @@ public class VentanaNuevaLista extends JFrame {
 	
 	private String playlistMostrada;
 	private String ultimaPlaylistCreada;
-	
+	private List<Cancion> listaCancionesMostradas; 
+	private List<Cancion> listaCancionesPlaylistMostrada;
 	public VentanaNuevaLista() {
 		setTitle("Ventana nueva lista");
 		controlador = ProyectoTDS.LogicaNegocio.ControladorAppMusic.INSTANCE;
@@ -122,7 +123,7 @@ public class VentanaNuevaLista extends JFrame {
 		JButton btnReciente = new JButton("Reciente");
 		btnReciente.addActionListener(event -> {
 				ServicioVentanas.abrirVentanaReciente();
-				dispose();
+				this.setVisible(false);
 		});
 		btnReciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnReciente.setBounds(39, 158, 117, 44);
@@ -131,7 +132,7 @@ public class VentanaNuevaLista extends JFrame {
 		JButton btnMisListas = new JButton("Mis listas");
 		btnMisListas.addActionListener(event -> {
 				ServicioVentanas.abrirVentanaMisListas();
-				dispose();
+				this.setVisible(false);
 		});
 		btnMisListas.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnMisListas.setBounds(39, 228, 117, 44);
@@ -160,7 +161,7 @@ public class VentanaNuevaLista extends JFrame {
 		btnLogout.addActionListener(event -> {
 				controlador.logout();
 				ServicioVentanas.abrirVentanaLogin();
-				dispose();
+				this.setVisible(false);
 		});
 		
 		btnLogout.setBounds(936, 11, 98, 37);
@@ -217,9 +218,9 @@ public class VentanaNuevaLista extends JFrame {
 		contentPane.add(btnEliminarPlaylist);
 	  
 		btnBuscar.addActionListener(event -> {
-				ServicioVentanas.cargarCanciones(controlador.buscarCanciones(textTitulo.getText() ,txtInterprete.getText(), comboBoxEstilo.getSelectedItem().toString()), 
-						tableIzq, scrollPaneIzq);
-					});
+				listaCancionesMostradas = controlador.buscarCanciones(textTitulo.getText() ,txtInterprete.getText(), comboBoxEstilo.getSelectedItem().toString());
+				ServicioVentanas.cargarCanciones(listaCancionesMostradas, tableIzq, scrollPaneIzq);
+				});
 		
 		btnCrear.addActionListener(event -> {
 				String nuevaPlaylist = textFieldNombrePlaylist.getText();
@@ -228,9 +229,11 @@ public class VentanaNuevaLista extends JFrame {
 					if (controlador.crearPlaylist(nuevaPlaylist)) {
 						JOptionPane.showMessageDialog(null, "Playlist " + nuevaPlaylist + " creada");
 						//Cargar tabla playlist a la dcha y la de explorar a la izq
-						ServicioVentanas.cargarCanciones(controlador.buscarCanciones("" , "", "TODOS"), 
+						listaCancionesMostradas = controlador.buscarCanciones("" , "", "TODOS");
+						ServicioVentanas.cargarCanciones(listaCancionesMostradas, 
 								tableIzq, scrollPaneIzq);
-						ServicioVentanas.cargarCanciones(controlador.getCancionesLista(nuevaPlaylist), 
+						listaCancionesPlaylistMostrada = controlador.getCancionesLista(nuevaPlaylist);
+						ServicioVentanas.cargarCanciones(listaCancionesPlaylistMostrada, 
 								tableDcha, scrollPaneDcha);
 						playlistMostrada = nuevaPlaylist;
 						ultimaPlaylistCreada = nuevaPlaylist;
@@ -259,7 +262,7 @@ public class VentanaNuevaLista extends JFrame {
 		
 		btnExplorar.addActionListener(event -> {
 				ServicioVentanas.abrirVentanaExplorar();
-				dispose();
+				this.setVisible(false);
 		});
 		
 		btnEliminarPlaylist.addActionListener(event -> {
@@ -275,12 +278,17 @@ public class VentanaNuevaLista extends JFrame {
 				//Insertar cancion en la playlist
 				String selectedData = null;
 			    int[] selectedRow = tableIzq.getSelectedRows();
-				String cancion = (String) tableIzq.getValueAt(selectedRow[0], 0);
+				String nombre = (String) tableIzq.getValueAt(selectedRow[0], 0);
 				String interprete = (String) tableIzq.getValueAt(selectedRow[0], 1);
-				//System.out.println("Fila selecionada: " + cancion + " " + interprete);
-				if (!controlador.insertarCancionEnPlaylist(playlistMostrada, cancion.trim(), interprete.trim())) {
-					JOptionPane.showMessageDialog(null, "La cancion no se ha podido insertar", "Error", JOptionPane.ERROR_MESSAGE);
-				};
+				Cancion cancionAinsertar = listaCancionesMostradas.stream().filter(
+		        		 c -> c.getTitulo().equals(nombre) && c.getInterprete().getNombre().equals(interprete))
+						 .findFirst()
+						 .get();
+				if (controlador.insertarCancionEnPlaylist(playlistMostrada, cancionAinsertar)) {
+					listaCancionesPlaylistMostrada.add(cancionAinsertar);
+				}
+				else JOptionPane.showMessageDialog(null, "La cancion no se ha podido insertar", "Error", JOptionPane.ERROR_MESSAGE);
+				
 				ServicioVentanas.cargarCanciones(controlador.getCancionesLista(playlistMostrada), tableDcha, scrollPaneDcha);
 		});
 		
@@ -292,10 +300,14 @@ public class VentanaNuevaLista extends JFrame {
 			    int[] selectedRow = tableDcha.getSelectedRows();
 				String cancion = (String) tableDcha.getValueAt(selectedRow[0], 0);
 				String interprete = (String) tableDcha.getValueAt(selectedRow[0], 1);
-				//System.out.println("Fila selecionada: " + cancion + " " + interprete);
-				if (!controlador.borrarCancionDePlaylist(playlistMostrada, cancion.trim(), interprete.trim())) {
-					JOptionPane.showMessageDialog(null, "La cancion no se ha podido eliminar", "Error", JOptionPane.ERROR_MESSAGE);
-				};
+				Cancion cancionAborrar = listaCancionesMostradas.stream().filter(
+		        		 c -> c.getTitulo().equals(cancion) && c.getInterprete().getNombre().equals(interprete))
+						 .findFirst()
+						 .get();
+				if (controlador.borrarCancionDePlaylist(playlistMostrada, cancionAborrar)) {
+					listaCancionesPlaylistMostrada.remove(cancionAborrar);
+				}
+				else JOptionPane.showMessageDialog(null, "La cancion no se ha podido eliminar", "Error", JOptionPane.ERROR_MESSAGE);
 				ServicioVentanas.cargarCanciones(controlador.getCancionesLista(playlistMostrada), tableDcha, scrollPaneDcha);
 			}
 		});

@@ -59,8 +59,7 @@ public enum CatalogoCanciones {
 	
 	
 	
-	public void ReproducirCancion(String nombre, String artista, Usuario usuarioActivo) {
-		Cancion cancionAreproducir = buscarCancion(nombre, artista);
+	public void ReproducirCancion(Cancion cancionAreproducir, Usuario usuarioActivo) {
 		Reproductor.reproducirCancion(cancionAreproducir);
 		usuarioActivo.nuevaCancionReciente(cancionAreproducir);
 		

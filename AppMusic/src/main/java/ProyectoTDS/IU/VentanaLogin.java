@@ -103,7 +103,7 @@ public class VentanaLogin extends JFrame {
 		btnNewButton_1.addActionListener(event -> {
 			if (controlador.comprobarLoginUsuario(textFieldUsuario.getText(), textFieldContrasena.getText())) {
 					ServicioVentanas.abrirVentanaReciente();
-					dispose();
+					this.setVisible(false);
 				}
 				else JOptionPane.showMessageDialog (null, "Usuario y/o contraseña incorrecta", "Error!", JOptionPane.ERROR_MESSAGE);
 		});
@@ -121,7 +121,7 @@ public class VentanaLogin extends JFrame {
 		JButton btnNewButton = new JButton("Registro");
 		btnNewButton.addActionListener(event -> {
 												ServicioVentanas.abrirVentanaRegistro();
-												dispose();});
+												this.setVisible(false);});
 		
 		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 15));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();

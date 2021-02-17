@@ -11,10 +11,11 @@ public enum Reproductor {
 		INSTANCE;
 		static MediaPlayer mediaPlayer;
 		Reproductor() {}
-		
+		public static boolean reproduciendo = false; //Esta variable es para controlar si al darle al play a una nueva canción ya estabamos reproduciendo una anteriormente
 		
 		public static void reproducirCancion(Cancion cancion) {
 			// activar reproductor
+			if (reproduciendo) mediaPlayer.pause();
 			try {
 			com.sun.javafx.application.PlatformImpl.startup(()->{});
 			} catch(Exception ex) {
@@ -31,6 +32,7 @@ public enum Reproductor {
 			Media hit = new Media(f.toURI().toString());
 			mediaPlayer = new  MediaPlayer(hit); 
 			mediaPlayer.play();
+			reproduciendo = true;
 		}
 		
 		public static void pausarCancion() {
